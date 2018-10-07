@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Skeleton</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+		<ul class="nav">
+			<li><a href="#">Logo Here</li>
+			<li><a href="#"><iframe src="https://freesecure.timeanddate.com/clock/i6fwzo4q/n5696/ts1" frameborder="0" width="94" height="18"></iframe></li>
+			<li><div id="clockbox">
+				<!--got code from: https://www.ricocheting.com/code/javascript/html-generator/date-time-clock-->
+				<script type="text/javascript">
+					function GetClock(){
+						var d=new Date();
+						var nhour=d.getHours(),nmin=d.getMinutes(),ap;
+						if(nhour==0){ap=" AM";nhour=12;}
+						else if(nhour<12){ap=" AM";}
+						else if(nhour==12){ap=" PM";}
+						else if(nhour>12){ap=" PM";nhour-=12;}
+
+						if(nmin<=9) nmin="0"+nmin;
+
+						var clocktext=""+nhour+":"+nmin+ap+"";
+						document.getElementById('clockbox').innerHTML=clocktext;
+					}
+
+					GetClock();
+					setInterval(GetClock,1000);
+				</script>
+			</div>
+			</li>
+		</ul>
+
+	
+</body>
+</html>
