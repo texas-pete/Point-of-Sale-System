@@ -15,65 +15,121 @@
   </head>
 
   <body>
-     <div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Table #</h3>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <nav id="sidebar">
+          <div class="sidebar-header">
+              <h3>Table # <label id='tblNumber'></label></h3>
+          </div>
+
+          <ul class="list-unstyled components">
+              <li class="active">
+                  <a href="#">Order</a>
+              </li>
+              <li>
+                  <a href="#">Payment</a>
+              </li>
+              <li>
+                  <a href="#">Service Request</a>
+              </li>
+          </ul>
+      </nav>
+      <div id="content">
+        <!-- Table Grid -->
+        <!-- First ROW -->
+        <div class="table-layout">
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 1 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 2 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 3 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 4 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 5 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 6 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 7 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 8 <span>
+            </button>
+          </div>
+        </div>
+        <div class="table-layout">
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 9 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 10 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 11 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 12 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 13 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 14 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 15 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 16 <span>
+            </button>
+          </div>
         </div>
 
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#">Order</a>
-            </li>
-            <li>
-                <a href="#">Payment</a>
-            </li>
-            <li>
-                <a href="#">Service Request</a>
-            </li>
-        </ul>
-    </nav>
-    <div id="content">
-      <!-- Table Grid -->
-      <!-- First ROW -->
-      <div class="table-layout">
-        <div class="box">1</div>
-        <div class="box">2</div>
-        <div class="box">3</div>
-        <div class="box">4</div>
-        <div class="box">5</div>
-        <div class="box">6</div>
-        <div class="box">7</div>
-        <div class="box">8</div>
+        <!-- <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+        </div> -->
+
       </div>
-      <div class="table-layout">
-        <div class="box" class="container-fluid">
-          <button type="button" id="sidebarCollapse">
-            <span> 9 <span>
-          </button>
-        </div>
-        <div class="box" class="container-fluid">
-          <button type="button" id="sidebarCollapse">
-            <span> 10 <span>
-          </button>
-        </div>
-        <div class="box">11</div>
-        <div class="box">12</div>
-        <div class="box">13</div>
-        <div class="box">14</div>
-        <div class="box">15</div>
-        <div class="box">16</div>
-      </div>
-
-      <!-- <div class="container-fluid">
-          <button type="button" id="sidebarCollapse" class="btn btn-info">
-              <i class="fas fa-align-left"></i>
-              <span>Toggle Sidebar</span>
-          </button>
-      </div> -->
-
-    </div>
   </div>
 
 
@@ -85,9 +141,21 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   <script type="text/javascript">
     $(document).ready(function () {
+        // boxButton onClick
+        $('.boxButton').click(function () {
 
-        $('#sidebarCollapse').on('click', function () {
+            // visible sidebar
             $('#sidebar').toggleClass('active');
+
+            // if visible, put tbl number in sidebar header
+            if( !($('#sidebar').hasClass('active')) ){
+              // select first child element of current button (should be a span with the tbl number)
+              var tblNum = $(this).first().text();
+              $('#tblNumber').text(tblNum);
+            }else{
+              $('#tblNumber').text("");
+            }
+            
         });
 
     });

@@ -121,11 +121,16 @@ a, a:hover, a:focus {
   margin-left: 100px;
 }
 
+.boxButton {
+    height: 40px;
+    width: 40px;
+}
 
 section {
   margin:-1%;
   padding:20px;
 }
+
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
