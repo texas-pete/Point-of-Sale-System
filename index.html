@@ -144,16 +144,25 @@
         // boxButton onClick
         $('.boxButton').click(function () {
 
-            // visible sidebar
-            $('#sidebar').toggleClass('active');
+          // table number of button being pressed
+          var btnTblNum = $(this).first().text();
+          // table number on sidebar
+          var sidebarTblNum = $('#tblNumber').text();
 
-            // if visible, put tbl number in sidebar header
-            if( !($('#sidebar').hasClass('active')) ){
-              // select first child element of current button (should be a span with the tbl number)
-              var tblNum = $(this).first().text();
-              $('#tblNumber').text(tblNum);
-            }else{
-              $('#tblNumber').text("");
+            if( $('#sidebar').hasClass('active') ){
+              // if table is already on screen, hide sidebar
+              if( btnTblNum == sidebarTblNum ){
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('boxButtonSelected');
+              }else{ //else, put new info in sidebar
+                $('.boxButtonSelected').toggleClass('boxButtonSelected');
+                $('#tblNumber').text(btnTblNum);
+                $(this).toggleClass('boxButtonSelected');
+              }      
+            }else{ //else, put new number and show
+              $('#tblNumber').text(btnTblNum);
+              $('#sidebar').toggleClass('active');
+              $(this).toggleClass('boxButtonSelected');
             }
             
         });
