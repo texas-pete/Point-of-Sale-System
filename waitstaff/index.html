@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Waitstaff View</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/waitstaff.css">
+    <link rel="stylesheet" type="text/css" href="css/nav.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- Our Stuff -->
+    <script src="scripts/waitstaff.js"></script>
+
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <nav id="sidebar">
+          <div class="sidebar-header">
+              <h3>Table # <label id='tblNumber'></label></h3>
+          </div>
+
+          <ul class="list-unstyled components">
+              <li class="active">
+                  <a href="#">Order</a>
+              </li>
+              <li>
+                  <a href="#">Payment</a>
+              </li>
+              <li>
+                  <a href="#">Service Request</a>
+              </li>
+          </ul>
+      </nav>
+      <div id="content">
+        <!-- Table Grid -->
+        <!-- First ROW -->
+        <div class="table-layout">
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 1 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 2 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 3 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 4 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 5 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 6 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 7 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 8 <span>
+            </button>
+          </div>
+        </div>
+        <div class="table-layout">
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 9 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 10 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 11 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 12 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 13 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 14 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 15 <span>
+            </button>
+          </div>
+          <div class="box" class="container-fluid">
+            <button class="boxButton" type="button">
+              <span> 16 <span>
+            </button>
+          </div>
+        </div>
+
+        <!-- <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+        </div> -->
+
+      </div>
+    </div>
+
+  </body>
+
+  <footer>
+    <!-- Navbar goes here -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-bottom">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="img/eatLogo.png" height="49"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>	
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"><!--shows that it is current tab-->
+              <a class="nav-link" href="#">Specials</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Appetizers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Drinks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Burgers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Order</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </footer>
+</html>
