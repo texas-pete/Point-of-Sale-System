@@ -118,7 +118,7 @@ a, a:hover, a:focus {
   grid-template-rows: repeat(4, 100px);
   grid-auto-flow: row;
   margin: 45px;
-  margin-right: 75px;
+  margin-right: 5px;
   margin-left: 75px;
 }
 
