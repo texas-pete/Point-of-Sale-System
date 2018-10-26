@@ -9,6 +9,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script src="./scripts/drop.js"></script>
 	<link href="./css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -54,6 +55,50 @@
 	</div>
 </div>
 </nav>
+
+<div class="left">
+	<!--Page Title-->
+	<h1>Games</h1>
+
+	<!--actual game selection-->
+	<div class="game-selection">
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">Tic-Tac-Toe</th>
+					<th scope="col">Snake</th>	
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<!--change out # for game link?-->
+					<td><a href="#"><img src="../img/games/tic-tac-toe.gif" height="100%"></a></td>
+					<td><a href="#"><img src="../img/games/snake.gif" height="75%"></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+<!--Assistance Buttons-->
+<!--DISABLE THESE WHEN PLAYING A GAME-->
+<header>
+<div class="assistance">
+	<ul>
+		<div class="ass-dropdown">
+			<li><button onclick="showDrinks()" class="ass-dropbtn"><img src="../img/refill.png"> Tap to Select Refill</button></li>
+			<div id="ass-drop" class="ass-dropdown-content">
+			    <a href="#">Milk</a>
+			    <a href="#">Leche</a>
+			    <a href="#">Cow Juice</a>
+			</div>
+		</div>
+		<li><button><img src="../img/assistance.png"> Tap for Assistance</button></li>
+	</ul>
+</div>
+</header>
 
 </body>
 </html>
