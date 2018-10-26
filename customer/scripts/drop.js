@@ -1,5 +1,5 @@
-function dropRefill(){
-	document.getElementById("refillDropdown").classList.toggle("show");
+function myFunction(){
+	document.getElementById("myDropdown").classList.toggle("show");
 }
 
 window.onclick = function(event){
