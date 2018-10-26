@@ -7,6 +7,7 @@ html, body {
   color: #222;
 }
 
+/*-----Navbar-----*/
 .navbar {
   padding: .8rem;
 }
@@ -20,6 +21,7 @@ html, body {
   font-size: 1.1em !important;
 }
 
+/*Carousel*/
 .carousel-inner img {
   width: 100%;
   height: 100%;
@@ -44,6 +46,7 @@ html, body {
   padding-bottom: 1rem;
 }
 
+/*Button*/
 .btn {
   background-color: #6648b1;
   border: 1px solid #6648b1;
@@ -52,6 +55,102 @@ html, body {
 .btn:hover {
   background-color: #563d7c;
   border: 1px solid #6648b1; 
+}
+
+.orderbtn{
+  float: right;
+  width: 300px;
+  padding: 10px;
+}
+
+/*Assistance*/
+.assistance {
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  padding: 1px;
+}
+
+.assistance li {
+  list-style-type: none;
+  display: inline;
+}
+
+.assistance button {
+  border: none;
+  text-align: center;
+  display: inline-block;
+  background: rgba(74, 10, 80, 0.0);
+  padding: none;
+  color: white;
+  text-shadow: .5px .5px 10px #222;
+}
+
+.assistance img {
+  height: 50px;
+  width: 50px;
+}
+
+/*Dropdown Refill Assistance*/
+.ass-dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer; 
+}
+
+.ass-dropbtn: hover, .ass-dropbtn: focus {
+  background-color: #2980B9;
+}
+
+.ass-dropdown {
+  position: relative;
+  display: inline-block;
+  color:white;
+  text-shadow: .5px .5px 10px #222;
+}
+
+.ass-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.ass-dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.ass-dropdown-content a: hover {
+  background-color: #ddd;
+}
+
+.show {display: block;}
+
+/*Games*/
+.game-selection {
+  top: 40%;
+}
+
+.game-selection table {
+  table-layout: fixed;
+  width: 100%;
+  height: 80%;
+  border: 3px solid #7289da;
+  border-collapse: collapse;
+  padding: none;
+}
+
+.game-selection thead {
+  text-align: center;
+  font-size: 40px;
 }
 
 /*---Media Queries --*/
@@ -102,7 +201,34 @@ figure {
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
   will-change: transform;
+
 }
+
+/* Control the left side */
+.left {
+  position: absolute;
+    left: 0px;
+    width: 1500px;
+    padding: 10px;
+}
+
+/* Control the right side */
+.right {
+    position: absolute;
+    right: 590px;
+    width: 300px;
+    padding: 10px;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
     padding: 1rem;

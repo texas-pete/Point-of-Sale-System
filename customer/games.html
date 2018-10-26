@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Home</title>
+	<title>Games</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -14,52 +14,10 @@
 </head>
 <body>
 
-<!--- Image Slider -->
-<div id="slides" class="carousel slide" data-ride="carousel">
-<ul class="carousel-indicators">
-	<li data-target="#slides" data-slide-to="0" class="active"></li>
-	<li data-target="#slides" data-slide-to="1"></li>
-	<li data-target="#slides" data-slide-to="2"></li>
-</ul>
-<div class="carousel-inner">
-	<div class="carousel-item active">
-		<img src="../img/menu/specials/liquado.jpg">
-		<div class="carousel-caption">
-			<h1 class="display-2">Fresh Liquado</h1>
-			<h3>Homemade Banana Smoothie</h3>
-			<button type="button" class="btn btn-outline-light btn-lg">Order Now</button>
-		</div>
-	</div>
-	<div class="carousel-item">
-		<img src="../img/menu/specials/croissant.jpg">
-	</div>
-	<div class="carousel-item">
-		<img src="../img/menu/specials/bread.jpg">
-	</div>
-</div>
-</div>
-
-<!--Assistance Buttons-->
-<header>
-<div class="assistance">
-	<ul>
-		<div class="ass-dropdown">
-			<li><button onclick="showDrinks()" class="ass-dropbtn"><img src="../img/refill.png"> Tap to Select Refill</button></li>
-			<div id="ass-drop" class="ass-dropdown-content">
-			    <a href="#">Milk</a>
-			    <a href="#">Leche</a>
-			    <a href="#">Cow Juice</a>
-			</div>
-		</div>
-		<li><button><img src="../img/assistance.png"> Tap for Assistance</button></li>
-	</ul>
-</div>
-</header>
-
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-bottom">
 <div class="container-fluid">
-	<a class="navbar-brand" href="#"><img src="../img/discord-logo.png" height="49"></a>
+	<a class="navbar-brand" href="./specials.html"><img src="../img/discord-logo.png" height="49"></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
     	<span class="navbar-toggler-icon"></span>
 	</button>	
@@ -84,8 +42,8 @@
 	</div>
 	<div class="collapse navbar-collapse" id="navbarResponsive">
 		<ul class="navbar-nav mx-auto">
-			<li class="nav-item">
-				<a class="nav-link" href="./games.html">Play Games</a>
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Play Games</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="./order.html">View Order</a>
@@ -97,6 +55,50 @@
 	</div>
 </div>
 </nav>
+
+<div class="left">
+	<!--Page Title-->
+	<h1>Games</h1>
+
+	<!--actual game selection-->
+	<div class="game-selection">
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">Tic-Tac-Toe</th>
+					<th scope="col">Snake</th>	
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<!--change out # for game link?-->
+					<td><a href="#"><img src="../img/games/tic-tac-toe.gif" height="100%"></a></td>
+					<td><a href="#"><img src="../img/games/snake.gif" height="75%"></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+<!--Assistance Buttons-->
+<!--DISABLE THESE WHEN PLAYING A GAME-->
+<header>
+<div class="assistance">
+	<ul>
+		<div class="ass-dropdown">
+			<li><button onclick="showDrinks()" class="ass-dropbtn"><img src="../img/refill.png"> Tap to Select Refill</button></li>
+			<div id="ass-drop" class="ass-dropdown-content">
+			    <a href="#">Milk</a>
+			    <a href="#">Leche</a>
+			    <a href="#">Cow Juice</a>
+			</div>
+		</div>
+		<li><button><img src="../img/assistance.png"> Tap for Assistance</button></li>
+	</ul>
+</div>
+</header>
 
 </body>
 </html>

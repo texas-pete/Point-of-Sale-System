@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Desserts</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script src="./scripts/drop.js"></script>
+	<link href="./css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-bottom">
+<div class="container-fluid">
+	<a class="navbar-brand" href="./specials.html"><img src="../img/discord-logo.png" height="49"></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+    	<span class="navbar-toggler-icon"></span>
+	</button>	
+	<div class="collapse navbar-collapse" id="navbarResponsive">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><!--shows that it is current tab-->
+				<a class="nav-link" href="./appetizers.html">Appetizers</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="./entrees.html">Entrees</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="./kids-meals.html">Kid's Meals</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Desserts</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="./drinks.html">Drinks</a>
+			</li>
+		</ul>
+	</div>
+	<div class="collapse navbar-collapse" id="navbarResponsive">
+		<ul class="navbar-nav mx-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="./games.html">Play Games</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="./order.html">View Order</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="./pay.html">Payment</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</nav>
+
+<h1>Desserts</h1>
+<div class = "container">
+	<div class = "row">
+		<div class = "col-md-6">
+			<h3>Buttermilk Pie</h3>
+			<h5>$6.99</h5>
+			<hr style="clear:both;"/>
+			<p><img src="../img/appetizers/Breakfast-Bruschetta.jpg" alt="Breakfast Bruschetta" style="float:left" width="290" height="200" hspace="20">
+				A twist on classic bruschetta! Three slices of toasted rustic whole grain bread topped with california avocados, tomato, hard-boiled eggs and ricotta with basil.</p>
+				<hr style="clear:both;"/>
+		</div>
+
+		<div class = "col-md-6">
+			<h3>Cinnamon Roll</h3>
+			<h5>$7.99</h5>
+			<hr style="clear:both;"/>
+			<p><img src="../img/appetizers/acai-bowl.jpg" alt="Acai Bowl" style="float:left" width="290" height="200" hspace="20">
+				Organic acai blended with strawberries and bananas, and topped with crunchy granola, fresh blueberries and raspberries, sliced bananas, almonds, granola, and chia seeds.</p>
+				<hr style="clear:both;"/>
+		</div>
+
+	</div>
+    <div class = "row">
+        <div class = "col-md-6">
+            <h3>Monkey Bread</h3>
+            <h5>$4.99</h5>
+            <hr style="clear:both;"/>
+            <p><img src="../img/appetizers/biscuits-gravy.jpg" alt="Biscuits and Gravy" style="float:left" width="290" height="200" hspace="20">
+				One country style open-faced biscuit with two freshly cooked sausages topped with homemade white gravy.</p>
+				<hr style="clear:both;"/>
+		</div>
+		<div class = "col-md-6">
+			<h3> Chocolate Scone</h3>
+			<h5>$4.99</h5>
+			<hr style="clear:both;"/>
+			<p><img src="../img/appetizers/quiche.jpg" alt="Breakfast Quiche" style="float:left" width="290" height="200" hspace="20">
+				Bacon, swiss cheese, red bell peppers, and light onions combine in this timeless classic.</p>
+				<hr style="clear:both;"/>
+		</div>
+	</div>
+	<br>
+    <div class = "row">
+        <div class = "col-md-6">
+            <h3>Chocolate Crepes</h3>
+            <h5>$4.99</h5>
+            <hr style="clear:both;"/>
+            <p><img src="../img/appetizers/fruity-yogurt-parfait.jpg" alt="Yogurt Parfait" style="float:left" width="290" height="200" hspace="20">
+				Creamy vanilla Greek yogurt layered with blueberries, raspberries, blackberries, and granola.</p>
+				<hr style="clear:both;"/>
+        </div>
+        <div class = "col-md-6">
+            <h3>Blueberry Breakfast Cake</h3>
+            <h5>$2.99</h5>
+            <hr style="clear:both;"/>
+            <p><img src="../img/appetizers/chocolate-croissant.jpg" alt="Chocolate Croissant" style="float:left" width="290" height="200" hspace="20">
+				A light, flaky pastry topped with almonds and powdered sugar and filled with handmade chocolate.</p>
+				<hr style="clear:both;"/>
+        </div>
+	</div>
+	<br>
+	
+</div>
+
+<!--Assistance Buttons-->
+<header>
+<div class="assistance">
+	<ul>
+		<div class="ass-dropdown">
+			<li><button onclick="showDrinks()" class="ass-dropbtn"><img src="../img/refill.png"> Tap to Select Refill</button></li>
+			<div id="ass-drop" class="ass-dropdown-content">
+			    <a href="#">Milk</a>
+			    <a href="#">Leche</a>
+			    <a href="#">Cow Juice</a>
+			</div>
+		</div>
+		<li><button><img src="../img/assistance.png"> Tap for Assistance</button></li>
+	</ul>
+</div>
+</header>
+
+
+</body>
+</html>
