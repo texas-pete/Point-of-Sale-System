@@ -3,15 +3,23 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Hackfast Binarykey</title>
+	<title>Home</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script type="./scripts/drop.js"></script>
 	<link href="./css/style.css" rel="stylesheet">
 </head>
 <body>
+
+
+<!--<div style="position: relative;">
+    some content here
+    <div style="position: absolute; top: 0; right: 0;"><input type="button" value="x" /></div>
+</div>-->
+
 
 <!--- Image Slider -->
 <div id="slides" class="carousel slide" data-ride="carousel">
@@ -37,6 +45,23 @@
 	</div>
 </div>
 </div>
+
+<!--Assistance Buttons-->
+<header>
+<div class="assistance">
+	<ul>
+		<div class="dropdown">
+			<li><button onclick="dropRefill() "class="dropbtn"><img src="../img/refill.png"> Tap to Select Refill</button></li>
+			<div id="refillDropdown" class="dropRefill">
+				<p>Milk</p>
+				<p>Leche</p>
+				<p>Cow Juice</p>
+			</div>
+		</div>
+		<li><button><img src="../img/assistance.png"> Tap for Assistance</button></li>
+	</ul>
+</div>
+</header>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-bottom">
