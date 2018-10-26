@@ -22,6 +22,7 @@
 
     <!-- Our Stuff -->
     <script src="scripts/waitstaff.js"></script>
+    <script src="scripts/hideElement.js"></script>
 
   </head>
 
@@ -35,13 +36,13 @@
 
           <ul class="list-unstyled components">
               <li class="active">
-                  <a href="#">Order</a>
+                  <a href="#" onclick="hideContent('content')">Order</a>
               </li>
               <li>
-                  <a href="#">Payment</a>
+                  <a href="#" onclick="hideContent('payment')">Payment</a>
               </li>
               <li>
-                  <a href="#">Service Request</a>
+                  <a href="#" onclick="hideContent('service')">Service Request</a>
               </li>
           </ul>
       </nav>
@@ -90,6 +91,7 @@
             </button>
           </div>
         </div>
+
         <div class="table-layout">
           <div class="box" class="container-fluid">
             <button class="boxButton" type="button">
@@ -141,38 +143,58 @@
         </div> -->
 
       </div>
+
+      <div id="service" style="display: none">
+        <p> Refills Needed: </p>
+        <ul>
+          <li>Sprite</li>
+          <li>Milk</li>
+          <li>Water</li>
+          <li>Water</li>
+        </ul>
+        <button> Clear Refills</button>
+        <button> Clear Service Request</button>
+        <button> Request Managerial Assistance </button>
+      </div>
+
+
+
+      <div id="payment" style="display: none">
+        <p> hello </p>
+      </div>
     </div>
 
   </body>
 
   <footer>
     <!-- Navbar goes here -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-bottom">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="img/eatLogo.png" height="49"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-            <span class="navbar-toggler-icon"></span>
-        </button>	
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><!--shows that it is current tab-->
-              <a class="nav-link" href="#">Specials</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Appetizers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Drinks</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Burgers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Order</a>
-            </li>
-          </ul>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-bottom">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Clock-In</a>
+                </li>
+            </ul>
         </div>
-      </div>
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto" href="#"><img src="./img/discord-logo.png" height="49"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Bullshit Goes Here</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Time</a>
+                </li>
+            </ul>
+        </div>
     </nav>
   </footer>
 </html>
