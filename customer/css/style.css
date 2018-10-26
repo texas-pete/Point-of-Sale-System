@@ -134,6 +134,25 @@ html, body {
 
 .show {display: block;}
 
+/*Games*/
+.game-selection {
+  top: 40%;
+}
+
+.game-selection table {
+  table-layout: fixed;
+  width: 100%;
+  height: 80%;
+  border: 3px solid #7289da;
+  border-collapse: collapse;
+  padding: none;
+}
+
+.game-selection thead {
+  text-align: center;
+  font-size: 40px;
+}
+
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
