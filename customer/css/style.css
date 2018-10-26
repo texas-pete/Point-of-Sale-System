@@ -92,7 +92,7 @@ html, body {
 }
 
 /*Dropdown Refill Assistance*/
-.dropbtn {
+.ass-dropbtn {
   background-color: #3498DB;
   color: white;
   padding: 16px;
@@ -101,18 +101,18 @@ html, body {
   cursor: pointer; 
 }
 
-.dropbtn: hover, .dropbtn: focus {
+.ass-dropbtn: hover, .ass-dropbtn: focus {
   background-color: #2980B9;
 }
 
-.dropdown {
+.ass-dropdown {
   position: relative;
   display: inline-block;
   color:white;
   text-shadow: .5px .5px 10px #222;
 }
 
-.dropdown-content {
+.ass-dropdown-content {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -121,14 +121,14 @@ html, body {
   z-index: 1;
 }
 
-.dropdown-content a {
+.ass-dropdown-content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a: hover {
+.ass-dropdown-content a: hover {
   background-color: #ddd;
 }
 
