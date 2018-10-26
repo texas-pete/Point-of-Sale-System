@@ -57,6 +57,12 @@ html, body {
   border: 1px solid #6648b1; 
 }
 
+.orderbtn{
+  float: right;
+  width: 300px;
+  padding: 10px;
+}
+
 /*Assistance*/
 .assistance {
   position: fixed;
@@ -176,7 +182,34 @@ figure {
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
   will-change: transform;
+
 }
+
+/* Control the left side */
+.left {
+  position: absolute;
+    left: 0px;
+    width: 1500px;
+    padding: 10px;
+}
+
+/* Control the right side */
+.right {
+    position: absolute;
+    right: 590px;
+    width: 300px;
+    padding: 10px;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
     padding: 1rem;
