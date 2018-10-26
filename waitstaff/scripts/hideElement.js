@@ -1,11 +1,11 @@
 function hideContent(whichDiv) {
   var x = document.getElementById("content"); //CONTENT is the div we wish to hide
-  var y = document.getElementById("payment");
+  var y = document.getElementById("orderinfo");
   var z = document.getElementById("service");
 
   if(whichDiv === "content")
   {
-    //we want to hide the payment and service code
+    //we want to hide the orderinfo and service code
     y.style.display = "none";
     z.style.display = "none";
     if($('#sidebar').hasClass('active'))
@@ -17,19 +17,19 @@ function hideContent(whichDiv) {
     //we want to show the content information
     x.style.display = "block";
   }
-  else if(whichDiv === "payment")
+  else if(whichDiv === "orderinfo")
   {
     //we want to hide the content and service code
     x.style.display = "none";
     z.style.display = "none";
 
-    //we want to show the payment information
+    //we want to show the orderinfo information
     y.style.display = "block";
   }
   else if(whichDiv === "service")
   {
 
-    //we want to hide the content and payment code
+    //we want to hide the content and orderinfo code
     x.style.display = "none";
     y.style.display = "none";
 

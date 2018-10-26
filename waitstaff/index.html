@@ -36,10 +36,10 @@
 
           <ul class="list-unstyled components">
               <li class="active">
-                  <a href="#" onclick="hideContent('content')">Order</a>
+                  <a href="#" onclick="hideContent('content')">Table View</a>
               </li>
               <li>
-                  <a href="#" onclick="hideContent('payment')">Payment</a>
+                  <a href="#" onclick="hideContent('orderinfo')">Order Info</a>
               </li>
               <li>
                   <a href="#" onclick="hideContent('service')">Service Request</a>
@@ -153,15 +153,39 @@
           <li>Water</li>
         </ul>
         <button> Clear Refills</button>
-        <p>Table has Requested Help </p>
         <button> Clear Service Request</button>
         <button> Request Managerial Assistance </button>
+        <button> Adjust Total </button>
       </div>
 
-      <div id="payment" style="display: none">
-        <p> hello </p>
-      </div>
-    </div>
+      <div id="orderinfo" style="display: none">
+        <div class= "left">
+          <div class="centered">
+          </div>
+        
+          <h1>Order</h1>
+          <div class = "right">
+            <div class = orderbtn>
+                <button type="button" class="btn btn-secondary btn-lg">Edit</button>
+                <button type="button" class="btn btn-secondary btn-lg">X</button>
+            </div>
+          </div>
+          <div class = "col-md-6">
+            <h3>Breakfast Bruschetta</h3>
+            <h5>$6.99</h5>
+            <hr style="clear:both;"/>
+              A twist on classic bruschetta! Three slices of toasted rustic whole grain bread topped with california avocados, tomato, hard-boiled eggs and ricotta with basil.</p>
+              <hr style="clear:both;"/>
+              <form>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Notes and Allergies</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+              </form>
+              <hr style="clear:both;"/>
+              <br>
+        </div>      
+        
 
   </body>
 
@@ -186,10 +210,7 @@
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Bullshit Goes Here</a>
-                </li>
-                <li class="nav-item">
+                 <li class="nav-item">
                     <a class="nav-link" href="#">Time</a>
                 </li>
             </ul>
