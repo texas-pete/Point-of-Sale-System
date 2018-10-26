@@ -8,7 +8,7 @@ function hideContent(whichDiv) {
     //we want to hide the payment and service code
     y.style.display = "none";
     z.style.display = "none";
-
+    $('#sidebar').toggleClass('active');
     //we want to show the content information
     x.style.display = "block";
   }
