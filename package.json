@@ -1,30 +1,18 @@
 {
   "name": "4quad",
-  "version": "1.0.0",
-  "description": "Boiler Plate for React and Express",
-  "main": "server.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "client-install": "cd client && npm install",
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\" "
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VallejoAgustin/4Quad.git"
-  },
-  "author": "Hackstreet Boys",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/VallejoAgustin/4Quad/issues"
-  },
-  "homepage": "https://github.com/VallejoAgustin/4Quad#readme",
   "dependencies": {
-    "concurrently": "^4.0.1",
-    "express": "^4.16.3"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.4"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "mongodb": "~2.0.33",
+    "morgan": "~1.9.0"
   }
 }

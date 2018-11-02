@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Waitstaff View</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="http://localhost:3000/stylesheets/waitstaff.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <script src="http://localhost:3000/javascripts/waitstaff.js"></script>
+    <script src="http://localhost:3000/javascripts/hideElement.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Table # <label id='tblNumber'></label></h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#" onclick="hideContent('content')">Table View</a>
+                </li>
+                <li>
+                    <a href="#" onclick="hideContent('orderinfo')">Order Info</a>
+                </li>
+                <li>
+                    <a href="#" onclick="hideContent('service')">Service Request</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- tables -->
+        <div id="content">
+            <!-- Table Grid -->
+            <!-- First ROW -->
+            <div class="table-layout">
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 1 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 2 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 3 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 4 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 5 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 6 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 7 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 8 <span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-layout">
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 9 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 10 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 11 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 12 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 13 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 14 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 15 <span>
+                    </button>
+                </div>
+                <div class="box" class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span> 16 <span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- <div class="container-fluid">
+                      <button type="button" id="sidebarCollapse" class="btn btn-info">
+                          <i class="fas fa-align-left"></i>
+                          <span>Toggle Sidebar</span>
+                      </button>
+                  </div> -->
+
+        </div>
+
+        <div id="service" style="display: none">
+            <p> Refills Needed: </p>
+            <ul>
+                <li>Sprite</li>
+                <li>Milk</li>
+                <li>Water</li>
+                <li>Water</li>
+            </ul>
+            <button> Clear Refills</button>
+            <button> Clear Service Request</button>
+            <button> Request Managerial Assistance </button>
+            <button> Adjust Total </button>
+        </div>
+
+        <div id="orderinfo" style="display: none">
+            <h1>Order</h1>
+            <div class="right">
+                <div class="orderbtn">
+                    <button type="button" class="btn btn-secondary btn-lg">Edit</button>
+                    <button type="button" class="btn btn-secondary btn-lg">X</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>Breakfast Bruschetta</h3>
+                <h5>$6.99</h5>
+                <hr style="clear:both;" />
+                A twist on classic bruschetta! Three slices of toasted rustic whole grain bread topped with california
+                avocados, tomato, hard-boiled eggs and ricotta with basil.</p>
+                <hr style="clear:both;" />
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Notes and Allergies</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </form>
+                <hr style="clear:both;" />
+                <br>
+            </div>
+        </div>
+</body>
+<footer>
+    <% include partials/navbar %>
+</footer>
+
+
+</html>
