@@ -1,0 +1,44 @@
+Name,Description,Price,Vegan Flag,Vegetarian Flag,Gluten Free Flag,Spicy Flag,Category
+Buttermilk Pie,"Smooth, mild, and sweet, our buttermilk filling is like a cross between a chess pie and a custard.",7.99,no,yes,no,no,Desserts
+Cinnamon Roll,"Combined with our smooth, tender dough and fluffy signature frosting, this isn’t your average cinnamon roll.",7.99,yes,yes,no,no,Desserts
+Monkey Bread,"Baked sweet yeast dough covered in melted butter, cinnamon, sugar, and chopped pecans",4.99,no,yes,no,no,Desserts
+Chocolate Scone,Your classic scone with dark chocolate chunks and sprinkled with coarse sugar and chocolate sauce.,4.99,yes,yes,no,no,Desserts
+Chocolate Crepes,"Chocolate Fudge with creme fraiche, pine nuts and caramelized pears.",4.99,no,yes,no,no,Desserts
+Blueberry Breakfast Cakes,,2.99,yes,yes,no,no,Desserts
+The Benny,One poached egg with half a toasted english muffin served two strips of bacon,5.99,no,no,no,no,Kid's Meal
+Rise and Shine,Two sunny side up eggs served with hashbrowns and two stips of bacon,6.99,no,no,yes,no,Kid's Meal
+The English,Two slices of rye bread topped with black beans and shredded sharp cheddar,4.99,no,yes,no,no,Kid's Meal
+Yogurt Parfait,"Creamy vanilla Greek yogurt layered with blueberries, raspberries, blackberries, and granola.",2.99,no,yes,no,no,Appetizer
+Acai Bowl,"Organic acai blended with strawberries and bananas, and topped with crunchy granola, fresh blueberries and raspberries, sliced bananas, almonds, granola, and chia seeds.",2.99,yes,yes,yes,no,Appetizer
+Biscuits & Gravy,One country style open-faced biscuit with two freshly cooked sausages topped with homemade white gravy.,4.99,no,no,no,no,Appetizer
+Chocolate Croissant,"A light, flaky pastry topped with almonds and powdered sugar and filled with handmade chocolate.",2.99,yes,yes,no,no,Appetizer
+Crustless Mini Quiche Lorraine,"Bacon, swiss cheese, red bell peppers, and light onions combine in this timeless classic.",4.99,no,no,yes,no,Appetizer
+Breakfast Bruschetta,"A twist on classic bruschetta! Three slices of toasted rustic whole grain bread topped with california avocados, tomato, hard-boiled eggs and ricotta with basil.",6.99,no,yes,no,no,Appetizer
+Berry Smoothie,"Strawberry, banana, vanilla, agave, soy milk",3.99,yes,yes,yes,no,Drink
+Mean Green Smoothie,"Pineapples, Bananas, Spinach, Carrots, Lemon Juice Blend, Almonds, Pineapple Mango Juice",3.99,yes,yes,yes,no,Drink
+Orange Juice,,1.99,yes,yes,yes,no,Drink
+Apple Juice,,1.99,yes,yes,yes,no,Drink
+Milk,,1.49,no,yes,yes,no,Drink
+Hand Roasted Coffee,,2.49,yes,yes,yes,no,Drink
+Lemonade,,2.49,yes,yes,yes,no,Drink
+Iced Tea,,2.49,yes,yes,yes,no,Drink
+Arnold Palmer,,2.49,yes,yes,yes,no,Drink
+Fountain Soda,,1.99,no,yes,yes,no,Drink
+Almond Milk,,1.49,yes,yes,yes,no,Drink
+Eggs Benedict,Two poached eggs over a toasted english muffin served with hollandaise sauce and a side of canadian bacon.,9.99,no,no,no,no,Entrée
+Migas ,"Scrambled eggs with tortilla chips, jalapenos, chorizo, onions, tomatoes, cheese, and avocado. Served with black beans and tortillas.",8.99,no,no,yes,yes,Entree
+Huevos Rancheros,"Corn tortilla topped with black beans, pulled pork, ranchero sauce, cheese, and 2 over easy eggs.",8.99,no,no,yes,yes,Entree
+Loaded Hash Browns,"Hash browns mixed with 2 veggies or meats, melted jack and cheddar, 2 eggs any style, garnished with scallions.",7.99,no,no,yes,no,Entree
+Chocolate Chip Pancakes,,5.99,yes,yes,no,no,Entree
+Banana Nutella Pancakes,,6.99,no,yes,no,no,Entree
+Blueberry Pancakes,,6.99,yes,yes,no,no,Entree
+Johnny Cakes,,5.99,yes,yes,yes,no,Entree
+Apple Walnut Pancakes,,7.99,no,no,no,no,Entree
+Stuffed French Toast,,6.99,no,yes,no,no,Entree
+Wild Berry French Toast,,6.99,no,yes,no,no,Entree
+Belgian Waffle,,5.99,no,yes,no,no,Entree
+Chicken and Waffles,,10.99,no,no,no,no,Entree
+Chilled Swiss Oats,,6.99,no,yes,yes,no,Entree
+Steel-Cut Oatmeal,,4.99,yes,yes,yes,no,Entree
+Berry Almond Sweet Oats,,5.99,yes,yes,yes,no,Entree
+Apple Walnut Oatmeal,,5.99,yes,yes,yes,no,Entree
