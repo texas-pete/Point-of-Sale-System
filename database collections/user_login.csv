@@ -1,0 +1,5 @@
+_id,terminal
+ObjectId("5bdbde199a3b124b4847f5bc"),manager
+ObjectId("5bdbde379a3b124b4847f5bd"),guest
+ObjectId("5bdbde439a3b124b4847f5be"),waitstaff
+ObjectId("5bdbde539a3b124b4847f5bf"),kitchenstaff
