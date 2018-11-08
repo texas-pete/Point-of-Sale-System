@@ -46,30 +46,12 @@
     </div>
 
     <!--Assistance Buttons-->
-    <header>
-        <div class="assistance">
-            <ul>
-                <li><button><img src="http://localhost:3000/images/MAG.png"> Magnifying Glass</button></li>
-                <li><button><img src="http://localhost:3000/images/txt2spch.png"> Text to Speech</button></li>
-                <div class="ass-dropdown">
-                    <li><button onclick="showDrinks()" class="ass-dropbtn"><img src="http://localhost:3000/images/refill.png">
-                            Tap to Select
-                            Refill</button></li>
-                    <div id="ass-drop" class="ass-dropdown-content">
-                        <a href="#">Milk</a>
-                        <a href="#">Leche</a>
-                        <a href="#">Cow Juice</a>
-                    </div>
-                </div>
-                <li><button><img src="http://localhost:3000/images/assistance.png"> Tap for Assistance</button></li>
-            </ul>
-        </div>
-    </header>
-
-    <!-- Navigation -->
+    <% include partials/assistance %>
+    
 
 </body>
 <footer>
+    <!-- Navigation -->
     <% include partials/guestnavbar %>
 </footer>
 
