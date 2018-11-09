@@ -27,6 +27,42 @@ router.get("/guest", function(req, res) {
   res.render("guest", { page: "Guest View" });
 });
 
+//Guest pages
+//appetizers
+router.get("/guest-appetizers", function(req, res){
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
+
+  MongoClient.connect(url, function(err, db){
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Connection established with MongoDB Server");
+
+      var query = {Category:"Appetizer"};
+      var collection = db.collection("menu_items");
+      console.log("attempting " + query);
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log("in here");
+          console.log(err);
+        }
+        else if(results.length){
+          //want to send info to db
+          res.render("appetizers", {menu_items: results});
+        }
+        else{
+          console.log("No results! ERROR");
+        }
+        db.close();
+      });
+    }
+  });
+
+  //res.render("appetizers", {page: "Apps"});
+});
+
 router.post("/validateCredentials", function(req, res) {
   var MongoClient = mongodb.MongoClient;
 
