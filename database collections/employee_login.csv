@@ -1,0 +1,2 @@
+_id,employee_id,employee_pass,employee_clock_in,employee_clock_status
+ObjectId("5be65fcc36e02044fcae6b79"),1234,1234,0,1
