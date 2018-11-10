@@ -3,38 +3,38 @@ var router = express.Router();
 var mongodb = require("mongodb");
 
 /* GET home page. Log onto our terminal*/
-router.get("/", function(req, res) {
+router.get("/", function (req, res) {
   res.render("terminal_login", { page: "Log in to the Terminal" });
 });
 
 // Terminal View for Waitstaff
-router.get("/waitstaff", function(req, res) {
+router.get("/waitstaff", function (req, res) {
   res.render("waitstaff", { page: "Waitstaff View" });
 });
 
 // Terminal View for Kitchen Staff
-router.get("/kitchenstaff", function(req, res) {
+router.get("/kitchenstaff", function (req, res) {
   res.render("kitchenstaff", { page: "Kitchen Staff View" });
 });
 
 // Terminal View for Management
-router.get("/manager", function(req, res) {
+router.get("/manager", function (req, res) {
   res.render("manager", { page: "Management View" });
 });
 
 // Terminal View for Guests
-router.get("/guest", function(req, res) {
+router.get("/guest", function (req, res) {
   res.render("guest", { page: "Guest View" });
 });
 
-router.post("/validateCredentials", function(req, res) {
+router.post("/validateCredentials", function (req, res) {
   var MongoClient = mongodb.MongoClient;
 
   var url = "mongodb://localhost:27017/4quad";
 
   MongoClient.connect(
     url,
-    function(err, db) {
+    function (err, db) {
       if (err) {
         console.log("Unable to Connect to the Server", err);
       } else {
@@ -43,7 +43,7 @@ router.post("/validateCredentials", function(req, res) {
         var query = { terminal: req.body.username };
         var collection = db.collection("terminal_login");
 
-        collection.find(query).toArray(function(err, results) {
+        collection.find(query).toArray(function (err, results) {
           if (err) {
             console.log(err);
           } else if (results.length) {
@@ -67,6 +67,53 @@ router.post("/validateCredentials", function(req, res) {
             res.redirect("/"); //redirect if we fail to validate input
           }
           db.close();
+          console.log("Connection Closed");
+        });
+      }
+    }
+  );
+});
+
+router.get("/validateEmployee", function (req, res) {
+  var prevAddress = req.headers.referer
+  res.render("clock_login", { page: "Clock-In", prevAddress: prevAddress });
+
+});
+
+router.post("/validateEmpCredentials", function (req, res) { //accessed (POST REQUEST) via the clock_login.ejs file
+  var MongoClient = mongodb.MongoClient;
+  var retAddress = req.body.retAddress;
+  var url = "mongodb://localhost:27017/4quad";
+
+  MongoClient.connect( //create a database connection
+    url,
+    function (err, db) {
+      if (err) { //if we can't open our server, throw an error
+        console.log("Unable to Connect to the Server", err);
+      } else {
+        console.log("Connection Opened"); //prints to the node.js command prompt
+
+        var query = { employee_id: req.body.username }; //create a query in the collection we need to check
+        var query2 = { employee_pass: req.body.password };
+        var collection = db.collection("employee_login"); //I don't feel like typing the whole thing out 
+
+        collection.find(query && query2).toArray(function (err, results) { //query our collection within our database for any results 
+          if (err) { //If there are any issues with the database, print them to the browser
+            console.log(err);
+          } else if (results.length) { //SUCCESS ( we have an employee with this ID... )
+
+            //we want to verify password now....
+
+            //TODO: Not sure how we want to implement labor tracking... It would go here though. 
+            collection.update({ employee_id: req.body.username }, { $set: { employee_clock_status: 1 } }); //this just sets a flag 
+            res.redirect(retAddress); //return back to the kiosk view we were logged into prior
+
+          }
+          else { //user not found
+            console.log("Login not found");
+            res.render("clock_login", { page: "Clock-In", prevAddress: retAddress });
+          }
+          //db.close(); if i keep this here and we successfully login, I get a warning in the console? idk what other instances of the DB would cause this
           console.log("Connection Closed");
         });
       }

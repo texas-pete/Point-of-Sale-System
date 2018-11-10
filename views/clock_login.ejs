@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include partials/login_head %>
+</head>
+
+<body>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active"><a class="nav-link" href="<%= prevAddress%>">Home</a></li>
+    </ul>
+    <div class="clockinbox">
+        <h1>Login Here</h1>
+        <form method="post" action="/validateEmpCredentials">
+            <p>Username</p>
+            <input type="text" name="username" placeholder="Enter Username">
+            <input type="password" name="password" placeholder="Enter Password">
+            <input type="submit" name="" value="Login"> <br>
+            <input style="visibility: hidden;" type="text" name="retAddress" value="<%= prevAddress%>">
+        </form>
+    </div>
+</body>
+<footer>
+    <!-- <% include partials/navbar %> -->
+</footer>
+
+</html>

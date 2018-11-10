@@ -40,6 +40,11 @@ function changeHTML(id, val) {
         }
 
     }
+    else if (id === 'min') {
+        if (val < 10) {
+            val = '0' + val;
+        }
+    }
     document.getElementById(id).innerHTML = val;
 };
 
