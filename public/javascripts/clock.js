@@ -24,13 +24,13 @@ function clock() {
             }
         }
     }
-    $('ampm', s);
-    $('min', m);
-    $('hr', ampm);
+    changeHTML('ampm', s);
+    changeHTML('min', m);
+    changeHTML('hr', ampm);
     animate = setTimeout(clock, 1000);
 };
 
-function $(id, val) {
+function changeHTML(id, val) {
     if (id === 'ampm') {
         if (h > 12) {
             val = 'PM';
@@ -40,9 +40,6 @@ function $(id, val) {
         }
 
     }
-    // if (val < 10) {
-    //     val = '0' + val;
-    // }
     document.getElementById(id).innerHTML = val;
 };
 
