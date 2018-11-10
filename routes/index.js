@@ -58,9 +58,9 @@ router.post("/validateCredentials", function (req, res) {
             } else if (req.body.username === "manager") {
               //redirect to manager
               res.redirect("/manager");
-            } else if (req.body.username === "guest") {
-              //redirect to guest view
-              res.redirect("/guest");
+            } else {
+              //redirect to guest view we have 16 logins and if we get here they hit somethng. if we manage the db correctly we shouldn't have issues.
+              res.render("guest", { page: "Table", tablenum: req.body.username });
             }
           } else {
             console.log("Login not found");
