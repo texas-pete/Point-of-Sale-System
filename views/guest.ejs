@@ -15,7 +15,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
     <script src="http://localhost:3000/javascripts/customerDrop.js"></script>
+
 
     <link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
 </head>
@@ -49,23 +51,7 @@
 
     <!--Assistance Buttons-->
     <header>
-        <div class="assistance">
-            <ul>
-                <li><button><img src="http://localhost:3000/images/MAG.png"> Magnifying Glass</button></li>
-                <li><button><img src="http://localhost:3000/images/txt2spch.png"> Text to Speech</button></li>
-                <div class="ass-dropdown">
-                    <li><button onclick="showDrinks()" class="ass-dropbtn"><img src="http://localhost:3000/images/refill.png">
-                            Tap to Select
-                            Refill</button></li>
-                    <div id="ass-drop" class="ass-dropdown-content">
-                        <a href="#">Milk</a>
-                        <a href="#">Leche</a>
-                        <a href="#">Cow Juice</a>
-                    </div>
-                </div>
-                <li><button><img src="http://localhost:3000/images/assistance.png"> Tap for Assistance</button></li>
-            </ul>
-        </div>
+        <%include partials/guestheader.ejs %>
     </header>
 
     <!-- Navigation -->
@@ -73,6 +59,8 @@
 </body>
 <footer>
     <% include partials/guestnavbar %>
+    <script src="http://localhost:3000/javascripts/guestAssistanceHeader.js"></script>
+    <!-- Script needs to load AFTER the header does. -->
 </footer>
 
 </html>
