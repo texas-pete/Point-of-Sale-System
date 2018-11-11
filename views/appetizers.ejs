@@ -9,45 +9,64 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <script src="http://localhost:3000/javascripts/customerDrop.js"></script>
-
+    
     <link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 </head>
 <body>
-
-
-<!--http://localhost:3000/images/appetizers/...HERE...-->
-<h1>Appetizers</h1>
-<br><br>
-<div class="container">
-	<div class="row">
-	<% menu_items.forEach(function(item, index){ %>
-		<div class="col-md-6">
-			<h3><%= item.Name %></h3>
-			<h5><%= item.Price %></h5>
-			<hr style="clear:both;"/>
-			<p><img src="#" alt=<%= item.Name %> style="float:left" width="290" height="200" hspace="20">
-			<%= item.Description %></p>
-			<button type="button" class="btn btn-secondary btn-sm">Add to Order</button>
-			<hr style="clear:both;"/>
-		</div>
-		<% if((index + 1) > 0 && (index + 1) % 2 == 0){ %>
+	<h1>Appetizers</h1>
+	<br><br>
+	<div class="container">
+		<div class="row">
+		<% menu_items.forEach(function(item, index){ %>
+			<div class="col-md-6">
+				<h3><%= item.Name %></h3>
+				<h5>$<%= item.Price %></h5>
+				<hr style="clear:both;"/>
+				<p><img src= 'http://localhost:3000/images/appetizers/<%= item.ImageName %>' alt=<%= item.Name %> style="float:left" width="290" height="200" hspace="20">
+				<%= item.Description %></p>
+				<button type="button" class="btn btn-secondary btn-sm addToOrder" data-id="<%= item._id %>">Add to Order</button>
+				<hr style="clear:both;"/>
 			</div>
-			<div class="row">
-		<% } %>
-	<% }) %>
+			<% if((index + 1) > 0 && (index + 1) % 2 == 0){ %>
+				<br>
+				</div>
+				<div class="row">
+			<% } %>
+		<% }) %>
+		</div>
 	</div>
-</div>
 
-<br><br><br>
+	<br><br><br>
     <!--Assistance Buttons-->
     <% include partials/assistance %>
 
+	<!--Modal-->
+	<div class="bg-modal">
+		<div class="modal-content">
+			<div class="close">+</div>
+			<div class="modal-main-content">
+				<h3 class="modal-menu-name">Name</h3>
+				<img class="modal-menu-img" src="img" alt="nameOfImage" style="float:left" width="390" height="300" hspace="20">
+				<h4 class="modal-menu-price">Price</h4>
+				<h5 class="modal-menu-desc">Description</h5>
+			</div>
+			<br>
+			<form action="">
+				<textarea name="allergiesEdit" placeholder="Type in any allergies or anything you want added/removed from the item." cols = "60" rows="5"></textarea>
+				<a href="" class="btn btn-secondary btn-sm">Add to Order</a>
+			</form>
+			<button type="button" class="btn btn-secondary btn-sm">Add to Order</button>
+		</div>
+	</div>
 
 </body>
 
 <footer>
     <!-- Navigation -->
     <% include partials/guestnavbar %>
+
+    <!--@ bottom to allow DOM to fully load-->
+    <script src="http://localhost:3000/javascripts/customer.js"></script>
 </footer>
 </html>
