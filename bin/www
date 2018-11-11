@@ -8,6 +8,11 @@ var app = require('../app');
 var debug = require('debug')('4quad:server');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var mongodb = require("mongodb");
+
+var MongoClient = mongodb.MongoClient;
+
+var mongoURL = "mongodb://localhost:27017/4quad";
 
 /**
  * Get port from environment and store in Express.
@@ -99,9 +104,51 @@ io.on('connection', function (socket) {
   });
 
   // service request from customer view
+  // inserts a new service request in the DB
   socket.on('serviceRequest', function (msg) {
-    console.log('SERVICE REQUEST');
-    socket.emit("clearServiceRequest","Clear Service Request Response");
+    let tblNumber = msg.trim();
+    console.log('Service Request from tbl ' + tblNumber);
+
+    MongoClient.connect(mongoURL, function (err, db) {
+      var query = { tableNum: tblNumber };
+      var collection = db.collection("service_requests");
+  
+      collection.insertOne(query, function (err, results) {
+        if (err) 
+          console.log(err);
+        else
+        console.log(tblNumber + " Inserted");
+  
+        db.close();
+      });
+    });
+
   });
 
+  // Clears service request. Triggerd from waitstaff view.
+  socket.on('clearServiceRequest', function (msg) {
+    let tblNumber = msg.trim();
+    console.log('Clearing Service Request for tbl ' + tblNumber);
+    
+    //socket.emit("clearServiceRequest","Clear Service Request Response");
+
+    MongoClient.connect(mongoURL, function (err, db) {
+      var query = { tableNum: tblNumber };
+      var collection = db.collection("service_requests");
+  
+      collection.deleteMany(query, function (err, results) {
+        if (err) 
+          console.log(err);
+        else
+        console.log(results.result.n + " Document(s) Deleted");
+  
+        db.close();
+      });
+    });
+  });
 });
+
+
+
+
+  

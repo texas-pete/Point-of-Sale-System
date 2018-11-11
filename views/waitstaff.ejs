@@ -26,9 +26,12 @@
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
     <script src="http://localhost:3000/javascripts/waitstaff.js"></script>
     <script src="http://localhost:3000/javascripts/hideElement.js"></script>
     <script src="http://localhost:3000/javascripts/clock.js"></script>
+    
 </head>
 
 <body>
@@ -159,10 +162,10 @@
                 <li>Water</li>
                 <li>Water</li>
             </ul>
-            <button> Clear Refills</button>
-            <button> Clear Service Request</button>
-            <button> Request Managerial Assistance </button>
-            <button> Adjust Total </button>
+            <button id="clearRefills"> Clear Refills</button>
+            <button id="clearServiceRequest"> Clear Service Request</button>
+            <button id="requestManager"> Request Managerial Assistance </button>
+            <button id="adjustTotal"> Adjust Total </button>
         </div>
 
         <div id="orderinfo" style="display: none">
