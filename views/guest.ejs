@@ -13,8 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <script src="http://localhost:3000/javascripts/customerDrop.js"></script>
-
     <link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
 </head>
 
@@ -47,12 +45,13 @@
 
     <!--Assistance Buttons-->
     <% include partials/assistance %>
-    
-
 </body>
+
 <footer>
     <!-- Navigation -->
     <% include partials/guestnavbar %>
-</footer>
 
+    <!--@ bottom to allow DOM to fully load-->
+    <script src="http://localhost:3000/javascripts/customer.js"></script>
+</footer>
 </html>

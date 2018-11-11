@@ -3,6 +3,8 @@ var router = express.Router();
 var mongodb = require("mongodb");
 var ObjectId = require('mongodb').ObjectId;
 
+var currentTable = ""//is null b.c no table set.
+
 /* GET home page. Log onto our terminal*/
 router.get("/", function(req, res) {
   res.render("terminal_login", { page: "Log in to the Terminal" });
@@ -25,10 +27,10 @@ router.get("/manager", function(req, res) {
 
 // Terminal View for Guests
 router.get("/guest", function(req, res) {
-  res.render("guest", { page: "Guest View" });
+  console.log("accessing guest index page, table " + req.body.tablenum);
+  res.render("guest", { page: "Guest View", tablenum: req.body.tablenum });
 });
 
-//Guest pages
 //appetizers
 router.get("/guest-appetizers", function(req, res){
   var MongoClient = mongodb.MongoClient;
@@ -46,7 +48,6 @@ router.get("/guest-appetizers", function(req, res){
       console.log("attempting " + query);
       collection.find(query).toArray(function(err, results){
         if(err){
-          console.log("in here");
           console.log(err);
         }
         else if(results.length){
@@ -65,6 +66,39 @@ router.get("/guest-appetizers", function(req, res){
 //games
 router.get("/guest-games", function(req, res){
   res.render("guest-games");
+});
+
+//order
+router.get("/guest-order", function(req, res){
+  //res.render("guest-order");
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
+
+  MongoClient.connect(url, function(err, db){
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Connection established with MongoDB Server");
+
+      var query = {table : currentTable};
+      var collection = db.collection("active_orders");
+      console.log("attempting " + query + " " + currentTable);
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){
+          //want to send info to db
+          res.render("guest-order", {order_items: results});
+        }
+        else{
+          console.log("No results! ERROR");
+        }
+        db.close();
+      });
+    }
+  });
 });
 
 //is used to retrieve the necessary information for the modal popup
@@ -101,18 +135,16 @@ router.post("/getMenuItemById/*", function(req, res) {
       }
     }
   );
-
-  //res.send()
 });
 
-router.post("/validateCredentials", function(req, res) {
+router.post("/validateCredentials", function (req, res) {
   var MongoClient = mongodb.MongoClient;
 
   var url = "mongodb://localhost:27017/4quad";
 
   MongoClient.connect(
     url,
-    function(err, db) {
+    function (err, db) {
       if (err) {
         console.log("Unable to Connect to the Server", err);
       } else {
@@ -121,7 +153,7 @@ router.post("/validateCredentials", function(req, res) {
         var query = { terminal: req.body.username };
         var collection = db.collection("terminal_login");
 
-        collection.find(query).toArray(function(err, results) {
+        collection.find(query).toArray(function (err, results) {
           if (err) {
             console.log(err);
           } else if (results.length) {
@@ -136,8 +168,11 @@ router.post("/validateCredentials", function(req, res) {
             } else if (req.body.username === "manager") {
               //redirect to manager
               res.redirect("/manager");
-            } else if (req.body.username === "guest") {
-              //redirect to guest view
+            } else {
+              //redirect to guest view we have 16 logins and if we get here they hit somethng. if we manage the db correctly we shouldn't have issues.
+              var tableN = req.body.username;
+              currentTable = tableN.substring(5, tableN.length);
+              console.log("Table " + currentTable + " is active.");
               res.redirect("/guest");
             }
           } else {
