@@ -60,7 +60,7 @@ router.post("/validateCredentials", function (req, res) {
               res.redirect("/manager");
             } else {
               //redirect to guest view we have 16 logins and if we get here they hit somethng. if we manage the db correctly we shouldn't have issues.
-              let tblNumber = req.body.username.replace("table","");
+              let tblNumber = req.body.username.replace("table", "");
               res.render("guest", { page: "", tablenum: tblNumber });
             }
           } else {
@@ -95,19 +95,26 @@ router.post("/validateEmpCredentials", function (req, res) { //accessed (POST RE
         console.log("Connection Opened"); //prints to the node.js command prompt
 
         var query = { employee_id: req.body.username }; //create a query in the collection we need to check
-        var query2 = { employee_pass: req.body.password };
+        var query2flag = { employee_pass: 1, _id: 0 };
+        var query2 = req.body.password;
         var collection = db.collection("employee_login"); //I don't feel like typing the whole thing out 
 
-        collection.find(query && query2).toArray(function (err, results) { //query our collection within our database for any results 
+        collection.find(query, query2flag).toArray(function (err, results) { //query our collection within our database for any results 
           if (err) { //If there are any issues with the database, print them to the browser
             console.log(err);
           } else if (results.length) { //SUCCESS ( we have an employee with this ID... )
+            //verify the password exists
 
-            //we want to verify password now....
+            if (results[0].employee_pass === query2) { //validates the user's password. 
 
-            //TODO: Not sure how we want to implement labor tracking... It would go here though. 
-            collection.update({ employee_id: req.body.username }, { $set: { employee_clock_status: 1 } }); //this just sets a flag 
-            res.redirect(retAddress); //return back to the kiosk view we were logged into prior
+              //TODO: Not sure how we want to implement labor tracking... It would go here though. 
+              collection.update({ employee_id: req.body.username }, { $set: { employee_clock_status: 1 } }); //this just sets a flag 
+              res.redirect(retAddress); //return back to the kiosk view we were logged into prior
+            }
+            else {
+              console.log("Login not found");
+              res.render("clock_login", { page: "Clock-In", prevAddress: retAddress });
+            }
 
           }
           else { //user not found
