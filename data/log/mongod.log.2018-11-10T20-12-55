@@ -1,0 +1,40 @@
+2018-11-10T14:12:03.090-0600 I CONTROL  [initandlisten] MongoDB starting : pid=9732 port=27017 dbpath=C:\Users\Stin\Desktop\Fall_2018\Software Engineering\4Quad\data\db 64-bit host=Stin
+2018-11-10T14:12:03.090-0600 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2018-11-10T14:12:03.090-0600 I CONTROL  [initandlisten] db version v4.0.3
+2018-11-10T14:12:03.090-0600 I CONTROL  [initandlisten] git version: 7ea530946fa7880364d88c8d8b6026bbc9ffa48c
+2018-11-10T14:12:03.090-0600 I CONTROL  [initandlisten] allocator: tcmalloc
+2018-11-10T14:12:03.090-0600 I CONTROL  [initandlisten] modules: none
+2018-11-10T14:12:03.090-0600 I CONTROL  [initandlisten] build environment:
+2018-11-10T14:12:03.091-0600 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2018-11-10T14:12:03.091-0600 I CONTROL  [initandlisten]     distarch: x86_64
+2018-11-10T14:12:03.091-0600 I CONTROL  [initandlisten]     target_arch: x86_64
+2018-11-10T14:12:03.091-0600 I CONTROL  [initandlisten] options: { storage: { dbPath: "C:\Users\Stin\Desktop\Fall_2018\Software Engineering\4Quad\data\db" }, systemLog: { destination: "file", path: "C:\Users\Stin\Desktop\Fall_2018\Software Engineering\4Quad\data\log\mongod.log" } }
+2018-11-10T14:12:03.095-0600 I STORAGE  [initandlisten] Detected data files in C:\Users\Stin\Desktop\Fall_2018\Software Engineering\4Quad\data\db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2018-11-10T14:12:03.095-0600 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=7521M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+2018-11-10T14:12:03.528-0600 I STORAGE  [initandlisten] WiredTiger message [1541880723:528611][9732:140710503857232], txn-recover: Main recovery loop: starting at 4/26624
+2018-11-10T14:12:03.695-0600 I STORAGE  [initandlisten] WiredTiger message [1541880723:695416][9732:140710503857232], txn-recover: Recovering log 4 through 5
+2018-11-10T14:12:03.815-0600 I STORAGE  [initandlisten] WiredTiger message [1541880723:815275][9732:140710503857232], txn-recover: Recovering log 5 through 5
+2018-11-10T14:12:03.906-0600 I STORAGE  [initandlisten] WiredTiger message [1541880723:906169][9732:140710503857232], txn-recover: Set global recovery timestamp: 0
+2018-11-10T14:12:04.449-0600 I RECOVERY [initandlisten] WiredTiger recoveryTimestamp. Ts: Timestamp(0, 0)
+2018-11-10T14:12:05.070-0600 I CONTROL  [initandlisten] 
+2018-11-10T14:12:05.070-0600 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2018-11-10T14:12:05.070-0600 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2018-11-10T14:12:05.070-0600 I CONTROL  [initandlisten] 
+2018-11-10T14:12:05.071-0600 I CONTROL  [initandlisten] ** WARNING: This server is bound to localhost.
+2018-11-10T14:12:05.071-0600 I CONTROL  [initandlisten] **          Remote systems will be unable to connect to this server. 
+2018-11-10T14:12:05.071-0600 I CONTROL  [initandlisten] **          Start the server with --bind_ip <address> to specify which IP 
+2018-11-10T14:12:05.071-0600 I CONTROL  [initandlisten] **          addresses it should serve responses from, or with --bind_ip_all to
+2018-11-10T14:12:05.072-0600 I CONTROL  [initandlisten] **          bind to all interfaces. If this behavior is desired, start the
+2018-11-10T14:12:05.072-0600 I CONTROL  [initandlisten] **          server with --bind_ip 127.0.0.1 to disable this warning.
+2018-11-10T14:12:05.072-0600 I CONTROL  [initandlisten] 
+2018-11-10T14:12:06.130-0600 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'C:/Users/Stin/Desktop/Fall_2018/Software Engineering/4Quad/data/db/diagnostic.data'
+2018-11-10T14:12:06.131-0600 I NETWORK  [initandlisten] waiting for connections on port 27017
+2018-11-10T14:12:06.658-0600 I CONTROL  [thread1] Ctrl-C signal
+2018-11-10T14:12:06.659-0600 I CONTROL  [consoleTerminate] got CTRL_C_EVENT, will terminate after current cmd ends
+2018-11-10T14:12:06.659-0600 I NETWORK  [consoleTerminate] shutdown: going to close listening sockets...
+2018-11-10T14:12:06.661-0600 I CONTROL  [consoleTerminate] Shutting down free monitoring
+2018-11-10T14:12:06.661-0600 I FTDC     [consoleTerminate] Shutting down full-time diagnostic data capture
+2018-11-10T14:12:06.662-0600 I STORAGE  [consoleTerminate] WiredTigerKVEngine shutting down
+2018-11-10T14:12:07.631-0600 I STORAGE  [consoleTerminate] shutdown: removing fs lock...
+2018-11-10T14:12:07.632-0600 I CONTROL  [consoleTerminate] now exiting
+2018-11-10T14:12:07.633-0600 I CONTROL  [consoleTerminate] shutting down with code:12
