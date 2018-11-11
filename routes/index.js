@@ -108,6 +108,14 @@ router.post("/validateEmpCredentials", function (req, res) { //accessed (POST RE
             if (results[0].employee_pass === query2) { //validates the user's password. 
 
               //TODO: Not sure how we want to implement labor tracking... It would go here though. 
+
+              //we want to check a flag to see if a user if clocked in
+              //if so, clock them out and calculate the time
+
+              //else 
+              //insert the time and date.
+
+
               collection.update({ employee_id: req.body.username }, { $set: { employee_clock_status: 1 } }); //this just sets a flag 
               res.redirect(retAddress); //return back to the kiosk view we were logged into prior
             }
