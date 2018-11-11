@@ -73,7 +73,7 @@
 			<h3> Acai Bowl</h3>
 			<h5>$7.99</h5>
 			<hr style="clear:both;"/>
-			<p><img src="../img/appetizers/acai-bowl.jpg" alt="Acai Bowl" style="float:left" width="290" height="200" hspace="20">
+			<p><img id = "acai" src="../img/appetizers/acai-bowl.jpg" alt="Acai Bowl" style="float:left" width="290" height="200" hspace="20">
 				Organic acai blended with strawberries and bananas, and topped with crunchy granola, fresh blueberries and raspberries, sliced bananas, almonds, granola, and chia seeds.</p>
 				<button type="button" class="btn btn-secondary btn-sm">Add to Order</button>
 				<hr style="clear:both;"/>
@@ -129,7 +129,25 @@
 <header>
 <div class="assistance">
 	<ul>
-		<li><button><img src="../img/MAG.png"> Magnifying Glass</button></li>
+		<script src="magnify.js"></script>
+		<div class="img-magnifier-container">
+				
+		</div>
+			<li><button id="mag" onclick="function()"><img src="../img/MAG.png"> Magnifying Glass</button></li>
+		
+			  <script>
+				/*Execute the magnify function:*/
+				mag.onclick = function(){
+					magnify("acai", 3);
+				}
+				// When the user clicks anywhere outside of the modal, close it
+				acai.onclick = function(event) {
+					if (event.target == modal) {
+						modal.style.display = "none";
+					}
+				}
+				/*Specify the id of the image, and the strength of the magnifier glass:*/ 
+				</script>
 		<li><button><img src="../img/txt2spch.png"> Text to Speech</button></li>
 		<div class="ass-dropdown">
 			<li><button onclick="showDrinks()" class="ass-dropbtn"><img src="../img/refill.png"> Tap to Select Refill</button></li>
