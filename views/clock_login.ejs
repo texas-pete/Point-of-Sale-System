@@ -3,6 +3,7 @@
 
 <head>
     <% include partials/login_head %>
+    <% include partials/keyboard/keyboardHeader %>
 </head>
 
 <body>
@@ -13,8 +14,8 @@
         <h1>Login Here</h1>
         <form method="post" action="/validateEmpCredentials">
             <p>Username</p>
-            <input type="text" name="username" placeholder="Enter Username">
-            <input type="password" name="password" placeholder="Enter Password">
+            <input type="tel" autocomplete="off" name="username" placeholder="Enter Username" id="number1">
+            <input type="tel" name="password" placeholder="Enter Password" id="number">
             <input type="submit" name="" value="Login"> <br>
             <input style="visibility: hidden;" type="text" name="retAddress" value="<%= prevAddress%>">
         </form>
@@ -22,6 +23,7 @@
 </body>
 <footer>
     <!-- <% include partials/navbar %> -->
+    <% include partials/keyboard/keyboardScripts %>
 </footer>
 
 </html>

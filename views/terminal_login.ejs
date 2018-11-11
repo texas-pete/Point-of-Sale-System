@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
+
     <% include partials/login_head %>
+    <% include partials/keyboard/keyboardHeader %>
 </head>
 
 <body>
@@ -10,10 +12,13 @@
         <h1>Login Here</h1>
         <form method="post" action="/validateCredentials">
             <p>Username</p>
-            <input type="text" name="username" placeholder="Enter Username">
+            <input type="default" type="text" autocomplete="off" class="keyboard form-control" id="default" name="username"
+                placeholder="Enter Username">
             <input type="submit" name="" value="Login"> <br>
         </form>
     </div>
+
+    <% include partials/keyboard/keyboardScripts %>
 </body>
 <footer>
 </footer>
