@@ -62,6 +62,11 @@ router.get("/guest-appetizers", function(req, res){
   });
 });
 
+//games
+router.get("/guest-games", function(req, res){
+  res.render("guest-games");
+});
+
 //is used to retrieve the necessary information for the modal popup
 router.post("/getMenuItemById/*", function(req, res) {
   console.log("Retrieving data from: " + req.params[0]);
