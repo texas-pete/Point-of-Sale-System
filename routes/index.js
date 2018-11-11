@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var mongodb = require("mongodb");
+var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. Log onto our terminal*/
 router.get("/", function(req, res) {
@@ -59,8 +60,44 @@ router.get("/guest-appetizers", function(req, res){
       });
     }
   });
+});
 
-  //res.render("appetizers", {page: "Apps"});
+//is used to retrieve the necessary information for the modal popup
+router.post("/getMenuItemById/*", function(req, res) {
+  console.log("Retrieving data from: " + req.params[0]);
+
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
+  MongoClient.connect(
+    url,
+    function(err, db) {
+      if(err){
+        console.log("Unable to connect to the Server");
+      }
+      else{
+        console.log("Connection established");
+        var objID = new ObjectId(req.params[0]);
+        var query = { _id: objID};
+        var collection = db.collection("menu_items");
+
+        collection.find(query).toArray(function(err, results) {
+            if(err){
+              console.log(err);
+            }
+            else if (results.length){//send the object to the page
+              res.send(results);
+            }
+            else{
+              console.log("Menu item not found!");
+            }
+            db.close();
+            console.log("Connection closed");
+        });
+      }
+    }
+  );
+
+  //res.send()
 });
 
 router.post("/validateCredentials", function(req, res) {
