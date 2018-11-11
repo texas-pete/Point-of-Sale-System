@@ -14,8 +14,10 @@
         <h1>Login Here</h1>
         <form method="post" action="/validateEmpCredentials">
             <p>Username</p>
-            <input type="tel" autocomplete="off" name="username" placeholder="Enter Username" id="number1">
-            <input type="tel" name="password" placeholder="Enter Password" id="number">
+            <input type="tel" autocomplete="off" class="keyboard form-control" name="username" placeholder="Enter Username"
+                id="number">
+            <input type="tel" autocomplete="off" name="password" class="keyboard form-control" placeholder="Enter Password"
+                id="numberpad">
             <input type="submit" name="" value="Login"> <br>
             <input style="visibility: hidden;" type="text" name="retAddress" value="<%= prevAddress%>">
         </form>

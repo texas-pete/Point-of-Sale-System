@@ -1,7 +1,7 @@
 // jQuery Bootstrap Touch Keyboard plugin
 // By Matthew Dawkins
-(function($) {
-    $.fn.keyboard = function(options) {
+(function ($) {
+    $.fn.keyboard = function (options) {
         // Settings
         var settings = $.extend({
             keyboardLayout: [
@@ -61,7 +61,7 @@
                 [
                     ['shift', 'shift'],
                     ['space', 'space'],
-                    ['shift', 'shift']
+                    ['enter', 'enter']
                 ]
             ],
             numpadLayout: [
@@ -104,8 +104,7 @@
                 ],
                 [
                     ['del'],
-                    ['0'],
-                    ['.']
+                    ['0']
                 ]
             ],
             layout: false,
@@ -115,7 +114,7 @@
             btnActiveClasses: 'active btn-primary',
             initCaps: false,
             placement: 'bottom',
-            container:'body',
+            container: 'body',
             trigger: 'focus'
         }, options);
         if (!settings.layout) {
@@ -131,7 +130,7 @@
         var keyboardShift = false;
 
         // Listen for keypresses
-        var onKeypress = function(e) {
+        var onKeypress = function (e) {
             $(this).addClass(settings.btnActiveClasses);
             var keyContent = $(this).attr('data-value' + (keyboardShift ? '-alt' : ''));
             var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
@@ -162,8 +161,8 @@
         $(document).on('touchstart', '.jqbtk-row .btn', onKeypress);
 
         $(document).off('mousedown', '.jqbtk-row .btn');
-        $(document).on('mousedown', '.jqbtk-row .btn',function(e){
-            onKeypress.bind(this,e)();
+        $(document).on('mousedown', '.jqbtk-row .btn', function (e) {
+            onKeypress.bind(this, e)();
             var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
             parent.focus();
             e.preventDefault();
@@ -171,30 +170,30 @@
 
         // All those trouble just to prevent clicks on the popover from cancelling the focus
         $(document).off('mouseup', '.jqbtk-row .btn');
-        $(document).on('mouseup', '.jqbtk-row .btn',function(e){
+        $(document).on('mouseup', '.jqbtk-row .btn', function (e) {
             $(this).removeClass(settings.btnActiveClasses);
             var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
             parent.focus();
         });
 
-        $(document).on('click', '.jqbtk-row .btn',function(e){
+        $(document).on('click', '.jqbtk-row .btn', function (e) {
             var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
             parent.focus();
         });
-        $(document).on('touchend', '.jqbtk-row .btn', function() {
+        $(document).on('touchend', '.jqbtk-row .btn', function () {
             $(this).removeClass(settings.btnActiveClasses);
             var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
             parent.focus();
         });
-        $(document).on('touchend', '.jqbtk-row', function(e) {
+        $(document).on('touchend', '.jqbtk-row', function (e) {
             e.preventDefault();
             var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
             parent.focus();
 
         });
         // Update keys according to shift status
-        var keyboardShiftify = function() {
-            $('.jqbtk-container .btn').each(function() {
+        var keyboardShiftify = function () {
+            $('.jqbtk-container .btn').each(function () {
                 switch ($(this).attr('data-value')) {
                     case 'shift':
                     case 'del':
@@ -207,28 +206,27 @@
             });
         };
         var container = this.data('container');
-        if(container!=undefined)
-        {
-          container = '#'+container;
-          settings.container = container;
-          settings.placement = 'in';
-          settings.trigger = 'manual';
-          $(container).addClass('keyboard-container');
+        if (container != undefined) {
+            container = '#' + container;
+            settings.container = container;
+            settings.placement = 'in';
+            settings.trigger = 'manual';
+            $(container).addClass('keyboard-container');
         }
         // Set up a popover on each of the targeted elements
-        return this.each(function() {
+        return this.each(function () {
             $(this).popover({
-                content: function() {
+                content: function () {
                     // Optionally set initial caps
                     if (settings.initCaps && $(this).val().length === 0) {
                         keyboardShift = true;
                     }
                     // Set up container
                     var content = $('<div class="jqbtk-container" tabIndex="-1">');
-                    $.each(settings.layout, function() {
+                    $.each(settings.layout, function () {
                         var line = this;
                         var lineContent = $('<div class="jqbtk-row">');
-                        $.each(line, function() {
+                        $.each(line, function () {
                             var btn = $(settings.btnTpl).addClass(settings.btnClasses);
                             btn.attr('data-value', this[0]).attr('data-value-alt', this[1]);
                             switch (this[0]) {
@@ -256,12 +254,11 @@
                 html: true,
                 placement: settings.placement,
                 trigger: settings.trigger,
-                container:settings.container,
+                container: settings.container,
                 viewport: settings.container
             });
-            if(settings.trigger == 'manual')
-            {
-              $(this).popover('show');
+            if (settings.trigger == 'manual') {
+                $(this).popover('show');
             }
         });
     };
