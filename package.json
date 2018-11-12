@@ -17,6 +17,7 @@
 <<<<<<< HEAD
     "socket.io": "^2.1.1"
 =======
+    "kerberos": "*"
 >>>>>>> waitstaff-ag
   }
 }
