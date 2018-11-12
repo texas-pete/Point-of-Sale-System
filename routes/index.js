@@ -137,6 +137,55 @@ router.post("/getMenuItemById/*", function(req, res) {
   );
 });
 
+router.post("/submitToOrder/:objId/:notes", function(req, res){
+  console.log("Trying to submit to order with menu_items.objId " + req.params.objId + 
+    " and notes as " + req.params.notes);
+
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
+  MongoClient.connect(
+    url,
+    function(err, db) {
+      if(err){
+        console.log("Unable to connect to the Server");
+      }
+      else{
+        console.log("Connection established");
+        //var objID = new ObjectId(req.params.objId);
+        var itemId = req.params.objId
+        var query = { table: currentTable.toString()};
+        var collection = db.collection("active_orders");
+        var newvalues = {$push: {items: {item: itemId, notes: req.params.notes}}};
+        
+        console.log("Running the query collection.update(table: " + currentTable.toString()
+        + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes);
+        var itemId = req.params.objId
+        var query = { table: currentTable.toString()};
+        var collection = db.collection("active_orders");
+        var newvalues = {$push: {items: {item: itemId, notes: req.params.notes}}};
+        collection.update(query, newvalues, function(err, res){
+          if(err) throw err;
+          console.log("order updated");
+          db.close();
+        });
+        /*collection.find(query).toArray(function(err, results) {
+            if(err){
+              console.log(err);
+            }
+            else if (results.length){//send the object to the page
+              res.send(results);
+            }
+            else{
+              console.log("Menu item not found!");
+            }
+            db.close();
+            console.log("Connection closed");
+        });*/
+      }
+    }
+  ); 
+});
+
 router.post("/validateCredentials", function (req, res) {
   var MongoClient = mongodb.MongoClient;
 
