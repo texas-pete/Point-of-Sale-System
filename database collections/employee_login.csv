@@ -1,3 +1,0 @@
-_id,employee_id,employee_pass,employee_clock_status,employee_weekly_hours,employee_first_name,employee_last_name
-ObjectId("5be62dc9ab07f640d075d72b"),1234,1234,0,0.002,Joe,Doe
-ObjectId("5be8a546ecbf7b273423e2e0"),2345,2345,1,0,Jane,Doe
