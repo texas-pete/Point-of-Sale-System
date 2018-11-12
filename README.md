@@ -1,7 +1,5 @@
 # 4Quad
 4444 POS Project
-<<<<<<< HEAD
-=======
 
 ### Todo:
 - [ ] Assign roles
@@ -46,4 +44,3 @@
     - Agile
       - Scrum
     - Waterfall
->>>>>>> master

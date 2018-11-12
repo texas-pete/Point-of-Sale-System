@@ -48,16 +48,6 @@ router.get("/manager", function (req, res) {
 });
 
 // Terminal View for Guests
-<<<<<<< HEAD
-router.get("/guest", function (req, res) {
-  res.render("guest", { page: "Guest View" });
-});
-
-router.post("/validateCredentials", function (req, res) {
-  
-  MongoClient.connect(
-    url,
-=======
 router.get("/guest", function(req, res) {
   console.log("accessing guest index page, table " + req.body.tablenum);
   res.render("guest", { page: "Guest View", tablenum: req.body.tablenum });
@@ -225,7 +215,6 @@ router.post("/validateCredentials", function (req, res) {
 
   MongoClient.connect(
     url,
->>>>>>> waitstaff-ag
     function (err, db) {
       if (err) {
         console.log("Unable to Connect to the Server", err);
@@ -253,15 +242,12 @@ router.post("/validateCredentials", function (req, res) {
               res.redirect("/manager");
             } else {
               //redirect to guest view we have 16 logins and if we get here they hit somethng. if we manage the db correctly we shouldn't have issues.
-<<<<<<< HEAD
               let tblNumber = req.body.username.replace("table", "");
               res.render("guest", { page: "", tablenum: tblNumber });
-=======
-              var tableN = req.body.username;
-              currentTable = tableN.substring(5, tableN.length);
+              //var tableN = req.body.username;
+              currentTable = tblNumber;//tableN.substring(5, tableN.length);
               console.log("Table " + currentTable + " is active.");
-              res.redirect("/guest");
->>>>>>> waitstaff-ag
+              //res.redirect("/guest");
             }
           } else {
             console.log("Login not found");
