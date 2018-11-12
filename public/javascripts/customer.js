@@ -16,6 +16,7 @@ window.onclick = function(event){
 	}
 }
 
+//for opening up the modal
 $(document).ready(function(){
 	$('.addToOrder').on('click', addToOrder);
 });
@@ -23,6 +24,7 @@ $(document).ready(function(){
 //opens a modal to add to order and make any changes or note any allergies
 function addToOrder(){
 	console.log($(this).data('id'))
+	var objId = $(this).data('id')
 	document.querySelector('.bg-modal').style.display = 'flex';
 	$.ajax({
 		url: "/getMenuItemById/" + $(this).data('id'),
@@ -34,16 +36,41 @@ function addToOrder(){
 			document.querySelector('.modal-menu-img').alt = responseData[0].Name;
 			document.querySelector('.modal-menu-price').innerHTML = '$' + responseData[0].Price;
 			document.querySelector('.modal-menu-desc').innerHTML = responseData[0].Description;
+			//sets the modal's submit button to contain objId information
+			var id = document.querySelector('.modal-submit');
+			id.setAttribute('data-id', objId);
+			//console.log(document.querySelector('.modal-submit').data-id);
 		},
 		error: console.error
 	});
+}
 
-	/*$.ajax({
-		type: 'POST',
-		url: '.../addToOrder'+$(this).data('id')
-	}).done(function(response){
-		window.location.replace();
-	});*/
+//for submitting order
+$(document).ready(function(){
+	$('.modal-submit').on('click', submitToOrder);
+});
+
+
+function submitToOrder(){
+	//store objID in variable for ease-of-use and scope 
+	var objId = $(this).data('id');
+	var notes = document.getElementsByName('notes')[0].value;
+	if(!notes.replace(/\s/g, '').length){
+		notes = "empty"
+	}
+	console.log("Attempting to submit order " + objId + " and notes as " + notes);
+	//hide modal
+	document.querySelector('.bg-modal').style.display = 'none';
+
+	$.ajax({
+		url: "/submitToOrder/" + objId + "/" + notes,
+		type: "POST",
+		success: function(responseData) {
+			//TODO: maybe include alert that says 'your order has been added. add more and submit in the 'View Order' tab
+			//TODO: have to clear notes section for next order
+		},
+		error: console.error
+	});
 }
 
 //closes the modal if clicked on
