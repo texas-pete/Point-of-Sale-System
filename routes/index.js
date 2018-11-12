@@ -2,6 +2,9 @@ var express = require("express");
 var router = express.Router();
 var mongodb = require("mongodb");
 
+var MongoClient = mongodb.MongoClient;
+var url = "mongodb://localhost:27017/4quad";
+
 /* GET home page. Log onto our terminal*/
 router.get("/", function (req, res) {
   res.render("terminal_login", { page: "Log in to the Terminal" });
@@ -9,8 +12,27 @@ router.get("/", function (req, res) {
 
 // Terminal View for Waitstaff
 router.get("/waitstaff", function (req, res) {
-  res.render("waitstaff", { page: "Waitstaff View" });
-});
+  let serviceRequests = {};
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) { //if we can't open our server, throw an error
+      console.log("Unable to Connect to the Server", err);
+    } else {
+      console.log("Connection Opened"); //prints to the node.js command prompt
+
+      // we only want the tableNumber
+      let proj = { _id: 0, tableNum: 1}
+
+      db.collection("service_requests").find({}, proj ).toArray(function(err, result) {
+        if (err) throw err;
+        serviceRequests = result;
+        res.render("waitstaff", { page: "Waitstaff View", serviceReqs: serviceRequests });
+        db.close();
+      });
+    }
+  })
+})
+
 
 // Terminal View for Kitchen Staff
 router.get("/kitchenstaff", function (req, res) {
@@ -28,10 +50,7 @@ router.get("/guest", function (req, res) {
 });
 
 router.post("/validateCredentials", function (req, res) {
-  var MongoClient = mongodb.MongoClient;
-
-  var url = "mongodb://localhost:27017/4quad";
-
+  
   MongoClient.connect(
     url,
     function (err, db) {
@@ -52,6 +71,7 @@ router.post("/validateCredentials", function (req, res) {
             if (req.body.username === "waitstaff") {
               // redirect to waitstaff view
               res.redirect("/waitstaff");
+              
             } else if (req.body.username === "kitchenstaff") {
               //redirect to kitchen staff
               res.redirect("/kitchenstaff");
@@ -61,6 +81,7 @@ router.post("/validateCredentials", function (req, res) {
             } else {
               //redirect to guest view we have 16 logins and if we get here they hit somethng. if we manage the db correctly we shouldn't have issues.
               let tblNumber = req.body.username.replace("table","");
+
               res.render("guest", { page: "", tablenum: tblNumber });
             }
           } else {
@@ -82,9 +103,8 @@ router.get("/validateEmployee", function (req, res) {
 });
 
 router.post("/validateEmpCredentials", function (req, res) { //accessed (POST REQUEST) via the clock_login.ejs file
-  var MongoClient = mongodb.MongoClient;
   var retAddress = req.body.retAddress;
-  var url = "mongodb://localhost:27017/4quad";
+
 
   MongoClient.connect( //create a database connection
     url,
