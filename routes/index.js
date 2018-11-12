@@ -95,35 +95,47 @@ router.post("/validateEmpCredentials", function (req, res) { //accessed (POST RE
         console.log("Connection Opened"); //prints to the node.js command prompt
 
         var query = { employee_id: req.body.username }; //create a query in the collection we need to check
-        var query2flag = { employee_pass: 1, _id: 0 };
         var query2 = req.body.password;
         var collection = db.collection("employee_login"); //I don't feel like typing the whole thing out 
 
-        collection.find(query, query2flag).toArray(function (err, results) { //query our collection within our database for any results 
+        collection.find(query, { _id: 0 }).toArray(function (err, results) { //query our collection within our database for any results. I coud limit the information returned from our query. I probably should too...
           if (err) { //If there are any issues with the database, print them to the browser
             console.log(err);
           } else if (results.length) { //SUCCESS ( we have an employee with this ID... )
             //verify the password exists
+            if (results[0].employee_pass === query2) { //validates the user's password.  
+              var curTime = new Date(); //get the current time
 
-            if (results[0].employee_pass === query2) { //validates the user's password. 
 
-              //TODO: Not sure how we want to implement labor tracking... It would go here though. 
 
+              //CLOCK IN SCRIPT
               //we want to check a flag to see if a user if clocked in
               //if so, clock them out and calculate the time
-
-              //else 
-              //insert the time and date.
-
-
-              collection.update({ employee_id: req.body.username }, { $set: { employee_clock_status: 1 } }); //this just sets a flag 
+              if (results[0].employee_clock_status == 0) {//update the time and set the clock bit
+                collection.update({ employee_id: req.body.username }, { $set: { employee_clock_status: 1 } }, { multi: true }); //this just sets a flag signify time clock status
+                collection.update({ employee_id: req.body.username }, { $set: { employee_time_in: curTime } }, { multi: true });
+              }
+              else { //otherwise the user is already clocked in and we need to update this value to clock the user out
+                //we need to calculate the time the user was clocked in.
+                collection.find(query, { _id: 0, employee_time_in: 1, employee_weekly_hours: 1 }).toArray(function (err, results2) { //check for clock in time
+                  var before = results2[0].employee_time_in; //get the value stored in the database
+                  var diff = Math.abs(curTime - new Date(before)); //subtract original time from current time
+                  var total_hours = results2[0].employee_weekly_hours;
+                  // change from milliseconds to seconds -> seconds to minutes -> minutes to hours
+                  diff = (diff / 60000) / 60;
+                  total_hours = diff + total_hours;
+                  collection.update({ employee_id: req.body.username }, { $set: { employee_weekly_hours: total_hours } }, { multi: true });
+                });
+                collection.update({ employee_id: req.body.username }, { $set: { employee_clock_status: 0 } }, { multi: true }); //this just sets a flag to signify time clock status
+                collection.update({ employee_id: req.body.username }, { $unset: { employee_time_in: 1 } }, { multi: true }); //removes the previous entry for this field.
+              }
+              // END OF CLOCK IN SCRIPT 
               res.redirect(retAddress); //return back to the kiosk view we were logged into prior
             }
             else {
               console.log("Login not found");
               res.render("clock_login", { page: "Clock-In", prevAddress: retAddress });
             }
-
           }
           else { //user not found
             console.log("Login not found");
