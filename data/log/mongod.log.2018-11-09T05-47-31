@@ -1,0 +1,108 @@
+2018-11-07T17:42:49.888-0600 I CONTROL  [initandlisten] MongoDB starting : pid=1624 port=27017 dbpath=C:\Users\Stin\Desktop\Fall_2018\Software Engineering\4Quad\data\db 64-bit host=Stin
+2018-11-07T17:42:49.888-0600 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2018-11-07T17:42:49.888-0600 I CONTROL  [initandlisten] db version v4.0.3
+2018-11-07T17:42:49.888-0600 I CONTROL  [initandlisten] git version: 7ea530946fa7880364d88c8d8b6026bbc9ffa48c
+2018-11-07T17:42:49.889-0600 I CONTROL  [initandlisten] allocator: tcmalloc
+2018-11-07T17:42:49.889-0600 I CONTROL  [initandlisten] modules: none
+2018-11-07T17:42:49.889-0600 I CONTROL  [initandlisten] build environment:
+2018-11-07T17:42:49.889-0600 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2018-11-07T17:42:49.889-0600 I CONTROL  [initandlisten]     distarch: x86_64
+2018-11-07T17:42:49.890-0600 I CONTROL  [initandlisten]     target_arch: x86_64
+2018-11-07T17:42:49.890-0600 I CONTROL  [initandlisten] options: { storage: { dbPath: "C:\Users\Stin\Desktop\Fall_2018\Software Engineering\4Quad\data\db" }, systemLog: { destination: "file", path: "C:\Users\Stin\Desktop\Fall_2018\Software Engineering\4Quad\data\log\mongod.log" } }
+2018-11-07T17:42:49.891-0600 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=7521M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+2018-11-07T17:42:50.141-0600 I STORAGE  [initandlisten] WiredTiger message [1541634170:140340][1624:140710503857232], txn-recover: Set global recovery timestamp: 0
+2018-11-07T17:42:50.446-0600 I RECOVERY [initandlisten] WiredTiger recoveryTimestamp. Ts: Timestamp(0, 0)
+2018-11-07T17:42:50.744-0600 I CONTROL  [initandlisten] 
+2018-11-07T17:42:50.744-0600 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2018-11-07T17:42:50.744-0600 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2018-11-07T17:42:50.744-0600 I CONTROL  [initandlisten] 
+2018-11-07T17:42:50.744-0600 I CONTROL  [initandlisten] ** WARNING: This server is bound to localhost.
+2018-11-07T17:42:50.744-0600 I CONTROL  [initandlisten] **          Remote systems will be unable to connect to this server. 
+2018-11-07T17:42:50.744-0600 I CONTROL  [initandlisten] **          Start the server with --bind_ip <address> to specify which IP 
+2018-11-07T17:42:50.744-0600 I CONTROL  [initandlisten] **          addresses it should serve responses from, or with --bind_ip_all to
+2018-11-07T17:42:50.745-0600 I CONTROL  [initandlisten] **          bind to all interfaces. If this behavior is desired, start the
+2018-11-07T17:42:50.745-0600 I CONTROL  [initandlisten] **          server with --bind_ip 127.0.0.1 to disable this warning.
+2018-11-07T17:42:50.745-0600 I CONTROL  [initandlisten] 
+2018-11-07T17:42:50.745-0600 I STORAGE  [initandlisten] createCollection: admin.system.version with provided UUID: 5da98f74-da7c-4603-82f8-01459b7665fa
+2018-11-07T17:42:51.081-0600 I COMMAND  [initandlisten] setting featureCompatibilityVersion to 4.0
+2018-11-07T17:42:51.095-0600 I STORAGE  [initandlisten] createCollection: local.startup_log with generated UUID: 3f505fbd-27ea-46e7-8d0a-0d029dddfb58
+2018-11-07T17:42:51.741-0600 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'C:/Users/Stin/Desktop/Fall_2018/Software Engineering/4Quad/data/db/diagnostic.data'
+2018-11-07T17:42:51.743-0600 I STORAGE  [LogicalSessionCacheRefresh] createCollection: config.system.sessions with generated UUID: 648e7718-28d7-49b2-86bc-5b060e34c64d
+2018-11-07T17:42:51.743-0600 I NETWORK  [initandlisten] waiting for connections on port 27017
+2018-11-07T17:42:52.286-0600 I INDEX    [LogicalSessionCacheRefresh] build index on: config.system.sessions properties: { v: 2, key: { lastUse: 1 }, name: "lsidTTLIndex", ns: "config.system.sessions", expireAfterSeconds: 1800 }
+2018-11-07T17:42:52.287-0600 I INDEX    [LogicalSessionCacheRefresh] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2018-11-07T17:42:52.298-0600 I INDEX    [LogicalSessionCacheRefresh] build index done.  scanned 0 total records. 0 secs
+2018-11-07T17:42:52.299-0600 I COMMAND  [LogicalSessionCacheRefresh] command config.$cmd command: createIndexes { createIndexes: "system.sessions", indexes: [ { key: { lastUse: 1 }, name: "lsidTTLIndex", expireAfterSeconds: 1800 } ], $db: "config" } numYields:0 reslen:114 locks:{ Global: { acquireCount: { r: 2, w: 2 } }, Database: { acquireCount: { w: 2, W: 1 } }, Collection: { acquireCount: { w: 2 } } } protocol:op_msg 556ms
+2018-11-07T17:47:06.271-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56861 #1 (1 connection now open)
+2018-11-07T17:47:06.272-0600 I NETWORK  [conn1] received client metadata from 127.0.0.1:56861 conn1: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "4.0.3" }, os: { type: "Windows", name: "Microsoft Windows 10", architecture: "x86_64", version: "10.0 (build 17134)" } }
+2018-11-07T17:48:21.421-0600 I STORAGE  [conn1] createCollection: 4quad.terminal_login with generated UUID: 5e7d01d0-79b4-4e1b-b067-ab8fb7840cdc
+2018-11-07T17:48:21.805-0600 I COMMAND  [conn1] command 4quad.terminal_login appName: "MongoDB Shell" command: create { create: "terminal_login", lsid: { id: UUID("11c77346-4755-4f5f-8939-996863bd4d59") }, $db: "4quad" } numYields:0 reslen:38 locks:{ Global: { acquireCount: { r: 1, w: 1 } }, Database: { acquireCount: { W: 1 } } } protocol:op_msg 384ms
+2018-11-07T17:51:54.454-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56885 #2 (2 connections now open)
+2018-11-07T17:51:54.461-0600 I NETWORK  [conn2] end connection 127.0.0.1:56885 (1 connection now open)
+2018-11-07T17:51:54.465-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56886 #3 (2 connections now open)
+2018-11-07T17:51:54.465-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56887 #4 (3 connections now open)
+2018-11-07T17:51:54.468-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56888 #5 (4 connections now open)
+2018-11-07T17:51:54.468-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56889 #6 (5 connections now open)
+2018-11-07T17:51:54.468-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56890 #7 (6 connections now open)
+2018-11-07T17:51:54.489-0600 I NETWORK  [conn3] end connection 127.0.0.1:56886 (5 connections now open)
+2018-11-07T17:51:54.489-0600 I NETWORK  [conn4] end connection 127.0.0.1:56887 (4 connections now open)
+2018-11-07T17:51:54.489-0600 I NETWORK  [conn5] end connection 127.0.0.1:56888 (3 connections now open)
+2018-11-07T17:51:54.489-0600 I NETWORK  [conn6] end connection 127.0.0.1:56889 (2 connections now open)
+2018-11-07T17:51:54.489-0600 I NETWORK  [conn7] end connection 127.0.0.1:56890 (1 connection now open)
+2018-11-07T18:00:49.460-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56955 #8 (2 connections now open)
+2018-11-07T18:00:49.467-0600 I NETWORK  [conn8] end connection 127.0.0.1:56955 (1 connection now open)
+2018-11-07T18:00:49.471-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56956 #9 (2 connections now open)
+2018-11-07T18:00:49.471-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56957 #10 (3 connections now open)
+2018-11-07T18:00:49.474-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56958 #11 (4 connections now open)
+2018-11-07T18:00:49.474-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56959 #12 (5 connections now open)
+2018-11-07T18:00:49.474-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:56960 #13 (6 connections now open)
+2018-11-07T18:00:49.486-0600 I NETWORK  [conn9] end connection 127.0.0.1:56956 (5 connections now open)
+2018-11-07T18:00:49.486-0600 I NETWORK  [conn10] end connection 127.0.0.1:56957 (4 connections now open)
+2018-11-07T18:00:49.486-0600 I NETWORK  [conn12] end connection 127.0.0.1:56959 (2 connections now open)
+2018-11-07T18:00:49.486-0600 I NETWORK  [conn11] end connection 127.0.0.1:56958 (3 connections now open)
+2018-11-07T18:00:49.486-0600 I NETWORK  [conn13] end connection 127.0.0.1:56960 (1 connection now open)
+2018-11-07T20:59:05.789-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57641 #14 (2 connections now open)
+2018-11-07T20:59:05.791-0600 I NETWORK  [conn14] end connection 127.0.0.1:57641 (1 connection now open)
+2018-11-07T20:59:05.794-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57642 #15 (2 connections now open)
+2018-11-07T20:59:05.795-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57643 #16 (3 connections now open)
+2018-11-07T20:59:05.795-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57644 #17 (4 connections now open)
+2018-11-07T20:59:05.797-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57645 #18 (5 connections now open)
+2018-11-07T20:59:05.797-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57646 #19 (6 connections now open)
+2018-11-07T20:59:05.802-0600 I NETWORK  [conn15] end connection 127.0.0.1:57642 (5 connections now open)
+2018-11-07T20:59:05.802-0600 I NETWORK  [conn16] end connection 127.0.0.1:57643 (4 connections now open)
+2018-11-07T20:59:05.802-0600 I NETWORK  [conn17] end connection 127.0.0.1:57644 (3 connections now open)
+2018-11-07T20:59:05.802-0600 I NETWORK  [conn18] end connection 127.0.0.1:57645 (2 connections now open)
+2018-11-07T20:59:05.802-0600 I NETWORK  [conn19] end connection 127.0.0.1:57646 (1 connection now open)
+2018-11-07T20:59:20.290-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57653 #20 (2 connections now open)
+2018-11-07T20:59:20.291-0600 I NETWORK  [conn20] end connection 127.0.0.1:57653 (1 connection now open)
+2018-11-07T20:59:20.293-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57654 #21 (2 connections now open)
+2018-11-07T20:59:20.294-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57655 #22 (3 connections now open)
+2018-11-07T20:59:20.296-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57656 #23 (4 connections now open)
+2018-11-07T20:59:20.296-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57657 #24 (5 connections now open)
+2018-11-07T20:59:20.299-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57658 #25 (6 connections now open)
+2018-11-07T20:59:20.300-0600 I NETWORK  [conn21] end connection 127.0.0.1:57654 (5 connections now open)
+2018-11-07T20:59:20.300-0600 I NETWORK  [conn22] end connection 127.0.0.1:57655 (4 connections now open)
+2018-11-07T20:59:20.300-0600 I NETWORK  [conn24] end connection 127.0.0.1:57657 (3 connections now open)
+2018-11-07T20:59:20.300-0600 I NETWORK  [conn23] end connection 127.0.0.1:57656 (2 connections now open)
+2018-11-07T20:59:20.300-0600 I NETWORK  [conn25] end connection 127.0.0.1:57658 (1 connection now open)
+2018-11-07T20:59:36.819-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57665 #26 (2 connections now open)
+2018-11-07T20:59:36.819-0600 I NETWORK  [conn26] end connection 127.0.0.1:57665 (1 connection now open)
+2018-11-07T20:59:36.823-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57666 #27 (2 connections now open)
+2018-11-07T20:59:36.823-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57667 #28 (3 connections now open)
+2018-11-07T20:59:36.825-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57668 #29 (4 connections now open)
+2018-11-07T20:59:36.825-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57669 #30 (5 connections now open)
+2018-11-07T20:59:36.826-0600 I NETWORK  [listener] connection accepted from 127.0.0.1:57670 #31 (6 connections now open)
+2018-11-07T20:59:36.829-0600 I NETWORK  [conn27] end connection 127.0.0.1:57666 (5 connections now open)
+2018-11-07T20:59:36.829-0600 I NETWORK  [conn28] end connection 127.0.0.1:57667 (4 connections now open)
+2018-11-07T20:59:36.829-0600 I NETWORK  [conn29] end connection 127.0.0.1:57668 (3 connections now open)
+2018-11-07T20:59:36.829-0600 I NETWORK  [conn30] end connection 127.0.0.1:57669 (2 connections now open)
+2018-11-07T20:59:36.829-0600 I NETWORK  [conn31] end connection 127.0.0.1:57670 (1 connection now open)
+2018-11-08T13:00:24.383-0600 I CONTROL  [thread32] Ctrl-C signal
+2018-11-08T13:00:24.384-0600 I CONTROL  [consoleTerminate] got CTRL_C_EVENT, will terminate after current cmd ends
+2018-11-08T13:00:24.384-0600 I NETWORK  [consoleTerminate] shutdown: going to close listening sockets...
+2018-11-08T13:00:24.387-0600 I CONTROL  [consoleTerminate] Shutting down free monitoring
+2018-11-08T13:00:24.387-0600 I FTDC     [consoleTerminate] Shutting down full-time diagnostic data capture
+2018-11-08T13:00:24.418-0600 I STORAGE  [consoleTerminate] WiredTigerKVEngine shutting down
+2018-11-08T13:00:24.885-0600 I STORAGE  [consoleTerminate] shutdown: removing fs lock...
+2018-11-08T13:00:24.886-0600 I CONTROL  [consoleTerminate] now exiting
+2018-11-08T13:00:24.886-0600 I CONTROL  [consoleTerminate] shutting down with code:12

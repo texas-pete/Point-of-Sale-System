@@ -45,6 +45,7 @@ router.get("/manager", function (req, res) {
 });
 
 // Terminal View for Guests
+<<<<<<< HEAD
 router.get("/guest", function (req, res) {
   res.render("guest", { page: "Guest View" });
 });
@@ -80,8 +81,12 @@ router.post("/validateCredentials", function (req, res) {
               res.redirect("/manager");
             } else {
               //redirect to guest view we have 16 logins and if we get here they hit somethng. if we manage the db correctly we shouldn't have issues.
+<<<<<<< HEAD
               let tblNumber = req.body.username.replace("table", "");
               res.render("guest", { page: "", tablenum: tblNumber });
+=======
+              res.redirect("/guest");
+>>>>>>> waitstaff-ag
             }
           } else {
             console.log("Login not found");
