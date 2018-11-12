@@ -18,9 +18,7 @@ function validateSelection(e) //e is the entity which was pressed.
         if (interactedItem === "servicerq") {
             // emit a service request event
             tblNumberString = tblNumber.toString();
-            socket.emit("serviceRequest", tblNumberString);
-            //alert("Hello " + interactedItem);
-            
+            socket.emit("serviceRequest", tblNumberString);          
         }
         else if (interactedItem === "drinkrq") {
             alert("Hello " + interactedItem);
