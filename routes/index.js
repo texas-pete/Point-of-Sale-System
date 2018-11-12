@@ -54,6 +54,8 @@ router.post("/validateCredentials", function (req, res) {
   
   MongoClient.connect(
     url,
+=======
+>>>>>>> waitstaff-ag
     function (err, db) {
       if (err) {
         console.log("Unable to Connect to the Server", err);
