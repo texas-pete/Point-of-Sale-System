@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ./data/db/mongod.lock
+=======
+node_modules/
+>>>>>>> 24a252f8222344f2d21bfe667d790c972f0f71bf
