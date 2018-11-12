@@ -1,1 +1,2 @@
-./data/db/mongod.lock
+node_modules/
+data/
