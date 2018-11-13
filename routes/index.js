@@ -77,7 +77,11 @@ router.get("/guest-appetizers", function(req, res){
         }
         else if(results.length){
           //want to send info to db
-          res.render("appetizers", {menu_items: results});
+          var dt = new Date();
+          var time = dt.getHours();
+          console.log("The current hour is: " + time + typeof time);
+          //console.log(util.inspect(results, {showHidden:false, depth: null}))
+          res.render("appetizers", {menu_items: results, hour: time});
         }
         else{
           console.log("No results! ERROR");

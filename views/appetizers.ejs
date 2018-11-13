@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 </head>
 <body>
+
 	<h1>Appetizers</h1>
 	<br><br>
 	<div class="container">
@@ -20,7 +21,14 @@
 		<% menu_items.forEach(function(item, index){ %>
 			<div class="col-md-6">
 				<h3><%= item.Name %></h3>
-				<h5>$<%= item.Price %></h5>
+				
+				<!--This says that the 'happy hour' is 2-3pm-->
+				<% if(hour == 14){ %>
+					<h5>$<%= item.HappyHour %> </h5>
+				<% } else{ %>
+   					<h5>$<%= item.Price %></h5>
+ 				<% } %>
+
 				<hr style="clear:both;"/>
 				<p><img src= 'http://localhost:3000/images/appetizers/<%= item.ImageName %>' alt=<%= item.Name %> style="float:left" width="290" height="200" hspace="20">
 				<%= item.Description %></p>
