@@ -70,7 +70,6 @@ router.post("/getTableOrder/:tblNum", function (req, res) {
 
 router.post("/getItemName/:db_name", function (req, res) { //Verify the value is in our database.
 
-  console.log("test " + req.params.db_name);
   var MongoClient = mongodb.MongoClient;
   var url = "mongodb://localhost:27017/4quad";
 
@@ -80,7 +79,10 @@ router.post("/getItemName/:db_name", function (req, res) { //Verify the value is
     }
     else {
       console.log("Connection established with MongoDB Server");
-      var query = { "_id": req.params.db_name }; //we need to pass the table number requesting
+
+      var objID = new ObjectId(req.params.db_name);
+      var query = { "_id": objID }; //we need to pass the table number requesting
+
       var collection = db.collection("menu_items");
       collection.find(query).toArray(function (err, results) {
         if (err) {
@@ -88,7 +90,6 @@ router.post("/getItemName/:db_name", function (req, res) { //Verify the value is
         }
         else if (results.length) { //if we return a result
           res.send(results[0].Name); //send the name of the object to the page.
-          console.log("sub")
         }
         else {
           console.log("No menu items with this id " + req.params.db_name);

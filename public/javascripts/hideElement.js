@@ -49,7 +49,6 @@ function hideContent(whichDiv) {
         for (let i = 0; i < responseData[0].items.length; i++) { //loop through the number of ITEMs ordered
 
           if (typeof responseData[0].items[i].item !== 'undefined') { //if the name of an item is undefined, omit it.
-
             myDiv.insertAdjacentHTML('beforeend', ' <p class= "item_name"> Item: Name</p > <button type="button" class="btn">X</button><p></p><p class= "item_desc" >Item: Description/Allergies</p><button type="button" class="btn">Edit</button><hr>');
           }
         }
@@ -59,11 +58,11 @@ function hideContent(whichDiv) {
         submitted_item_names.forEach(function (userItem, index) {
 
 
-          var database_name = responseData[0].items[index + 1].item; //we need to convert the gross name to a real name
+          var database_name = responseData[0].items[index].item; //we need to convert the gross name to a real name
           //userItem.innerHTML = database_name;
 
           $.ajax({ //there is a way to do this via $.post("/getTableOrder/" + sidebarVal) but keeping ajax as such
-            url: "/getItemName/" + responseData[0].items[index + 1].item,
+            url: "/getItemName/" + responseData[0].items[index].item,
             type: "POST",
             success: function (responseData) {
 
@@ -72,15 +71,15 @@ function hideContent(whichDiv) {
 
             },
             error: function () { //if we can't find the name in our database
-              userItem.innerHTML = responseData[0].items[index + 1].item;
+              userItem.innerHTML = responseData[0].items[index].item;
             }
           });
 
 
         });
         submitted_item_descr.forEach(function (userItem, index) {
-          if (typeof responseData[0].items[index + 1].notes != 'undefined') {
-            userItem.innerHTML = responseData[0].items[index + 1].notes; //for loop starts at 0 and we don't want the null index
+          if (typeof responseData[0].items[index].notes != 'undefined') {
+            userItem.innerHTML = responseData[0].items[index].notes; //for loop starts at 0 and we don't want the null index
           }
           else {
             userItem.innerHTML = "No notes provided";
