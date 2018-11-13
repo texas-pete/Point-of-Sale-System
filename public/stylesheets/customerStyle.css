@@ -193,6 +193,11 @@ html, body {
   cursor: pointer;
 }
 
+/*For snake game*/
+canvas {
+  border: 4px solid rgb(151, 149, 149);
+}
+
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
