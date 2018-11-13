@@ -45,7 +45,7 @@
     - [ ] Allow customers to have 1/5 chance in winning a coupon when paying
     
     - [x] Allow waitstaff to view all 16 tables
-    - [ ] Allow waitstaff to press a table button to view payment and order details for table
+    - [x] Allow waitstaff to press a table button to view payment and order details for table
     - [ ] Allow waitstaff to press a table button to edit the table order
     - [ ] Allow waitstaff to press a table button to remove notifications regarding refills or requests
     
