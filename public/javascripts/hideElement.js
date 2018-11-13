@@ -57,25 +57,16 @@ function hideContent(whichDiv) {
 
         submitted_item_names.forEach(function (userItem, index) {
 
-
-          var database_name = responseData[0].items[index].item; //we need to convert the gross name to a real name
-          //userItem.innerHTML = database_name;
-
           $.ajax({ //there is a way to do this via $.post("/getTableOrder/" + sidebarVal) but keeping ajax as such
             url: "/getItemName/" + responseData[0].items[index].item,
             type: "POST",
-            success: function (responseData) {
-
-
-
-
+            success: function (responseData) { //responseData contains the returned 'name' from our ID
+              userItem.innerHTML = responseData;
             },
             error: function () { //if we can't find the name in our database
               userItem.innerHTML = responseData[0].items[index].item;
             }
           });
-
-
         });
         submitted_item_descr.forEach(function (userItem, index) {
           if (typeof responseData[0].items[index].notes != 'undefined') {

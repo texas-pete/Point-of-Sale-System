@@ -79,25 +79,28 @@ router.post("/getItemName/:db_name", function (req, res) { //Verify the value is
     }
     else {
       console.log("Connection established with MongoDB Server");
-
-      var objID = new ObjectId(req.params.db_name);
-      var query = { "_id": objID }; //we need to pass the table number requesting
-
-      var collection = db.collection("menu_items");
-      collection.find(query).toArray(function (err, results) {
-        if (err) {
-          console.log(err);
-        }
-        else if (results.length) { //if we return a result
-          res.send(results[0].Name); //send the name of the object to the page.
-        }
-        else {
-          console.log("No menu items with this id " + req.params.db_name);
-          res.sendStatus(404); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
-        }
-        console.log("Connection Closed"); //prints to the node.js command prompt
-        db.close();
-      });
+      if (req.params.db_name.length != 24) {
+        res.sendStatus(404);
+      }
+      else {
+        var objID = new ObjectId(req.params.db_name);
+        var query = { "_id": objID }; //we need to pass the table number requesting
+        var collection = db.collection("menu_items");
+        collection.find(query).toArray(function (err, results) {
+          if (err) {
+            console.log(err);
+          }
+          else if (results.length) { //if we return a result
+            res.send(results[0].Name); //send the name of the object to the page.
+          }
+          else {
+            console.log("No menu items with this id " + req.params.db_name);
+            res.sendStatus(404); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
+          }
+          console.log("Connection Closed"); //prints to the node.js command prompt
+          db.close();
+        });
+      }
     }
   });
 });
