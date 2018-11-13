@@ -1,12 +1,14 @@
-var express = require("express");
-var router = express.Router();
-var mongodb = require("mongodb");
-var ObjectId = require('mongodb').ObjectId;
+//const keyword rather than var due to standards
+const express = require("express");
+const router = express.Router();
+const mongodb = require("mongodb");
+const ObjectId = require('mongodb').ObjectId;
+const util = require('util');//to inspect objects
 
 var currentTable = ""//is null b.c no table set.
 
-var MongoClient = mongodb.MongoClient;
-var url = "mongodb://localhost:27017/4quad";
+const MongoClient = mongodb.MongoClient;
+const url = "mongodb://localhost:27017/4quad";
 
 /* GET home page. Log onto our terminal*/
 router.get("/", function (req, res) {
@@ -55,9 +57,6 @@ router.get("/guest", function(req, res) {
 
 //appetizers
 router.get("/guest-appetizers", function(req, res){
-  var MongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/4quad";
-
   MongoClient.connect(url, function(err, db){
     if(err){
       console.log("Unable to Connect to the MongoDB Server");
@@ -65,14 +64,13 @@ router.get("/guest-appetizers", function(req, res){
     else{
       console.log("Connection established with MongoDB Server");
 
-      //var query = {Category:"Appetizer"};
       //attempting and query
       var query = {$and : [
             {Category:"Appetizer"},
             {Active:"yes"}
         ]};
       var collection = db.collection("menu_items");
-      //console.log("attempting " + query);
+      
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -97,10 +95,6 @@ router.get("/guest-games", function(req, res){
 
 //order
 router.get("/guest-order", function(req, res){
-  //res.render("guest-order");
-  var MongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/4quad";
-
   MongoClient.connect(url, function(err, db){
     if(err){
       console.log("Unable to Connect to the MongoDB Server");
@@ -108,16 +102,70 @@ router.get("/guest-order", function(req, res){
     else{
       console.log("Connection established with MongoDB Server");
 
-      var query = {table : currentTable};
+      //var query = {table : currentTable.toString()};
+      var query = {table : currentTable.toString()};//, {"_id":0, "table":0};
+      var hide = {"_id":0, "table":0};
       var collection = db.collection("active_orders");
-      console.log("attempting " + query + " " + currentTable);
-      collection.find(query).toArray(function(err, results){
+      //console.log("attempting " + query + " " + currentTable);
+      collection.find(query, hide).toArray(function(err, results){
         if(err){
           console.log(err);
         }
         else if(results.length){
-          //want to send info to db
-          res.render("guest-order", {order_items: results});
+          t_notes = results[0].items
+          console.log("T_notes: " + t_notes);
+          MongoClient.connect(url, function(err,db){
+            if(err){
+              console.log("Unable to connecto to the MongoDB Server");
+            }
+            else{
+              console.log("Connection established with MongoDB Server");
+
+              console.log("made it here");
+              //have to go over array of objects to find items
+              //console.log(util.inspect(results, {showHidden:false, depth: null}));
+              console.log(results[0]);//.items[0]);
+              if(results[0].items.length >= 2){
+                var t_collection = db.collection("menu_items");
+                var t_query = [];//creates an empty array to push objects into
+
+                for(var i = 0; i < results[0].items.length; i++){
+                  t_query.push({_id: new ObjectId(results[0].items[i].item)})
+                }
+                //run or query
+                t_collection.find({$or: t_query}).toArray(function(err, results){
+                  if(err){
+                    console.log(err);
+                  }
+                  else if(results.length){
+                    console.log("woo, success!");
+                    console.log("length is: " + results.length);
+                    res.render("guest-order", {order_items: results, notes: t_notes});
+                  }
+                  else{
+                    //no elements, should not happen
+                  }
+                  db.close();
+                });
+              }
+              else if (results[0].items.length == 1){
+                //run single query
+              }
+              else{
+                //no elements, render empty page
+              }
+              //console.log(results[0].items.length);
+              //for(var i = 0; i < results[0].items.length; i++){
+              //  console.log(i);
+              //  console.log(results[0].items[i].item);
+              //}
+              //console.log(util.inspect(results.items, {showHidden:false, depth: null}));
+              //want to send info to db
+              //res.render("guest-order", {order_items: results});
+
+
+            }
+          });
         }
         else{
           console.log("No results! ERROR");
@@ -128,12 +176,58 @@ router.get("/guest-order", function(req, res){
   });
 });
 
+/*
+          
+          console.log("made it here");
+          //have to go over array of objects to find items
+          //console.log(util.inspect(results, {showHidden:false, depth: null}));
+          console.log(results[0]);//.items[0]);
+          if(results[0].items.length >= 2){
+            var t_collection = db.collection("menu_items");
+            var t_query = [];//creates an empty array to push objects into
+
+            for(var i = 0; i < results[0].items.length; i++){
+              //console.log(i);
+              //var _id = {};//empty object
+              //var _id = new ObjectId(results[0].items[i].item);
+              //console.log(results[0].items[i].item);
+              t_query.push({_id: new ObjectId(results[0].items[i].item)})
+            }
+            //console.log(t_query[0]);
+            //run or query
+
+            t_collection.find(t_query).toArray(function(err, results){
+              if(err){
+                console.log(err);
+              }
+              else if(results.length){
+                console.log("woo, success!");
+              }
+              else{
+                //no elements, should not happen
+              }
+            });
+          }
+          else if (results[0].items.length == 1){
+            //run single query
+          }
+          else{
+            //no elements, render empty page
+          }
+          //console.log(results[0].items.length);
+          //for(var i = 0; i < results[0].items.length; i++){
+          //  console.log(i);
+          //  console.log(results[0].items[i].item);
+          //}
+          //console.log(util.inspect(results.items, {showHidden:false, depth: null}));
+          //want to send info to db
+          //res.render("guest-order", {order_items: results});
+*/
+
 //is used to retrieve the necessary information for the modal popup
 router.post("/getMenuItemById/*", function(req, res) {
   console.log("Retrieving data from: " + req.params[0]);
 
-  var MongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/4quad";
   MongoClient.connect(
     url,
     function(err, db) {
@@ -168,8 +262,6 @@ router.post("/submitToOrder/:objId/:notes", function(req, res){
   console.log("Trying to submit to order with menu_items.objId " + req.params.objId + 
     " and notes as " + req.params.notes);
 
-  var MongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/4quad";
   MongoClient.connect(
     url,
     function(err, db) {
@@ -214,10 +306,6 @@ router.post("/submitToOrder/:objId/:notes", function(req, res){
 });
 
 router.post("/validateCredentials", function (req, res) {
-  var MongoClient = mongodb.MongoClient;
-
-  var url = "mongodb://localhost:27017/4quad";
-
   MongoClient.connect(
     url,
     function (err, db) {
