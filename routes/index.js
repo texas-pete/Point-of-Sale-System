@@ -24,9 +24,9 @@ router.get("/waitstaff", function (req, res) {
       console.log("Connection Opened"); //prints to the node.js command prompt
 
       // we only want the tableNumber
-      let proj = { _id: 0, tableNum: 1}
+      let proj = { _id: 0, tableNum: 1 }
 
-      db.collection("service_requests").find({}, proj ).toArray(function(err, result) {
+      db.collection("service_requests").find({}, proj).toArray(function (err, result) {
         if (err) throw err;
         serviceRequests = result;
         res.render("waitstaff", { page: "Waitstaff View", serviceReqs: serviceRequests });
@@ -36,6 +36,36 @@ router.get("/waitstaff", function (req, res) {
   })
 })
 
+router.post("/getTableOrder/:tblNum", function (req, res) {
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to connect to the Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+      var query = { table: req.params.tblNum }; //we need to pass the table number requesting
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          //res.render("appetizers", { menu_items: results });
+        }
+        else {
+          console.log("No orders on record for table " + req.params.tblNum);
+        }
+        console.log("Connection Closed"); //prints to the node.js command prompt
+        db.close();
+      });
+    }
+  });
+  res.send(); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
+});
 
 // Terminal View for Kitchen Staff
 router.get("/kitchenstaff", function (req, res) {
@@ -48,35 +78,35 @@ router.get("/manager", function (req, res) {
 });
 
 // Terminal View for Guests
-router.get("/guest", function(req, res) {
+router.get("/guest", function (req, res) {
   console.log("accessing guest index page, table " + req.body.tablenum);
   res.render("guest", { page: "Guest View", tablenum: req.body.tablenum });
 });
 
 //appetizers
-router.get("/guest-appetizers", function(req, res){
+router.get("/guest-appetizers", function (req, res) {
   var MongoClient = mongodb.MongoClient;
   var url = "mongodb://localhost:27017/4quad";
 
-  MongoClient.connect(url, function(err, db){
-    if(err){
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
       console.log("Unable to Connect to the MongoDB Server");
     }
-    else{
+    else {
       console.log("Connection established with MongoDB Server");
 
-      var query = {Category:"Appetizer"};
+      var query = { Category: "Appetizer" };
       var collection = db.collection("menu_items");
       console.log("attempting " + query);
-      collection.find(query).toArray(function(err, results){
-        if(err){
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
           console.log(err);
         }
-        else if(results.length){
+        else if (results.length) {
           //want to send info to db
-          res.render("appetizers", {menu_items: results});
+          res.render("appetizers", { menu_items: results });
         }
-        else{
+        else {
           console.log("No results! ERROR");
         }
         db.close();
@@ -86,35 +116,35 @@ router.get("/guest-appetizers", function(req, res){
 });
 
 //games
-router.get("/guest-games", function(req, res){
+router.get("/guest-games", function (req, res) {
   res.render("guest-games");
 });
 
 //order
-router.get("/guest-order", function(req, res){
+router.get("/guest-order", function (req, res) {
   //res.render("guest-order");
   var MongoClient = mongodb.MongoClient;
   var url = "mongodb://localhost:27017/4quad";
 
-  MongoClient.connect(url, function(err, db){
-    if(err){
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
       console.log("Unable to Connect to the MongoDB Server");
     }
-    else{
+    else {
       console.log("Connection established with MongoDB Server");
 
-      var query = {table : currentTable};
+      var query = { table: currentTable };
       var collection = db.collection("active_orders");
       console.log("attempting " + query + " " + currentTable);
-      collection.find(query).toArray(function(err, results){
-        if(err){
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
           console.log(err);
         }
-        else if(results.length){
+        else if (results.length) {
           //want to send info to db
-          res.render("guest-order", {order_items: results});
+          res.render("guest-order", { order_items: results });
         }
-        else{
+        else {
           console.log("No results! ERROR");
         }
         db.close();
@@ -124,69 +154,69 @@ router.get("/guest-order", function(req, res){
 });
 
 //is used to retrieve the necessary information for the modal popup
-router.post("/getMenuItemById/*", function(req, res) {
+router.post("/getMenuItemById/*", function (req, res) {
   console.log("Retrieving data from: " + req.params[0]);
 
   var MongoClient = mongodb.MongoClient;
   var url = "mongodb://localhost:27017/4quad";
   MongoClient.connect(
     url,
-    function(err, db) {
-      if(err){
+    function (err, db) {
+      if (err) {
         console.log("Unable to connect to the Server");
       }
-      else{
+      else {
         console.log("Connection established");
         var objID = new ObjectId(req.params[0]);
-        var query = { _id: objID};
+        var query = { _id: objID };
         var collection = db.collection("menu_items");
 
-        collection.find(query).toArray(function(err, results) {
-            if(err){
-              console.log(err);
-            }
-            else if (results.length){//send the object to the page
-              res.send(results);
-            }
-            else{
-              console.log("Menu item not found!");
-            }
-            db.close();
-            console.log("Connection closed");
+        collection.find(query).toArray(function (err, results) {
+          if (err) {
+            console.log(err);
+          }
+          else if (results.length) {//send the object to the page
+            res.send(results);
+          }
+          else {
+            console.log("Menu item not found!");
+          }
+          db.close();
+          console.log("Connection closed");
         });
       }
     }
   );
 });
 
-router.post("/submitToOrder/:objId/:notes", function(req, res){
-  console.log("Trying to submit to order with menu_items.objId " + req.params.objId + 
+router.post("/submitToOrder/:objId/:notes", function (req, res) {
+  console.log("Trying to submit to order with menu_items.objId " + req.params.objId +
     " and notes as " + req.params.notes);
 
   var MongoClient = mongodb.MongoClient;
   var url = "mongodb://localhost:27017/4quad";
   MongoClient.connect(
     url,
-    function(err, db) {
-      if(err){
+    function (err, db) {
+      if (err) {
         console.log("Unable to connect to the Server");
       }
-      else{
+      else {
         console.log("Connection established");
         //var objID = new ObjectId(req.params.objId);
         var itemId = req.params.objId
-        var query = { table: currentTable.toString()};
+        var query = { table: currentTable.toString() };
         var collection = db.collection("active_orders");
-        var newvalues = {$push: {items: {item: itemId, notes: req.params.notes}}};
-        
+        var newvalues = { $push: { items: { item: itemId, notes: req.params.notes } } };
+
         console.log("Running the query collection.update(table: " + currentTable.toString()
-        + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes);
+          + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes);
         var itemId = req.params.objId
-        var query = { table: currentTable.toString()};
+        var query = { table: currentTable.toString() };
         var collection = db.collection("active_orders");
-        var newvalues = {$push: {items: {item: itemId, notes: req.params.notes}}};
-        collection.update(query, newvalues, function(err, res){
-          if(err) throw err;
+        var newvalues = { $push: { items: { item: itemId, notes: req.params.notes } } };
+        collection.update(query, newvalues, function (err, res) {
+          if (err) throw err;
           console.log("order updated");
           db.close();
         });
@@ -204,8 +234,9 @@ router.post("/submitToOrder/:objId/:notes", function(req, res){
             console.log("Connection closed");
         });*/
       }
+
     }
-  ); 
+  );
 });
 
 router.post("/validateCredentials", function (req, res) {
@@ -233,7 +264,7 @@ router.post("/validateCredentials", function (req, res) {
             if (req.body.username === "waitstaff") {
               // redirect to waitstaff view
               res.redirect("/waitstaff");
-              
+
             } else if (req.body.username === "kitchenstaff") {
               //redirect to kitchen staff
               res.redirect("/kitchenstaff");
