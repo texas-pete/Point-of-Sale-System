@@ -68,6 +68,11 @@ router.get("/guest-games", function(req, res){
   res.render("guest-games");
 });
 
+//pay
+router.get("/guest-pay", function(req, res){
+  res.render("guest-pay");
+});
+
 //order
 router.get("/guest-order", function(req, res){
   //res.render("guest-order");
