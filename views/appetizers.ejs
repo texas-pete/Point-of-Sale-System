@@ -22,8 +22,10 @@
 			<div class="col-md-6">
 				<h3><%= item.Name %></h3>
 				
-				<!--This says that the 'happy hour' is 2-3pm-->
-				<% if(hour == 14){ %>
+				<!--This says that the 'happy hour' is 2-3pm
+					need to also change in customer.js
+				-->
+				<% if(hour == 15){ %>
 					<h5>$<%= item.HappyHour %> </h5>
 				<% } else{ %>
    					<h5>$<%= item.Price %></h5>
@@ -54,7 +56,7 @@
 			<div class="close">+</div>
 			<div class="modal-main-content">
 				<h3 class="modal-menu-name">Name</h3>
-				<img class="modal-menu-img" src="img" alt="nameOfImage" style="float:left" width="390" height="300" hspace="20">
+				<img class="modal-menu-img" src="" alt="nameOfImage" style="float:left" width="390" height="300" hspace="20">
 				<h4 class="modal-menu-price">Price</h4>
 				<h5 class="modal-menu-desc">Description</h5>
 			</div>
@@ -62,10 +64,6 @@
 			<form>
 				<textarea name="notes" placeholder="Type in any allergies or anything you want added/removed from the item." cols = "60" rows="5"></textarea>
 			</form>
-			<!--<form method="post" action="/submitToOrder">
-				<textarea name="allergiesEdit" placeholder="Type in any allergies or anything you want added/removed from the item." cols = "60" rows="5"></textarea>
-				<input type="submit" class="btn btn-secondary btn-sm" value="Submit to Order">
-			</form>-->
 			<button type="button" class="btn btn-secondary btn-sm modal-submit">Add to Order</button>
 		</div>
 	</div>

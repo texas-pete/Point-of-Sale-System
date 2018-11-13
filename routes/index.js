@@ -153,80 +153,46 @@ router.get("/guest-order", function(req, res){
                 });
               }
               else if (results[0].items.length == 1){
+                console.log("Running single item query");
+                //single object
+                //console.log(util.inspect(results[0].items[0], {showHidden:false, depth: null}));
+                //just the object's item.
+                //console.log(util.inspect(results[0].items[0].item, {showHidden:false, depth: null}));
+                
                 //run single query
+                var t_collection = db.collection("menu_items");
+                var t_query = {_id : new ObjectId(results[0].items[0].item)};
+
+                t_collection.find(t_query).toArray(function(err, results){
+                  if(err){
+                    console.log(err);
+                  }
+                  else if(results.length){
+                    console.log("Got results");
+                    res.render("guest-order", {order_items: results, notes: t_notes})
+                  }
+                  else{
+                    console.log("No results, should not happen.")
+                  }
+                });
               }
               else{
                 //no elements, render empty page
+                console.log("Rendering empty order page");
+                res.render("guest-order", {order_items: [], notes: []});
               }
-              //console.log(results[0].items.length);
-              //for(var i = 0; i < results[0].items.length; i++){
-              //  console.log(i);
-              //  console.log(results[0].items[i].item);
-              //}
-              //console.log(util.inspect(results.items, {showHidden:false, depth: null}));
-              //want to send info to db
-              //res.render("guest-order", {order_items: results});
-
-
             }
           });
         }
         else{
           console.log("No results! ERROR");
+          
         }
         db.close();
       });
     }
   });
 });
-
-/*
-          
-          console.log("made it here");
-          //have to go over array of objects to find items
-          //console.log(util.inspect(results, {showHidden:false, depth: null}));
-          console.log(results[0]);//.items[0]);
-          if(results[0].items.length >= 2){
-            var t_collection = db.collection("menu_items");
-            var t_query = [];//creates an empty array to push objects into
-
-            for(var i = 0; i < results[0].items.length; i++){
-              //console.log(i);
-              //var _id = {};//empty object
-              //var _id = new ObjectId(results[0].items[i].item);
-              //console.log(results[0].items[i].item);
-              t_query.push({_id: new ObjectId(results[0].items[i].item)})
-            }
-            //console.log(t_query[0]);
-            //run or query
-
-            t_collection.find(t_query).toArray(function(err, results){
-              if(err){
-                console.log(err);
-              }
-              else if(results.length){
-                console.log("woo, success!");
-              }
-              else{
-                //no elements, should not happen
-              }
-            });
-          }
-          else if (results[0].items.length == 1){
-            //run single query
-          }
-          else{
-            //no elements, render empty page
-          }
-          //console.log(results[0].items.length);
-          //for(var i = 0; i < results[0].items.length; i++){
-          //  console.log(i);
-          //  console.log(results[0].items[i].item);
-          //}
-          //console.log(util.inspect(results.items, {showHidden:false, depth: null}));
-          //want to send info to db
-          //res.render("guest-order", {order_items: results});
-*/
 
 //is used to retrieve the necessary information for the modal popup
 router.post("/getMenuItemById/*", function(req, res) {
@@ -262,9 +228,10 @@ router.post("/getMenuItemById/*", function(req, res) {
   );
 });
 
-router.post("/submitToOrder/:objId/:notes", function(req, res){
+//submites to 'active_orders' w/ the price (for happy-hour), notes, and objectID.
+router.post("/submitToOrder/:objId/:notes/:price", function(req, res){
   console.log("Trying to submit to order with menu_items.objId " + req.params.objId + 
-    " and notes as " + req.params.notes);
+    " and notes as " + req.params.notes + " and price of $" + req.params.price);
 
   MongoClient.connect(
     url,
@@ -273,40 +240,21 @@ router.post("/submitToOrder/:objId/:notes", function(req, res){
         console.log("Unable to connect to the Server");
       }
       else{
-        console.log("Connection established");
-        //var objID = new ObjectId(req.params.objId);
         var itemId = req.params.objId
         var query = { table: currentTable.toString()};
         var collection = db.collection("active_orders");
-        var newvalues = {$push: {items: {item: itemId, notes: req.params.notes}}};
-        
+        var newvalues = {$push: {items: {item: itemId, notes: req.params.notes, price: req.params.price}}};
         console.log("Running the query collection.update(table: " + currentTable.toString()
-        + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes);
-        var itemId = req.params.objId
-        var query = { table: currentTable.toString()};
-        var collection = db.collection("active_orders");
-        var newvalues = {$push: {items: {item: itemId, notes: req.params.notes}}};
+        + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes + " ,price: " + req.params.price);
         collection.update(query, newvalues, function(err, res){
           if(err) throw err;
-          console.log("order updated");
+          console.log("Order updated");
           db.close();
         });
-        /*collection.find(query).toArray(function(err, results) {
-            if(err){
-              console.log(err);
-            }
-            else if (results.length){//send the object to the page
-              res.send(results);
-            }
-            else{
-              console.log("Menu item not found!");
-            }
-            db.close();
-            console.log("Connection closed");
-        });*/
       }
     }
-  ); 
+  );
+  res.send("Ok");
 });
 
 router.post("/validateCredentials", function (req, res) {
@@ -432,3 +380,6 @@ router.post("/validateEmpCredentials", function (req, res) { //accessed (POST RE
 });
 
 module.exports = router;
+
+//example of how to use util.inspect for objects
+//console.log(util.inspect(results.items, {showHidden:false, depth: null}));

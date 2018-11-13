@@ -34,7 +34,16 @@ function addToOrder(){
 			document.querySelector('.modal-menu-name').innerHTML = responseData[0].Name;
 			document.querySelector('.modal-menu-img').src = 'http://localhost:3000/images/appetizers/' + responseData[0].ImageName;
 			document.querySelector('.modal-menu-img').alt = responseData[0].Name;
-			document.querySelector('.modal-menu-price').innerHTML = '$' + responseData[0].Price;
+			var d = new Date();
+			var hour = d.getHours();
+			//CHANGE HAPPY HOUR HERE
+			if(hour == 15){
+				document.querySelector('.modal-menu-price').innerHTML = '$' + responseData[0].HappyHour;
+			}
+			else{
+				document.querySelector('.modal-menu-price').innerHTML = '$' + responseData[0].Price;
+			}
+			
 			document.querySelector('.modal-menu-desc').innerHTML = responseData[0].Description;
 			//sets the modal's submit button to contain objId information
 			var id = document.querySelector('.modal-submit');
@@ -55,6 +64,8 @@ function submitToOrder(){
 	//store objID in variable for ease-of-use and scope 
 	var objId = $(this).data('id');
 	var notes = document.getElementsByName('notes')[0].value;
+	var price = document.getElementsByClassName('modal-menu-price')[0].innerHTML.replace("$","");
+	console.log("Sending in the price of: " + price);
 	if(!notes.replace(/\s/g, '').length){
 		notes = "empty"
 	}
@@ -63,9 +74,10 @@ function submitToOrder(){
 	document.querySelector('.bg-modal').style.display = 'none';
 
 	$.ajax({
-		url: "/submitToOrder/" + objId + "/" + notes,
+		url: "/submitToOrder/" + objId + "/" + notes + "/" + price,
 		type: "POST",
 		success: function(responseData) {
+			alert("Your order has been added. View and submit complete order in the 'View Order' tab.");
 			//TODO: maybe include alert that says 'your order has been added. add more and submit in the 'View Order' tab
 			//TODO: have to clear notes section for next order
 		},
