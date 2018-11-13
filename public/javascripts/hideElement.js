@@ -3,6 +3,18 @@ function hideContent(whichDiv) {
   var y = document.getElementById("orderinfo");
   var z = document.getElementById("service");
   var sidebarVal = $('#tblNumber').text()
+
+  //we need to wipe the contents of our divs before we start. This way the button can't keep replicating the same order.
+  var myDiv = document.getElementById("entities");
+  if (document.contains(myDiv)) {
+    myDiv.remove();
+    //then insert an empty div
+    var ele = document.createElement("div"); //creates a div 
+    ele.setAttribute("id", "entities");
+    document.getElementById("orderinfo").appendChild(ele); //now we want to put it inside of orederinfo
+    myDiv = document.getElementById("entities")
+  }
+
   if (whichDiv === "content") {
     //we want to hide the orderinfo and service code
     y.style.display = "none";
@@ -22,19 +34,60 @@ function hideContent(whichDiv) {
     //we want to show the orderinfo information
     y.style.display = "block";
 
-
-    console.log($('#tblNumber').text());
-
-    $.ajax({
+    for (let i = 0; i < 16; i++) //hacky way to fix the input received from the table number
+    {
+      if (i + 1 == sidebarVal) {
+        sidebarVal = (i + 1);
+        break; //There is no reason to continue looping if we have fixed our variable
+      }
+    }
+    $.ajax({ //there is a way to do this via $.post("/getTableOrder/" + sidebarVal) but keeping ajax as such
       url: "/getTableOrder/" + sidebarVal,
       type: "POST",
-      success: function (responseData) {
-        //TODO: maybe include alert that says 'your order has been added. add more and submit in the 'View Order' tab
-        //TODO: have to clear notes section for next order
+      success: function (responseData) { //upon a successful post, we run below code.
+
+        for (let i = 0; i < responseData[0].items.length; i++) { //loop through the number of ITEMs ordered
+
+          if (typeof responseData[0].items[i].item !== 'undefined') { //if the name of an item is undefined, omit it.
+
+            myDiv.insertAdjacentHTML('beforeend', ' <p class= "item_name"> Item: Name</p > <button type="button" class="btn">X</button><p></p><p class= "item_desc" >Item: Description/Allergies</p><button type="button" class="btn">Edit</button><hr>');
+          }
+        }
+        var submitted_item_names = document.querySelectorAll('.item_name'); //stores all instances of this class into an array
+        var submitted_item_descr = document.querySelectorAll('.item_desc');
+
+        submitted_item_names.forEach(function (userItem, index) {
+
+
+          var database_name = responseData[0].items[index + 1].item; //we need to convert the gross name to a real name
+          //userItem.innerHTML = database_name;
+
+          $.ajax({ //there is a way to do this via $.post("/getTableOrder/" + sidebarVal) but keeping ajax as such
+            url: "/getItemName/" + responseData[0].items[index + 1].item,
+            type: "POST",
+            success: function (responseData) {
+
+
+
+
+            },
+            error: function () { //if we can't find the name in our database
+              userItem.innerHTML = responseData[0].items[index + 1].item;
+            }
+          });
+
+
+        });
+        submitted_item_descr.forEach(function (userItem, index) {
+          if (typeof responseData[0].items[index + 1].notes != 'undefined') {
+            userItem.innerHTML = responseData[0].items[index + 1].notes; //for loop starts at 0 and we don't want the null index
+          }
+          else {
+            userItem.innerHTML = "No notes provided";
+          }
+        });
       },
       error: console.error
-
-
     });
   }
   else if (whichDiv === "service") {

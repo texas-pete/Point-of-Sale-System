@@ -54,18 +54,53 @@ router.post("/getTableOrder/:tblNum", function (req, res) {
         }
         else if (results.length) {
           //want to send info to db
-          //res.render("appetizers", { menu_items: results });
+          res.send(results); //send the object to the page.
         }
         else {
           console.log("No orders on record for table " + req.params.tblNum);
+          res.send(); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
         }
         console.log("Connection Closed"); //prints to the node.js command prompt
         db.close();
       });
     }
   });
-  res.send(); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
 });
+
+
+router.post("/getItemName/:db_name", function (req, res) { //Verify the value is in our database.
+
+  console.log("test " + req.params.db_name);
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to connect to the Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+      var query = { "_id": req.params.db_name }; //we need to pass the table number requesting
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) { //if we return a result
+          res.send(results[0].Name); //send the name of the object to the page.
+          console.log("sub")
+        }
+        else {
+          console.log("No menu items with this id " + req.params.db_name);
+          res.sendStatus(404); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
+        }
+        console.log("Connection Closed"); //prints to the node.js command prompt
+        db.close();
+      });
+    }
+  });
+});
+
 
 // Terminal View for Kitchen Staff
 router.get("/kitchenstaff", function (req, res) {

@@ -13,6 +13,9 @@ function clock() {
     if (h > 12) {
         ampm = h - 12;
     }
+    else {
+        ampm = h;
+    }
     if (s == 60) {
         s = 0;
         m++;

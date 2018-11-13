@@ -144,3 +144,18 @@ ul ul a {
     padding-left: 30px !important;
     background: #6d7fcc;
 }
+.btn, .item_name{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px 0;
+}
+.btn, .item_desc{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px 0;
+}
+hr {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-top: 1px solid black;
+   }
