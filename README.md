@@ -56,8 +56,8 @@
     - [x] Allow waitstaff, kitchenstaff, and managers to login/clockin 
     - [ ] Allow for happy hour pricing which discounts meals
     - [ ] Allow for inventory tracking
-    - [ ] Allow for hour tracking of employees
-    - [ ] Allow management, waitstaff, and kitchenstaff to clock out
+    - [x] Allow for hour tracking of employees
+    - [x] Allow management, waitstaff, and kitchenstaff to clock out
   - What is 10%?
     - [ ] Allow customers to filter menu items from dropdown (3)
     - [x] Allow management, waitstaff, and kitchenstaff to clock out (1)
