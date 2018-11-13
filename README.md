@@ -40,24 +40,30 @@
     - [ ] Allow customers to request waitstaff assistance
     - [ ] Allow customers to request specific refills
     - [ ] Allow customers to play a game (of 2)
-    - [ ] Allow customers to split the check
+    - [ ] Allow customers to split the check 
     - [ ] Allow customers to pay at any time and have payment prevent refilling, help, play games ability
     - [ ] Allow customers to have 1/5 chance in winning a coupon when paying
+    
     - [x] Allow waitstaff to view all 16 tables
     - [ ] Allow waitstaff to press a table button to view payment and order details for table
     - [ ] Allow waitstaff to press a table button to edit the table order
     - [ ] Allow waitstaff to press a table button to remove notifications regarding refills or requests
+    
     - [ ] Allow kitchenstaff to signal to the other kitchen staff an order is being prepared through button
     - [ ] Allow kitchenstaff to tap order button to view order details
+    
     - [ ] Allow manager to view business essential data
     - [ ] Allow manager to edit the menu 
     - [ ] Allow manager to provide complimentary meals by changing price to zero
     - [ ] Allow manager to lookup orders using ticket numbering system
+    
     - [x] Allow waitstaff, kitchenstaff, and managers to login/clockin 
+    - [x] Allow management, waitstaff, and kitchenstaff to clock out
+    
     - [ ] Allow for happy hour pricing which discounts meals
     - [ ] Allow for inventory tracking
     - [x] Allow for hour tracking of employees
-    - [x] Allow management, waitstaff, and kitchenstaff to clock out
+    
   - What is 10%?
     - [ ] Allow customers to filter menu items from dropdown (3)
     - [x] Allow management, waitstaff, and kitchenstaff to clock out (1)
