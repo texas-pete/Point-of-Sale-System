@@ -31,11 +31,8 @@
 - [x] Set up Discord
 - [ ] Define MVP
   - What is necessary?
-    - [ ] Magnifying glass needs to magnify 
-    - [ ] Text to speech needs to speech
     - [x] Allow customers to substitute ingredients in an order
     - [x] Allow customers to note allergies
-    - [ ] Allow customers to filter menu items from dropdown
     - [ ] Allow customers to submit order to necessary screens
     - [ ] Allow customers to request waitstaff assistance
     - [ ] Allow customers to request specific refills
@@ -58,10 +55,7 @@
     - [ ] Allow manager to lookup orders using ticket numbering system
     
     - [x] Allow waitstaff, kitchenstaff, and managers to login/clockin 
-    - [x] Allow management, waitstaff, and kitchenstaff to clock out
     
-    - [ ] Allow for happy hour pricing which discounts meals
-    - [ ] Allow for inventory tracking
     - [x] Allow for hour tracking of employees
     
   - What is 10%?
