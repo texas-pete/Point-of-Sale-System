@@ -43,7 +43,7 @@
     - [ ] Allow customers to split the check
     - [ ] Allow customers to pay at any time and have payment prevent refilling, help, play games ability
     - [ ] Allow customers to have 1/5 chance in winning a coupon when paying
-    - [ ] Allow waitstaff to view all 16 tables
+    - [x] Allow waitstaff to view all 16 tables
     - [ ] Allow waitstaff to press a table button to view payment and order details for table
     - [ ] Allow waitstaff to press a table button to edit the table order
     - [ ] Allow waitstaff to press a table button to remove notifications regarding refills or requests
@@ -53,14 +53,14 @@
     - [ ] Allow manager to edit the menu 
     - [ ] Allow manager to provide complimentary meals by changing price to zero
     - [ ] Allow manager to lookup orders using ticket numbering system
-    - [ ] Allow waitstaff, kitchenstaff, and managers to login/clockin 
+    - [x] Allow waitstaff, kitchenstaff, and managers to login/clockin 
     - [ ] Allow for happy hour pricing which discounts meals
     - [ ] Allow for inventory tracking
     - [ ] Allow for hour tracking of employees
     - [ ] Allow management, waitstaff, and kitchenstaff to clock out
   - What is 10%?
     - [ ] Allow customers to filter menu items from dropdown (3)
-    - [ ] Allow management, waitstaff, and kitchenstaff to clock out (1)
+    - [x] Allow management, waitstaff, and kitchenstaff to clock out (1)
     - [ ] Allow for happy hour pricing which discounts meals (2)
     - [ ] Allow for inventory tracking (3)
     - [ ] Magnifying glass needs to magnify (1/2) 
