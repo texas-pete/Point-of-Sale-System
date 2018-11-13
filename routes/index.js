@@ -120,6 +120,44 @@ router.get("/guest-games", function (req, res) {
   res.render("guest-games");
 });
 
+//pay
+router.get("/guest-pay", function (req, res) {
+  res.render("guest-pay");
+});
+
+router.get('/getTotalCost', function(req, res, next){
+//res.render("guest-order");
+var MongoClient = mongodb.MongoClient;
+var url = "mongodb://localhost:27017/4quad";
+
+MongoClient.connect(url, function (err, db) {
+  if (err) {
+    console.log("Unable to Connect to the MongoDB Server");
+  }
+  else {
+    console.log("Connection established with MongoDB Server");
+
+    var resiltArray = [];
+    var query = { table: currentTable };
+    var collection = db.collection("submitted_orders");
+    console.log("attempting " + query + " " + currentTable);
+    collection.find(query).forEach(function (err, results) {
+      if (err) {
+        console.log(err);
+      }
+      else if (results.length) {//send the object to the page
+        resultArray.push(results)
+      }
+      else {
+        console.log("Menu item not found!");
+      }
+      db.close();
+      res.render('guest-pay', {order_items: resultArray});
+    });
+  }
+});
+});
+
 //order
 router.get("/guest-order", function (req, res) {
   //res.render("guest-order");
