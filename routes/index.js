@@ -65,9 +65,14 @@ router.get("/guest-appetizers", function(req, res){
     else{
       console.log("Connection established with MongoDB Server");
 
-      var query = {Category:"Appetizer"};
+      //var query = {Category:"Appetizer"};
+      //attempting and query
+      var query = {$and : [
+            {Category:"Appetizer"},
+            {Active:"yes"}
+        ]};
       var collection = db.collection("menu_items");
-      console.log("attempting " + query);
+      //console.log("attempting " + query);
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
