@@ -32,6 +32,14 @@
 						<td><a href="#"><img src="http://localhost:3000/images/games/tic-tac-toe.gif" height="100%"></a></td>
 						<td><a href="#"><img src="http://localhost:3000/images/games/snake.gif" height="75%"></a></td>
 					</tr>
+					<tr>
+						<td>
+							<button class="play-tic btn btn-secondary btn-sm">Play Now</button>
+						</td>
+						<td>
+							<button class="play-snake btn btn-secondary btn-sm">Play Now</button>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -39,11 +47,33 @@
 
     <!--Assistance Buttons-->
     <% include partials/assistance %>
+
+	<!--Modal for tic-tac-toe-->
+	<div class="bg-modal tic">
+		<div class="modal-content">
+			<div class="close close-tic">+</div>
+			<div class="modal-main-content">
+				<% include partials/tic %>				
+			</div>
+			<br>
+		</div>
+	</div>
+
+	<!--Modal for snake-->
+	<div class="bg-modal snake">
+		<div class="modal-content">
+			<div class="close close-snake">+</div>
+			<div class="modal-main-content">
+				<canvas id="stage" height="400" width="520"></canvas>
+			</div>
+			<br>
+		</div>
+	</div>
 </body>
 <footer>
     <!-- Navigation -->
     <% include partials/guestnavbar %>
     <!--@ bottom to allow DOM to fully load-->
-    <script src="http://localhost:3000/javascripts/customer.js"></script>
+    <script src="http://localhost:3000/javascripts/games.js"></script>
 </footer>
 </html>
