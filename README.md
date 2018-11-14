@@ -33,9 +33,9 @@
   - Customer
     - [x] Allow customers to substitute ingredients in an order
     - [x] Allow customers to note allergies
-    - [x] Allow customers to submit order to necessary screens
-    - [x] Allow customers to edit notes or remove menu item from order
-    - [ ] Allow customers to request waitstaff assistance
+    - [ ] Allow customers to submit order to necessary screens
+    - [ ] Allow customers to edit notes or remove menu item from order
+    - [x] Allow customers to request waitstaff assistance
     - [ ] Allow customers to request specific refills
     - [x] Allow customers to play a game (of 2)
     - [ ] Allow customers to split the check 
@@ -44,8 +44,8 @@
   - Waitstaff
     - [x] Allow waitstaff to view all 16 tables
     - [x] Allow waitstaff to press a table button to view payment and order details for table
-    - [ ] Allow waitstaff to press a table button to edit the table order
-    - [ ] Allow waitstaff to press a table button to remove notifications regarding refills or requests
+    - [x] Allow waitstaff to press a table button to edit the table order
+    - [x] Allow waitstaff to press a table button to remove notifications regarding refills or requests
   - Kitchen Staff
     - [ ] Allow kitchenstaff to signal to the other kitchen staff an order is being prepared through button
     - [ ] Allow kitchenstaff to tap order button to view order details
