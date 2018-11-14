@@ -63,7 +63,7 @@ router.get("/guest", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -71,13 +71,13 @@ router.get("/guest", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -159,7 +159,7 @@ router.get("/guest-appetizers", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -167,13 +167,13 @@ router.get("/guest-appetizers", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -255,7 +255,7 @@ router.get("/guest-entrees", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -263,13 +263,13 @@ router.get("/guest-entrees", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -351,7 +351,7 @@ router.get("/guest-games", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -359,13 +359,13 @@ router.get("/guest-games", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -410,7 +410,7 @@ router.get("/guest-order", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -418,13 +418,13 @@ router.get("/guest-order", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -810,23 +810,25 @@ router.post("/validateCredentials", function (req, res) {
                 }
                 else{
                   console.log("Drink connection to server successful");
+                  console.log("In here");
 
                   var query = {table: currentTable.toString()}
-                  var collection = db.collection("active_orders");
+                  var collection = db.collection("submitted_orders");
                   collection.find(query).toArray(function(err, results){
+                    console.log(util.inspect(results[0].orderedItems, {showHidden:false, depth: null}));
                     if(err){
                       console.log(err);
                     }
-                    else if(results.length){//not empty
+                    else if(results[0].orderedItems.length){//not empty
                       //need to find all drinks and put in object
                       //results[0].items[i].item
-                      console.log("The user does have orders, going through " + results[0].items.length + " iters");
-                      for(var i = 0; i < results[0].items.length; i++){
-                        console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+                      console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+                      for(var i = 0; i < results[0].orderedItems.length; i++){
+                        console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
                         var t_query = {
                           $and: [
                             { Category: "Drink" },
-                            {_id: new ObjectId(results[0].items[i].item)}
+                            {_id: new ObjectId(results[0].orderedItems[i].item)}
                           ]
                         };
                         var t_collection = db.collection("menu_items");
@@ -877,6 +879,16 @@ router.post("/validateCredentials", function (req, res) {
                               }, 500);
                             }
                             else {//still need to load page even if all items are not active
+
+
+
+
+
+
+
+
+
+
                               console.log("No results! ERROR");
                               console.log("All drinks are: " + drinks);
                               setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
@@ -1044,7 +1056,7 @@ router.get("/guest-appetizers/vegan/", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -1052,13 +1064,13 @@ router.get("/guest-appetizers/vegan/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -1137,7 +1149,7 @@ router.get("/guest-appetizers/vegetarian/", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -1145,13 +1157,13 @@ router.get("/guest-appetizers/vegetarian/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -1230,7 +1242,7 @@ router.get("/guest-appetizers/spicy/", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -1238,13 +1250,13 @@ router.get("/guest-appetizers/spicy/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -1323,7 +1335,7 @@ router.get("/guest-appetizers/gf/", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -1331,13 +1343,13 @@ router.get("/guest-appetizers/gf/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -1424,7 +1436,7 @@ router.get("/guest-entrees/vegan/", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -1432,13 +1444,13 @@ router.get("/guest-entrees/vegan/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -1517,7 +1529,7 @@ router.get("/guest-entrees/vegetarian/", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -1525,13 +1537,13 @@ router.get("/guest-entrees/vegetarian/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -1610,7 +1622,7 @@ router.get("/guest-entrees/spicy/", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -1618,13 +1630,13 @@ router.get("/guest-entrees/spicy/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
@@ -1703,7 +1715,7 @@ router.get("/guest-entrees/gf/", function (req, res) {
       console.log("Drink connection to server successful");
 
       var query = {table: currentTable.toString()}
-      var collection = db.collection("active_orders");
+      var collection = db.collection("submitted_orders");
       collection.find(query).toArray(function(err, results){
         if(err){
           console.log(err);
@@ -1711,13 +1723,13 @@ router.get("/guest-entrees/gf/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].items.length + " iters");
-          for(var i = 0; i < results[0].items.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].items[i].item);
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
             var t_query = {
               $and: [
                 { Category: "Drink" },
-                {_id: new ObjectId(results[0].items[i].item)}
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
               ]
             };
             var t_collection = db.collection("menu_items");
