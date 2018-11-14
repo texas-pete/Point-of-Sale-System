@@ -110,7 +110,7 @@ a, a:hover, a:focus {
 }
 
 .boxServiceRequested {
-    background-color: lightgreen;
+    background-color: lightgreen !important;
 }
 
 .table-layout {

@@ -1,12 +1,28 @@
 const socket = io();
 
+var arr;
 socket.on("connect", function() {
   // Connected, let's sign-up for to receive messages for this room
   socket.emit("joinSR");
 });
 
-socket.on("updatedSR", function(){
-  alert("UPDATED SR");
+// update the screen to change the color of tables with service requests
+// srUpdate events send an array of tableNumber for the tables with requests
+socket.on("srUpdate", function(requestsArray){
+  let idPrefix = '#box';
+  let i = 0;
+// table divs have ID's of the following form: 'box0' 'box1' ... etc
+
+  // turn off all indicators
+  $(".boxServiceRequested").toggleClass("boxServiceRequested");
+
+  // turn on the ones that still have requests
+  requestsArray.forEach(element => {
+    // #box + tableNumber
+    let currentBoxID = idPrefix + element["tableNum"];
+    // select that ID and add the boxServiceRequested class
+    $(currentBoxID).toggleClass("boxServiceRequested")
+  });
 })
 
 // applies functionality for table buttons to all table buttons
