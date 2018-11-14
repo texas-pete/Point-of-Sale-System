@@ -103,10 +103,18 @@ io.on('connection', function (socket) {
     sendServiceRequestsArray();
   });
 
+  // drink requests
   socket.on("joinDR", function(){
     socket.join("dr");
     // initial update
     sendDrinkRequestsArray();
+  });
+
+  // manager requests
+  socket.on("joinMR", function(){
+    socket.join("mr");
+    // initial update
+
   });
 
   // inserts a new service request in the DB and informs all pages in sr room
@@ -220,7 +228,6 @@ function sendDrinkRequestsArray(){
 
   });
 };
-
 
 //{drink:"milk", tableNum: "1"}
 function createDrinkRequest(msg, MongoClient, mongoURL){
