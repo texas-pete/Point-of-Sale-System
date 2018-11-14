@@ -45,10 +45,9 @@ function hideContent(whichDiv) {
       url: "/getTableOrder/" + sidebarVal,
       type: "POST",
       success: function (responseData) { //upon a successful post, we run below code.
+        for (let i = 0; i < responseData[0].orderedItems.length; i++) { //loop through the number of ITEMs ordered
 
-        for (let i = 0; i < responseData[0].items.length; i++) { //loop through the number of ITEMs ordered
-
-          if (typeof responseData[0].items[i].item !== 'undefined') { //if the name of an item is undefined, omit it.
+          if (typeof responseData[0].orderedItems[i].item !== 'undefined') { //if the name of an item is undefined, omit it.
             myDiv.insertAdjacentHTML('beforeend', createOrderItem(i));
           }
         }
@@ -58,19 +57,19 @@ function hideContent(whichDiv) {
         submitted_item_names.forEach(function (userItem, index) {
 
           $.ajax({ //there is a way to do this via $.post("/getTableOrder/" + sidebarVal) but keeping ajax as such
-            url: "/getItemName/" + responseData[0].items[index].item,
+            url: "/getItemName/" + responseData[0].orderedItems[index].item,
             type: "POST",
             success: function (responseData) { //responseData contains the returned 'name' from our ID
               userItem.innerHTML = responseData;
             },
             error: function () { //if we can't find the name in our database
-              userItem.innerHTML = responseData[0].items[index].item;
+              userItem.innerHTML = responseData[0].orderedItems[index].item;
             }
           });
         });
         submitted_item_descr.forEach(function (userItem, index) {
-          if (typeof responseData[0].items[index].notes != 'undefined') {
-            userItem.innerHTML = responseData[0].items[index].notes; //for loop starts at 0 and we don't want the null index
+          if (typeof responseData[0].orderedItems[index].notes != 'undefined') {
+            userItem.innerHTML = responseData[0].orderedItems[index].notes; //for loop starts at 0 and we don't want the null index
           }
           else {
             userItem.innerHTML = "No notes provided";
