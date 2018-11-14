@@ -103,6 +103,12 @@ io.on('connection', function (socket) {
     sendServiceRequestsArray();
   });
 
+  socket.on("joinDR", function(){
+    socket.join("dr");
+    // initial update
+    sendDrinkRequestsArray();
+  });
+
   // inserts a new service request in the DB and informs all pages in sr room
   socket.on('serviceRequest', function (msg) {
     createServiceRequest(msg, MongoClient, mongoURL);
@@ -113,6 +119,13 @@ io.on('connection', function (socket) {
     deleteServiceRequest(msg, MongoClient, mongoURL);
   });
 
+  socket.on('drinkRequest', function (msg) {
+    createDrinkRequest(msg, MongoClient, mongoURL);
+  });
+
+  socket.on('clearDrinkRequest', function (msg) {
+    deleteDrinkRequest(msg, MongoClient, mongoURL);
+  });
 });
 
 /**
@@ -186,5 +199,65 @@ function sendServiceRequestsArray(){
       };
     });
 
+  });
+};
+
+// sends out the updated list of tables with drink requests
+function sendDrinkRequestsArray(){
+  MongoClient.connect(mongoURL, function (err, db) {
+    let collection = db.collection("drink_requests");
+
+    collection.find({},{_id:0 , tableNum: 1, drink: 1}).toArray(function (err, results) {
+      if (err)
+        console.log(err);
+      else{
+        // send updated array to the pages to parse
+        console.log("Sending Updated DR Array");
+        console.log(results);
+        io.to("dr").emit("drUpdate", results);
+      };
+    });
+
+  });
+};
+
+
+//{drink:"milk", tableNum: "1"}
+function createDrinkRequest(msg, MongoClient, mongoURL){
+
+  // insert into drink_requests
+  MongoClient.connect(mongoURL, function (err, db) {
+    let query = { tableNum: msg["tableNum"], drink: msg["drink"] };
+    let collection = db.collection("drink_requests");
+
+    collection.insertOne(query, function (err, results) {
+      if (err) 
+        console.log(err);
+      else
+        console.log("Table # " + msg["tableNum"] + " - Drink Request Inserted for: " + msg["drink"]);
+        // send the new array of tables with requests to the appropriate screens
+        sendDrinkRequestsArray();
+    });
+  }); 
+};
+
+function deleteDrinkRequest(msg, MongoClient, mongoURL){
+  // remove any extra whitespace
+  let tblNumber = msg.trim();
+  console.log('Clearing Drink Request for Table: ' + tblNumber);
+    
+  MongoClient.connect(mongoURL, function (err, db) {
+    // only return the table number from the query
+    let query = { tableNum: tblNumber };
+    let collection = db.collection("drink_requests");
+
+    collection.deleteMany(query, function (err, results) {
+      if (err) 
+        console.log(err);
+      else
+        console.log(results.result.n + " Document(s) Deleted");
+
+        sendDrinkRequestsArray();
+    });
   });
 };

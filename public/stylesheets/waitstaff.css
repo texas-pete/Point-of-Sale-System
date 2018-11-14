@@ -113,6 +113,10 @@ a, a:hover, a:focus {
     background-color: lightgreen !important;
 }
 
+.boxDrinkRequested {
+    background-color: lightgreen !important;
+}
+
 .table-layout {
   float: left;
   width: 400px;
