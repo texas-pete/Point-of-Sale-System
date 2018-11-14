@@ -1,6 +1,5 @@
 const socket = io();
 
-var arr;
 socket.on("connect", function() {
   // Connected, let's sign-up for to receive messages for this room
   socket.emit("joinSR");
