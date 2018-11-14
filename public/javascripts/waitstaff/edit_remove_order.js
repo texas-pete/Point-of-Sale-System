@@ -52,15 +52,23 @@ function edit_remove(whichOperation) {
         //we need to get the content within the #item_desc(num) content
         let content = $("#item_name" + item).text();
         let desc = $("#item_desc" + item).text();//converted name.
+        let newDescription = "ttest";
         //we need to convert from a name to a string version of the object ID
 
+        var txt;
+        var input = prompt("Please enter the new description:", "Customer wants:");
+        if (input == null || input == "") {
+            txt = "Notes";
+        } else {
+            txt = input;
+        }
+        newDescription = txt;
         var sidebarTblNum = $("#tblNumber").text(); //we need to clean up our input. No random garbage
         for (let index = 0; index < 16; index++) {
             if (sidebarTblNum == index) {
                 sidebarTblNum = index;
             }
         }
-        let newDescription = "ttest";
         $.ajax({
             url: "/fromNameToID/" + content,
             type: "POST",
@@ -74,10 +82,10 @@ function edit_remove(whichOperation) {
                         //we need to refresh the page
                     },
                     error: function (responseData) {
+                        hideContent('orderinfo'); //refresh the page after
                         //we need to refresh the page
                     }
                 });
-
             },
             error: function (responseData) { //if we have a fake item in our dbase, we can still remove it
                 $.ajax({
@@ -87,16 +95,15 @@ function edit_remove(whichOperation) {
                         //we need to resfresh the page
                     },
                     error: function (responseData) {
+                        hideContent('orderinfo'); //refresh the page after
                     }
                 });
             }
         });
-
-
-
+        //location.reload();
+        //hideContent('orderinfo'); //refresh the page after
     }
     else {
         //We should never get here.
     }
-
 }
