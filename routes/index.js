@@ -232,7 +232,39 @@ router.post("/editSubmitted/:item_name/:item_description/:table_num/:newDescript
   });
 });
 
+//is used to retrieve the necessary information for the modal popup
+router.post("/getMenuItemById/*", function (req, res) {
+  console.log("Retrieving data from: " + req.params[0]);
 
+  MongoClient.connect(
+    url,
+    function (err, db) {
+      if (err) {
+        console.log("Unable to connect to the Server");
+      }
+      else {
+        console.log("Connection established");
+        var objID = new ObjectId(req.params[0]);
+        var query = { _id: objID };
+        var collection = db.collection("menu_items");
+
+        collection.find(query).toArray(function (err, results) {
+          if (err) {
+            console.log(err);
+          }
+          else if (results.length) {//send the object to the page
+            res.send(results);
+          }
+          else {
+            console.log("Menu item not found!");
+          }
+          db.close();
+          console.log("Connection closed");
+        });
+      }
+    }
+  );
+});
 
 
 
@@ -977,12 +1009,15 @@ router.get("/guest-order", function (req, res) {
                   console.log("pushed " + results[0].items[i].item);
                   t_query.push({ _id: new ObjectId(results[0].items[i].item) })
                 }
-                else{
+              }
+              else{
+                //else{}
                   console.log("Drink connection to server successful");
                   console.log("In here");
                   console.log(currentTable)
                   var query = {table: currentTable.toString()}
                   var collection = db.collection("submitted_orders");
+
                   collection.find(query).toArray(function(err, results){
                     //console.log(util.inspect(results[0].orderedItems, {showHidden:false, depth: null}));
                     if(err){
@@ -1060,50 +1095,56 @@ router.get("/guest-order", function (req, res) {
                     }
                     else{//empty
 
-  MongoClient.connect(
-    url,
-    function(err, db){
-      if(err){
-        console.log("Unable to connect to the db server");
-      }
-      else{//attempt making query
-        var query = { table: currentTable.toString()};
-        var collection = db.collection("active_orders");
+                      MongoClient.connect( url, function(err, db){
+                        if(err){
+                          console.log("Unable to connect to the db server");
+                        }
+                        else{//attempt making query
+                          var query = { table: currentTable.toString()};
+                          var collection = db.collection("active_orders");
 
-        collection.find(query).toArray(function(err, results){
-          if(err){
-            console.log(err);
-          }
-          else if(results.length){//want to insert the values of the ordered items for the current table to submitted orders
-            var t_insert = {table: results[0].table, orderedItems: results[0].items};
-            //console.log(util.inspect(t_insert, {showHidden:false, depth: null}));
-            
-            var t_collection = db.collection("submitted_orders");
-            t_collection.insert(t_insert, function(err){
-              if(err){
-                console.log(err);
-              }
-              else{//we want to clear out the current order
-                collection.update({table: currentTable.toString()}, {$set: {"items": []}}, function(err){
-                  if(err){
-                    console.log(err);
-                  }
-                  db.close(); 
-                  res.send("Ok");
-                });
+                          collection.find(query).toArray(function(err, results){
+                            if(err){
+                              console.log(err);
+                            }
+                            else if(results.length){//want to insert the values of the ordered items for the current table to submitted orders
+                              var t_insert = {table: results[0].table, orderedItems: results[0].items};
+                              //console.log(util.inspect(t_insert, {showHidden:false, depth: null}));
+                              
+                              var t_collection = db.collection("submitted_orders");
+                              t_collection.insert(t_insert, function(err){
+                                if(err){
+                                  console.log(err);
+                                }
+                                else{//we want to clear out the current order
+                                  collection.update({table: currentTable.toString()}, {$set: {"items": []}}, function(err){
+                                    if(err){
+                                      console.log(err);
+                                    }
+                                    db.close(); 
+                                    res.send("Ok");
+                                  });
+                                }
+                              });
+                              //need to clear out contents
+                              //
+                            }
+                            else{
+                              console.log("Should not happen, a table should be instantiated for everyone.");
+                            }
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
               }
             });
-            //need to clear out contents
-            //
-          }
-          else{
-            console.log("Should not happen, a table should be instantiated for everyone.");
           }
         });
-      }
-    }
-  );
-});
+      } 
+    });
+  });
 
 //calls database, manipulates returned object and sets it to emulate a deletion
 router.post("/removeFromOrder/:index", function(req, res){
@@ -1260,11 +1301,10 @@ router.post("/validateCredentials", function (req, res) {
                   var query = {table: currentTable.toString()}
                   var collection = db.collection("submitted_orders");
                   collection.find(query).toArray(function(err, results){
-                    console.log(util.inspect(results[0].orderedItems, {showHidden:false, depth: null}));
                     if(err){
                       console.log(err);
                     }
-                    else if(results[0].orderedItems.length){//not empty
+                    else if(results.length > 0 && results[0].orderedItems.length){//not empty
                       //need to find all drinks and put in object
                       //results[0].items[i].item
                       console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
