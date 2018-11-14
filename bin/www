@@ -93,20 +93,26 @@ function onListening() {
  */
 
 io.on('connection', function (socket) {
-  console.log('a user connected');
 
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
+  // join the service request room
+  // this room is for all the pages that
+  // need to know about service requests
+  socket.on("joinSR", function(){
+    socket.join("sr");
   });
 
   // inserts a new service request in the DB
   socket.on('serviceRequest', function (msg) {
     createServiceRequest(msg, MongoClient, mongoURL);
+    // lets everyone in the SR room know that the DB has been updated
+    io.to("sr").emit("updatedSR");
   });
 
   // removes service a service request from the db
   socket.on('clearServiceRequest', function (msg) {
     deleteServiceRequest(msg, MongoClient, mongoURL);
+    // lets everyone in the SR room know that the DB has been updated
+    io.to("sr").emit("updatedSR");
   });
 
 });
@@ -118,27 +124,37 @@ io.on('connection', function (socket) {
 function createServiceRequest(msg, MongoClient, mongoURL){
   // trim whitespace
   let tblNumber = msg.trim();
-  console.log('Service Request from tbl ' + tblNumber);
 
+  // insert into service_requests if not a duplicate request
   MongoClient.connect(mongoURL, function (err, db) {
     let query = { tableNum: tblNumber };
     let collection = db.collection("service_requests");
 
-    collection.insertOne(query, function (err, results) {
-      if (err) 
+    // check for duplicate requests
+    collection.find(query).toArray(function (err, results) {
+      if (err)
         console.log(err);
-      else
-        console.log(tblNumber + " Inserted");
-
-      db.close();
+      else if(results.length > 0)
+        console.log("Duplicate Service Request for Table: " + tblNumber);
+      else{
+        // insert
+        collection.insertOne(query, function (err, results) {
+          if (err) 
+            console.log(err);
+          else
+            console.log("Table # " + tblNumber + " - Service Request Inserted");
+            // send the new array of tables with requests to the appropriate screens
+            sendServiceRequestsArray();
+        });
+      };
     });
-  });
+  }); 
 };
 
 function deleteServiceRequest(msg, MongoClient, mongoURL){
   // remove any extra whitespace
   let tblNumber = msg.trim();
-  console.log('Clearing Service Request for tbl ' + tblNumber);
+  console.log('Clearing Service Request for Table: ' + tblNumber);
     
   MongoClient.connect(mongoURL, function (err, db) {
     // only return the table number from the query
@@ -153,5 +169,24 @@ function deleteServiceRequest(msg, MongoClient, mongoURL){
 
       db.close();
     });
+  });
+};
+
+// sends out the updated list of tables with service requests
+function sendServiceRequestsArray(){
+  MongoClient.connect(mongoURL, function (err, db) {
+    let collection = db.collection("service_requests");
+
+    collection.find({},{_id:0 , tableNum: 1}).toArray(function (err, results) {
+      if (err)
+        console.log(err);
+      else{
+        // send updated array to the pages to parse
+        console.log("Sending Updated SR Array");
+        console.log(results);
+        io.to("sr").emit("srUpdate", results);
+      };
+    });
+
   });
 };

@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="http://localhost:3000/stylesheets/waitstaff.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/waitstaff.css">
     <script>
 
         //var serviceReqs = <% -JSON.stringify(serviceReqs) %>
@@ -37,8 +37,8 @@
         crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
 
-    <script src="http://localhost:3000/javascripts/waitstaff/waitstaff.js"></script>
-    <script src="http://localhost:3000/javascripts/clock.js"></script>
+    
+    <script src="/javascripts/clock.js"></script>
 
 </head>
 
@@ -68,42 +68,42 @@
             <!-- Table Grid -->
             <!-- First ROW -->
             <div class="table-layout">
-                <div class="box" class="container-fluid">
+                <div class="box" id="box1" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 1 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box2" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 2 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box3" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 3 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box4" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 4 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box5" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 5 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box6" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 6 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box7" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 7 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box8" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 8 <span>
                     </button>
@@ -111,42 +111,42 @@
             </div>
 
             <div class="table-layout">
-                <div class="box" class="container-fluid">
+                <div class="box" id="box9" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 9 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box10" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 10 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box11" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 11 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box12" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 12 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box13" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 13 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box14" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 14 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box15" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 15 <span>
                     </button>
                 </div>
-                <div class="box" class="container-fluid">
+                <div class="box" id="box16" class="container-fluid">
                     <button class="boxButton" type="button">
                         <span> 16 <span>
                     </button>
@@ -179,8 +179,9 @@
 </body>
 <footer>
     <% include partials/navbar %>
-    <script src="http://localhost:3000/javascripts/waitstaff/edit_remove_order.js"></script>
-    <script src="http://localhost:3000/javascripts/waitstaff/hideElement.js"></script>
+    <script src="/javascripts/waitstaff/waitstaff.js"></script>
+    <script src="/javascripts/waitstaff/edit_remove_order.js"></script>
+    <script src="/javascripts/waitstaff/hideElement.js"></script>
 </footer>
 
 

@@ -1,18 +1,21 @@
+const socket = io();
 
-var socket = io();
-// socket.on('clearServiceRequest', function(){
-//     alert(tblNumber);
-// });
+socket.on('connect', function() {
+    // Connected, let's sign-up for to receive messages for this room
+    socket.emit('joinSR');
+ });
 
-
+// header button functions
 $(document).ready(function(){
+
+    // request assistance btn
     $("#servicerq").click(function(){
         tblNumberString = tblNumber.toString();
         socket.emit("serviceRequest", tblNumberString);  
-        alert("Request Sent")
+        alert("Request Sent for Table: " + tblNumberString)
     });
 
-    $("#drinkrq").click(function(){
-        alert("Hello ");
-    });
+    socket.on("updatedSR", function(){
+        alert("UPDATED SR");
+    })
 });
