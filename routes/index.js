@@ -1014,11 +1014,11 @@ router.post("/validateCredentials", function (req, res) {
                   var query = {table: currentTable.toString()}
                   var collection = db.collection("submitted_orders");
                   collection.find(query).toArray(function(err, results){
-                    console.log(util.inspect(results[0].orderedItems, {showHidden:false, depth: null}));
+                    //console.log(util.inspect(results[0].orderedItems, {showHidden:false, depth: null}));
                     if(err){
                       console.log(err);
                     }
-                    else if(results[0].orderedItems.length){//not empty
+                    else if( results.length > 0 && results[0].orderedItems.length){//not empty
                       //need to find all drinks and put in object
                       //results[0].items[i].item
                       console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
@@ -1045,8 +1045,6 @@ router.post("/validateCredentials", function (req, res) {
                           }
                         });
                       }
-
-
 
                       MongoClient.connect(url, function (err, db) {//grabs the menu items
                         if (err) {
@@ -1078,15 +1076,6 @@ router.post("/validateCredentials", function (req, res) {
                               }, 500);
                             }
                             else {//still need to load page even if all items are not active
-
-
-
-
-
-
-
-
-
 
                               console.log("No results! ERROR");
                               console.log("All drinks are: " + drinks);
