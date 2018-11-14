@@ -1,0 +1,28 @@
+<div class="assistance">
+    <ul id="requester">
+        <li><button><img src="http://localhost:3000/images/MAG.png"> Magnifying Glass</button></li>
+        <li><button><img src="http://localhost:3000/images/txt2spch.png"> Text to Speech</button></li>
+        <div class="ass-dropdown">
+            <li><button id="drinkrq" onclick="showDrinks()" class="ass-dropbtn"><img src="http://localhost:3000/images/refill.png">
+                    Tap to Select
+                    Refill</button></li>
+            <div id="ass-drop" class="ass-dropdown-content">
+                <a href="#">Milk</a>
+                <a href="#">Leche</a>
+                <a href="#">Cow Juice</a>
+            </div>
+        </div>
+        <div class="ass-dropdown">
+            <li><button id="filter" onclick="showFilters()" class="ass-dropbtn"><img src="http://localhost:3000/images/filter-icon-14.png">
+                    Tap to Filter Items</button></li>
+            <div id="filter_items" class="ass-dropdown-content">
+                <a href="/guest-appetizers">No Filter</a>
+                <a href="/guest-appetizers/vegan/">Vegan</a>
+                <a href="/guest-appetizers/vegetarian/">Vegetarian</a>
+                <a href="/guest-appetizers/spicy/">Spicy</a>
+                <a href="/guest-appetizers/gf/">Glutten Free</a>
+            </div>
+        </div>
+        <li><button id="servicerq"><img src="http://localhost:3000/images/assistance.png"> Tap for Assistance</button></li>
+    </ul>
+</div>
