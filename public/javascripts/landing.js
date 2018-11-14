@@ -93,11 +93,3 @@ document.querySelector('.close').addEventListener('click', function () {
 	document.querySelector('.bg-modal').style.display = 'none';
 	document.querySelector('.clear-this').value = '';
 });
-
-/* in remove from order
-	var confirmation = confirm('Are you sure?');
-
-	if(confirmation){
-		
-	}
-*/

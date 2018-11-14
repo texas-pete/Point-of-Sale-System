@@ -104,10 +104,46 @@ router.get("/guest", function (req, res) {
     }
   });
 
-  console.log("accessing guest index page, table " + req.body.tablenum);
-  setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
-    res.render("guest", { page: "Guest View", tablenum: req.body.tablenum, hour: time, refill: drinks, tablenum: currentTable });
-  }, 500);
+  MongoClient.connect(url, function (err, db) {//grabs the menu items
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Special" },
+          { Active: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          console.log("All drinks are: " + drinks);
+          console.log("We are in: /guest");
+          console.log("The current hour is: " + time + typeof time);
+          console.log(util.inspect(results, {showHidden:false, depth: null}))
+          setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+            res.render("guest", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {//still need to load page even if all items are not active
+          console.log("No results! ERROR");
+          console.log("All drinks are: " + drinks);
+          setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+            res.render("guest", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        db.close();
+      });
+    }
+  });
 });
 
 //appetizers
@@ -185,6 +221,7 @@ router.get("/guest-appetizers", function (req, res) {
         }
         else if (results.length) {
           //want to send info to db
+          console.log("We are in: /guest-appetizesr");
           console.log("All drinks are: " + drinks);
           console.log("The current hour is: " + time + typeof time);
           //console.log(util.inspect(results, {showHidden:false, depth: null}))
@@ -280,6 +317,7 @@ router.get("/guest-entrees", function (req, res) {
         }
         else if (results.length) {
           //want to send info to db
+          console.log("We are in: /guest-eentrees");
           console.log("All drinks are: " + drinks);
           console.log("The current hour is: " + time + typeof time);
           //console.log(util.inspect(results, {showHidden:false, depth: null}))
@@ -806,17 +844,93 @@ router.post("/validateCredentials", function (req, res) {
                           }
                         });
                       }
-                      console.log("Drinks is: " + drinks);
-                      setTimeout(function(){
-                        res.render("guest", { page: "", tablenum: tblNumber, refill: drinks, tablenum: currentTable });
-                      }, 500);
+
+
+
+                      MongoClient.connect(url, function (err, db) {//grabs the menu items
+                        if (err) {
+                          console.log("Unable to Connect to the MongoDB Server");
+                        }
+                        else {
+                          console.log("Connection established with MongoDB Server");
+
+                          //attempting and query
+                          var query = {
+                            $and: [
+                              { Category: "Special" },
+                              { Active: "yes" }
+                            ]
+                          };
+                          var collection = db.collection("menu_items");
+                          collection.find(query).toArray(function (err, results) {
+                            if (err) {
+                              console.log(err);
+                            }
+                            else if (results.length) {
+                              //want to send info to db
+                              console.log("All drinks are: " + drinks);
+                              console.log("We are in: /validateCredentials");
+                              console.log("The current hour is: " + time + typeof time);
+                              console.log(util.inspect(results, {showHidden:false, depth: null}))
+                              setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+                                res.render("guest", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+                              }, 500);
+                            }
+                            else {//still need to load page even if all items are not active
+                              console.log("No results! ERROR");
+                              console.log("All drinks are: " + drinks);
+                              setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+                                res.render("guest", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+                              }, 500);
+                            }
+                            db.close();
+                          });
+                        }
+                      });
                     }
                     else{//empty
-                      //set as empty variable
-                      console.log("Drinks is: " + drinks);
-                      setTimeout(function(){
-                        res.render("guest", { page: "", tablenum: tblNumber, refill: drinks, tablenum: currentTable });
-                      }, 500);
+
+
+                    MongoClient.connect(url, function (err, db) {//grabs the menu items
+                      if (err) {
+                        console.log("Unable to Connect to the MongoDB Server");
+                      }
+                      else {
+                        console.log("Connection established with MongoDB Server");
+
+                        //attempting and query
+                        var query = {
+                          $and: [
+                            { Category: "Special" },
+                            { Active: "yes" }
+                          ]
+                        };
+                        var collection = db.collection("menu_items");
+                        collection.find(query).toArray(function (err, results) {
+                          if (err) {
+                            console.log(err);
+                          }
+                          else if (results.length) {
+                            //want to send info to db
+                            console.log("We are in: /guest-validateCredentials 2");
+                            console.log("All drinks are: " + drinks);
+                            console.log("The current hour is: " + time + typeof time);
+                            console.log(util.inspect(results, {showHidden:false, depth: null}))
+                            setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+                              res.render("guest", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+                            }, 500);
+                          }
+                          else {//still need to load page even if all items are not active
+                            console.log("No results! ERROR");
+                            console.log("All drinks are: " + drinks);
+                            setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+                              res.render("guest", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+                            }, 500);
+                          }
+                          db.close();
+                        });
+                      }
+                    });
                     }
                     //db.close();
                   });
