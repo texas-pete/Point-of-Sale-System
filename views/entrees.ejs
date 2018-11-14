@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Table
-        <%= tablenum %></title>
+        <%= tablenum %>
+    </title>
+    <script>
+        var tblNumber = <%= tablenum %>
+    </script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -15,48 +21,51 @@
 
 	<link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
 </head>
+
 <body>
 
-<h1>Order</h1>
-<div class="container">
-	<% notes.forEach(function(o_item, index){ %>
-		<% order_items.forEach(function(i_item, index1){ %>
-			<% if(o_item.item == i_item._id){ %>
-			<div class="row">
-				<div class = "col-md-6">
-					<h3><%= i_item.Name %></h3>
-					<h5>$<%= o_item.price %></h5>
+	<h1>Entrees</h1>
+	<br><br>
+	<div class="container">
+		<div class="row">
+			<% menu_items.forEach(function(item, index){ %>
+			<div class="col-md-6">
+				<h3>
+					<%= item.Name %>
+				</h3>
 
-					<hr style="clear:both;"/>
-					<!--TODO: the appetizers path wont work b.c. not all will be appetizers-->
-					<p><img src='http://localhost:3000/images/<%= i_item.ImageName %>' alt=<%= i_item.Name %> style="float:left" width="290" height="200" hspace="20"><h6><%= i_item.Description %></h6></p>
-					<h5>Notes/Allergies:</h5>
-					<h6><%= o_item.notes %></h6>
-					<div class= "left">
-						<div class="centered">
-						</div>
-						<!--we give each button a data-id as index and a unique class, we can pull from the class and use the index to manipulate the database-->
-						<div class = "right">
-							<div class = orderbtn>
-									<button type="button" class="btn btn-secondary btn-lg edit-item" data-id="<%= index %>" data-parent="<%= i_item._id %>" data-columns="<%= o_item.notes %>">Edit</button>
-									<button type="button" class="btn btn-secondary btn-lg remove-item" data-id="<%= index %>">X</button>
-							</div>
-						</div>
-					</div>
-				</div>
+				<!--This says that the 'happy hour' is 2-3pm
+					need to also change in customer.js
+				-->
+				<% if(hour == 15){ %>
+				<h5>$
+					<%= item.HappyHour %>
+				</h5>
+				<% } else{ %>
+				<h5>$
+					<%= item.Price %>
+				</h5>
+				<% } %>
+
+				<hr style="clear:both;" />
+				<p><img src='http://localhost:3000/images/<%= item.ImageName %>' alt=<%=item.Name %> style="float:left"
+					width="290" height="200" hspace="20">
+					<%= item.Description %>
+				</p>
+				<button type="button" class="btn btn-secondary btn-sm addToOrder" data-id="<%= item._id %>">Add to Order</button>
+				<hr style="clear:both;" />
 			</div>
+			<% if((index + 1) > 0 && (index + 1) % 2 == 0){ %>
+			<br>
+		</div>
+		<div class="row">
 			<% } %>
-		<% }) %>
-	<% }) %>
-</div>
-<br><br><br><br>
-<!--only shows submit button if there exist orders-->
-<% if(notes.length){ %>
-<button type="button" class="btn btn-secondary btn-lg btn-block submit-db">Submit Order</button>
-<% } %>
-<br><br><br><br>
+			<% }) %>
+		</div>
+	</div>
 
-<br><br>
+	<br><br><br>
+	<!--Assistance Buttons-->
 	<div class="assistance">
 	    <ul id="requester">
 	        <li><button><img src="http://localhost:3000/images/MAG.png"> Magnifying Glass</button></li>
@@ -71,14 +80,20 @@
 	                <% }) %>
 	            </div>
 	        </div>
+	        <div class="ass-dropdown">
+	            <li><button id="filter" onclick="showFilters()" class="ass-dropbtn"><img src="http://localhost:3000/images/filter-icon-14.png">
+	                    Tap to Filter Items</button></li>
+	            <div id="filter_items" class="ass-dropdown-content">
+	                <a href="/guest-entrees">No Filter</a>
+	                <a href="/guest-entrees/vegan/">Vegan</a>
+	                <a href="/guest-entrees/vegetarian/">Vegetarian</a>
+	                <a href="/guest-entrees/spicy/">Spicy</a>
+	                <a href="/guest-entrees/gf/">Glutten Free</a>
+	            </div>
+	        </div>
 	        <li><button id="servicerq"><img src="http://localhost:3000/images/assistance.png"> Tap for Assistance</button></li>
 	    </ul>
 	</div>
-</body>
-<footer>
-	<br><br>
-    <!-- Navigation -->
-    <% include partials/guestnavbar %>
 
 	<!--Modal-->
 	<div class="bg-modal">
@@ -95,12 +110,18 @@
 				<textarea class="clear-this" name="notes" placeholder="Type in any allergies or anything you want added/removed from the item." cols="60"
 				 rows="5"></textarea>
 			</form>
-			<button type="button" class="btn btn-secondary btn-sm modal-submit submit-edited-item">Modify Order Item</button>
+			<button type="button" class="btn btn-secondary btn-sm modal-submit">Add to Order</button>
 		</div>
 	</div>
 
-    <!--@ bottom to allow DOM to fully load-->
-    <script src="http://localhost:3000/javascripts/submitToDB.js"></script>
-    
+</body>
+
+<footer>
+	<!-- Navigation -->
+	<% include partials/guestnavbar %>
+
+	<!--@ bottom to allow DOM to fully load-->
+	<script src="http://localhost:3000/javascripts/customer.js"></script>
 </footer>
+
 </html>

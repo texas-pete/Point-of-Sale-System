@@ -12,9 +12,10 @@
     "ejs": "~2.5.7",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
+    "kerberos": "*",
     "mongodb": "~2.0.33",
     "morgan": "~1.9.0",
     "socket.io": "^2.1.1",
-    "kerberos": "*"
+    "util": "^0.11.1"
   }
 }
