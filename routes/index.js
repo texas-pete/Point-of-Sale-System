@@ -674,6 +674,64 @@ router.post("/removeFromOrder/:index", function(req, res){
   });
 });
 
+//pulls the current table's items, finds index and modifies notes for index
+router.post("/editOrder/:index/:notes", function(req, res){
+  console.log("Trying to edit order at index " + req.params.index + " with the notes: " + req.params.notes);
+
+  MongoClient.connect(url, function(err, db){
+    if(err){
+      console.log("Unable to connect to server");
+    }
+    else{
+      console.log("Connection established");
+
+      //want to look for current table's items
+      var query = {table: currentTable.toString()};
+      var collection = db.collection("active_orders");
+
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){
+          //we want to travers the results object for items
+          console.log(util.inspect(results[0].items, {showHidden:false, depth: null}));
+          //create a new array and add to that the items except for at the index
+          var newOrder = [];
+          
+          //goes through objects, if index is not the same as one we want to delete, push to temp array
+          for(var i = 0; i < results[0].items.length; i++){
+            if(i == req.params.index){//modifying the object
+              console.log("Is edited");
+              console.log("Pushing to arrray: ");
+              results[0].items[i].notes = req.params.notes;
+              console.log(util.inspect(results[0].items[i], {showHidden:false, depth: null}));
+              newOrder.push(results[0].items[i]);
+            }
+            else{//pushing the unmodified object
+              console.log("Pushing to array: ");
+              console.log(util.inspect(results[0].items[i], {showHidden:false, depth: null}));
+              newOrder.push(results[0].items[i]);
+            }
+          }
+
+          //replace the current table's orders w/ that of edited item
+          collection.update({table: currentTable.toString()}, {$set: {"items": newOrder}}, function(err){
+            if(err){
+              console.log(err);
+            }
+            db.close();
+            res.send("ok");
+          });
+        }
+        else{
+          console.log("Should never happen, edit only displayed when items are here");
+        }
+      });
+    }
+  });  
+});
+
 router.post("/validateCredentials", function (req, res) {
   MongoClient.connect(
     url,

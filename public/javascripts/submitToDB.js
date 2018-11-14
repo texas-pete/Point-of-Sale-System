@@ -102,13 +102,20 @@ $(document).ready(function () {
 	$('.submit-edited-item').on('click', submitEdit);
 });
 
+//submites the edited notes/allergies
 function submitEdit(){
 	var index = $(this).data('id');
-	console.log(index);
+	
+	//takes the notes from the box, parses it for whitespace, changes to empty if none
+	var notes = document.getElementsByName('notes')[0].value;
+	if (!notes.replace(/\s/g, '').length) {
+		notes = "empty"
+	}
+	console.log(index + " " + notes);
 
 	//make ajax call to editOrder/index and reload the page upon success
 	$.ajax({
-		url: "/editOrder/" + index,
+		url: "/editOrder/" + index + "/" + notes,
 		type: "POST",
 		success: function (responseData) {
 			alert("Your order has been edited.");
@@ -124,6 +131,27 @@ function submitEdit(){
 	});
 }
 
+//imported from customer.js
+function showDrinks() {
+	document.getElementById("ass-drop").classList.toggle("show");
+}
+function showFilters() {
+	document.getElementById("filter_items").classList.toggle("show");
+}
+
+window.onclick = function (event) {
+	if (!event.target.matches('.ass-dropbtn')) {
+
+		var dropdowns = document.getElementsByClassName("ass-dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+				openDropdown.classList.remove('show');
+			}
+		}
+	}
+}
 /*var index = $(this).data('id');
 console.log("Removing index " + index);
 
