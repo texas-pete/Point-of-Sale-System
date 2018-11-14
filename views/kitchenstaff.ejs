@@ -11,13 +11,15 @@
 <!-- Sidebar -->
 
 <div class="sidebar">
-    <div class= "order_display_sidebar"> 
-          <h3>
-                Order #1
-                <div class = "status_indicator"> </div>
-          </h3>
-    </div>
+      <% orderItems.forEach(function(item, index){ %>
+      <div class= "order_display_sidebar"> 
+            <h5>Order #<%= item._id %></h5>
 
+
+
+      
+    </div>
+    <% }) %>
 </div>
  
     

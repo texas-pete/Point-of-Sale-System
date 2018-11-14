@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var mongodb = require("mongodb");
 var ObjectId = require('mongodb').ObjectId;
-
+const util = require('util');
 var currentTable = ""//is null b.c no table set.
 
 var MongoClient = mongodb.MongoClient;
@@ -69,8 +69,33 @@ router.post("/getTableOrder/:tblNum", function (req, res) {
 
 // Terminal View for Kitchen Staff
 router.get("/kitchenstaff", function (req, res) {
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
 
-  res.render("kitchenstaff", { page: "Kitchen Staff View" });
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+      var collection = db.collection("submitted_orders");
+      collection.find({}).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          console.log(util.inspect(results[0], {showHidden:false, depth: null}));
+          //Database access worked
+          console.log("It worked!");
+          res.render("kitchenstaff", { page: "Kitchen Staff View", orderItems: results});
+        }
+        else {
+          console.log("No results! ERROR");
+        }
+    });
+  }
+});
+  
 });
 
 // Terminal View for Management
