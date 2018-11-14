@@ -33,10 +33,10 @@
   - Customer
     - [x] Allow customers to substitute ingredients in an order
     - [x] Allow customers to note allergies
-    - [ ] Allow customers to submit order to necessary screens
-    - [ ] Allow customers to edit notes or remove menu item from order
+    - [x] Allow customers to submit order to necessary screens
+    - [x] Allow customers to edit notes or remove menu item from order
     - [x] Allow customers to request waitstaff assistance
-    - [ ] Allow customers to request specific refills
+    - [x] Allow customers to request specific refills
     - [x] Allow customers to play a game (of 2)
     - [ ] Allow customers to split the check 
     - [ ] Allow customers to pay at any time and have payment prevent refilling, help, play games ability
