@@ -138,43 +138,96 @@ router.post("/fromNameToID/:db_name", function (req, res) {
   });
 });
 
-router.post("/removeSubmitted/:item_name/:item_description/", function (req, res) {
+router.post("/removeSubmitted/:item_name/:item_description/:table_num", function (req, res) {
   //this does not check the current table number. there is a possibility that the wrong table number will be deleted if the message is exactly the same
   //we need to go in and remove element
   var MongoClient = mongodb.MongoClient;
   var url = "mongodb://localhost:27017/4quad";
-
-  console.log(req.params.item_name);
   MongoClient.connect(url, function (err, db) {
     if (err) {
       console.log("Unable to connect to the Server");
     }
     else {
-      var query = { Name: req.params.item_name, Description: req.params.item_description };
+
+      var query = { table: req.params.table_num };
+      var hide = { "table": 0 };
       var collection = db.collection("submitted_orders");
-      collection.deleteOne(query, function (err, results) {
+      var collectionID;
+      collection.find(query, hide).toArray(function (err, results) {
         if (err) {
           console.log(err);
         }
         else if (results.length) {
-          console.log("hello");
-          res.sendStatus(200);
+          collectionID = new ObjectId(results[0]._id); //returns the element ID of a 
+          //we have the ID, now we need to update our array by unsetting the value that matches.
+          collection.update(
+            { _id: collectionID },
+            { $pull: { 'items': { item: req.params.item_name, notes: req.params.item_description } }, }, function (err, result) {
+              if (err) {
+                console.log(err);
+                console.log("err");
+              }
+              else if (result.length) {
+                res.sendStatus(200);
+              }
+              else {
+                res.sendStatus(200); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
+              }
+            });
+          // console.log(results[0].items[0].item); //this allows me to access the name of an object
         }
         else {
           console.log("No orders match this critera.");
-          res.sendStatus(404); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
+          res.sendStatus(200); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
         }
         console.log("Connection Closed"); //prints to the node.js command prompt
-        db.close();
-      });
+        // db.close();
+      })
     }
   });
 });
 
-router.post("/editSubmitted/:item_desc", function (req, res) {
+router.post("/editSubmitted/:item_name/:item_description/:table_num/:newDescription", function (req, res) {
+  //this does not check the current table number. there is a possibility that the wrong table number will be deleted if the message is exactly the same
+  //we need to go in and remove element
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to connect to the Server");
+    }
+    else {
 
+      var query = { table: req.params.table_num };
+      var hide = { "table": 0 };
+      var collection = db.collection("submitted_orders");
+      var collectionID;
+      var newDescription = req.params.newDescription;
+      collection.find(query, hide).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          collectionID = new ObjectId(results[0]._id); //returns the element ID of a 
+          //we have the ID, now we need to update our array by unsetting the value that matches.
+          collection.update( //remove the old value
+            { _id: collectionID },
+            { $pull: { 'items': { item: req.params.item_name, notes: req.params.item_description } }, });
 
-  res.send();
+          collection.update(
+            { _id: collectionID }, //insert our new value
+            { $push: { 'items': { item: req.params.item_name, notes: newDescription } }, });
+        }
+        else {
+          console.log("No orders match this critera.");
+          res.sendStatus(200); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
+        }
+        console.log("Connection Closed"); //prints to the node.js command prompt
+        // db.close();
+        res.sendStatus(200);
+      })
+    }
+  });
 });
 
 

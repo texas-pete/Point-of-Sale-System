@@ -33,7 +33,7 @@ function hideContent(whichDiv) {
     z.style.display = "none";
     //we want to show the orderinfo information
     y.style.display = "block";
-
+    console.log('here');
     for (let i = 0; i < 16; i++) //hacky way to fix the input received from the table number
     {
       if (i + 1 == sidebarVal) {
