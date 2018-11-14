@@ -36,7 +36,7 @@
     - [ ] Allow customers to submit order to necessary screens
     - [ ] Allow customers to request waitstaff assistance
     - [ ] Allow customers to request specific refills
-    - [ ] Allow customers to play a game (of 2)
+    - [x] Allow customers to play a game (of 2)
     - [ ] Allow customers to split the check 
     - [ ] Allow customers to pay at any time and have payment prevent refilling, help, play games ability
     - [ ] Allow customers to have 1/5 chance in winning a coupon when paying
@@ -58,7 +58,7 @@
     - [x] Allow for hour tracking of employees
     
   - What is 10%?
-    - [ ] Allow customers to filter menu items from dropdown (3)
+    - [x] Allow customers to filter menu items from dropdown (3)
     - [x] Allow management, waitstaff, and kitchenstaff to clock out (1)
     - [ ] Allow for happy hour pricing which discounts meals (2)
     - [ ] Allow for inventory tracking (3)
