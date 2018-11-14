@@ -35,10 +35,10 @@
 					<div class= "left">
 						<div class="centered">
 						</div>
-
+						<!--we give each button a data-id as index and a unique class, we can pull from the class and use the index to manipulate the database-->
 						<div class = "right">
 							<div class = orderbtn>
-									<button type="button" class="btn btn-secondary btn-lg">Edit</button>
+									<button type="button" class="btn btn-secondary btn-lg edit-item" data-id="<%= index %>" data-parent="<%= i_item._id %>" data-columns="<%= o_item.notes %>">Edit</button>
 									<button type="button" class="btn btn-secondary btn-lg remove-item" data-id="<%= index %>">X</button>
 							</div>
 						</div>
@@ -79,6 +79,25 @@
 	<br><br>
     <!-- Navigation -->
     <% include partials/guestnavbar %>
+
+	<!--Modal-->
+	<div class="bg-modal">
+		<div class="modal-content">
+			<div class="close">+</div>
+			<div class="modal-main-content">
+				<h3 class="modal-menu-name">Name</h3>
+				<img class="modal-menu-img" src="" alt="nameOfImage" style="float:left" width="390" height="300" hspace="20">
+				<h4 class="modal-menu-price">Price</h4>
+				<h5 class="modal-menu-desc">Description</h5>
+			</div>
+			<br>
+			<form>
+				<textarea class="clear-this" name="notes" placeholder="Type in any allergies or anything you want added/removed from the item." cols="60"
+				 rows="5"></textarea>
+			</form>
+			<button type="button" class="btn btn-secondary btn-sm modal-submit submit-edited-item">Modify Order Item</button>
+		</div>
+	</div>
 
     <!--@ bottom to allow DOM to fully load-->
     <script src="http://localhost:3000/javascripts/submitToDB.js"></script>

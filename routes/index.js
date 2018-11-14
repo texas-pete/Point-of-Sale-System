@@ -634,7 +634,42 @@ router.post("/removeFromOrder/:index", function(req, res){
     else{
       console.log("Connection established");
 
-      
+      //want to look for current table's items
+      var query = {table: currentTable.toString()};
+      var collection = db.collection("active_orders");
+
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){
+          //we want to travers the results object for items
+          console.log(util.inspect(results[0].items, {showHidden:false, depth: null}));
+          //create a new array and add to that the items except for at the index
+          var newOrder = [];
+          
+          //goes through objects, if index is not the same as one we want to delete, push to temp array
+          for(var i = 0; i < results[0].items.length; i++){
+            if(i != req.params.index){
+              console.log("Pushing to arrray: ");
+              console.log(util.inspect(results[0].items[i], {showHidden:false, depth: null}));
+              newOrder.push(results[0].items[i]);
+            }
+          }
+
+          //replace the current table's orders w/ that of removed item
+          collection.update({table: currentTable.toString()}, {$set: {"items": newOrder}}, function(err){
+            if(err){
+              console.log(err);
+            }
+            db.close();
+            res.send("ok");
+          });
+        }
+        else{
+          console.log("Should never happen, x only displayed when items are here");
+        }
+      });
     }
   });
 });

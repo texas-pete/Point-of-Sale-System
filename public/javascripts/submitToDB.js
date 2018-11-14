@@ -46,3 +46,101 @@ function removeFromOrder(){
 		});
 	}
 }
+
+//for editing order item's notes
+$(document).ready(function () {
+	$('.edit-item').on('click', removeFromOrderPop);
+});
+
+//asks the user whether they're sure if they want to delete this item
+function removeFromOrderPop(){
+	if(confirm('Are you sure you want to edit this item?')){
+		document.querySelector('.bg-modal').style.display = 'flex';
+
+		var objId = $(this).data('parent');
+		var index = $(this).data('id');
+		var textNotes = $(this).data('columns');
+		if(textNotes == "empty"){//if it is 'empty' then we want to pass in the nothing string
+			textNotes = "";
+		}
+		document.querySelector('.bg-modal').style.display = 'flex';
+		$.ajax({
+			url: "/getMenuItemById/" + $(this).data('parent'),
+			type: "POST",
+			success: function (responseData) {
+				console.log(responseData[0].Name);
+				document.querySelector('.modal-menu-name').innerHTML = responseData[0].Name;
+				document.querySelector('.modal-menu-img').src = 'http://localhost:3000/images/' + responseData[0].ImageName;
+				document.querySelector('.modal-menu-img').alt = responseData[0].Name;
+				var d = new Date();
+				var hour = d.getHours();
+				//CHANGE HAPPY HOUR HERE
+				if (hour == 15) {
+					document.querySelector('.modal-menu-price').innerHTML = '$' + responseData[0].HappyHour;
+				}
+				else {
+					document.querySelector('.modal-menu-price').innerHTML = '$' + responseData[0].Price;
+				}
+
+				document.querySelector('.modal-menu-desc').innerHTML = responseData[0].Description;
+				//sets the modal's submit button to contain index information
+				var id = document.querySelector('.modal-submit');
+				console.log("Attribute is set as " + index);
+				id.setAttribute('data-id', index);
+				//sets the text box based on what the notes were
+				document.querySelector('.clear-this').value = textNotes;
+				//console.log(document.querySelector('.modal-submit').data-id);
+			},
+			error: console.error
+		});
+	}
+}
+
+
+//for submitting the editied order item's notes
+$(document).ready(function () {
+	$('.submit-edited-item').on('click', submitEdit);
+});
+
+function submitEdit(){
+	var index = $(this).data('id');
+	console.log(index);
+
+	//make ajax call to editOrder/index and reload the page upon success
+	$.ajax({
+		url: "/editOrder/" + index,
+		type: "POST",
+		success: function (responseData) {
+			alert("Your order has been edited.");
+			$.ajax({
+				url:"/guest-order",
+				type: "GET",
+				success: function(){//upon success, reloads the now empty order page
+					location.reload();
+				}
+			});
+		},
+		error: console.error
+	});
+}
+
+/*var index = $(this).data('id');
+console.log("Removing index " + index);
+
+//communicates w/ server that we want to remove the index value from current active orders
+$.ajax({
+	url: "/removeFromOrder/" + index,
+	type: "POST",
+	success: function(responseData){//reloads the order to reflect changes
+		alert("The item has been removed from your order.");
+		location.reload();
+	},
+	error: console.error
+});*/
+
+
+
+//closes the modal if clicked on
+document.querySelector('.close').addEventListener('click', function () {
+	document.querySelector('.bg-modal').style.display = 'none';
+});
