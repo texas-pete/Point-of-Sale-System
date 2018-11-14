@@ -536,6 +536,296 @@ router.get("/guest-entrees", function (req, res) {
   });
 });
 
+//guest kid-meals
+router.get("/guest-kids-meals", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {//grabs the menu items
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Kids Meal" },
+          { Active: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          console.log("We are in: /guest-kids-meals");
+          console.log("All drinks are: " + drinks);
+          console.log("The current hour is: " + time + typeof time);
+          //console.log(util.inspect(results, {showHidden:false, depth: null}))
+          setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {//still need to load page even if all items are not active
+          console.log("No results! ERROR");
+          console.log("All drinks are: " + drinks);
+          setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        db.close();
+      });
+    }
+  });
+});
+
+
+//for guest desserts
+router.get("/guest-desserts", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {//grabs the menu items
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Dessert" },
+          { Active: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          console.log("We are in: /guest-kids-meals");
+          console.log("All drinks are: " + drinks);
+          console.log("The current hour is: " + time + typeof time);
+          //console.log(util.inspect(results, {showHidden:false, depth: null}))
+          setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {//still need to load page even if all items are not active
+          console.log("No results! ERROR");
+          console.log("All drinks are: " + drinks);
+          setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        db.close();
+      });
+    }
+  });
+});
+
+//for guest-drinks
+router.get("/guest-drinks", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {//grabs the menu items
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Drink" },
+          { Active: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          console.log("We are in: /guest-drinks");
+          console.log("All drinks are: " + drinks);
+          console.log("The current hour is: " + time + typeof time);
+          //console.log(util.inspect(results, {showHidden:false, depth: null}))
+          setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {//still need to load page even if all items are not active
+          console.log("No results! ERROR");
+          console.log("All drinks are: " + drinks);
+          setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        db.close();
+      });
+    }
+  });
+});
+
+
 //games
 router.get("/guest-games", function (req, res) {
   var dt = new Date();
@@ -1994,6 +2284,1143 @@ router.get("/guest-entrees/gf/", function (req, res) {
     }
   });
 });
+
+
+
+/*---------------------------------------------------------------
+---------------------------------------------------------------
+FILTERING KID'S MEAL MENU
+---------------------------------------------------------------
+-----------------------------------------------------------------*/
+router.get("/guest-kids-meals/vegan/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Kids Meal" },
+          { Active: "yes" },
+          { VeganFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          console.log("No results! ERROR");
+          setTimeout(function(){
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+router.get("/guest-kids-meals/vegetarian/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Kids Meal" },
+          { Active: "yes" },
+          { VegetarianFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          console.log("No results! ERROR");
+          setTimeout(function(){
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);//we send an empty list anyways
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+router.get("/guest-kids-meals/spicy/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Kids Meal" },
+          { Active: "yes" },
+          { SpicyFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          console.log("No results! ERROR");
+          setTimeout(function(){
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+router.get("/guest-kids-meals/gf/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Kids Meal" },
+          { Active: "yes" },
+          { GlutenFreeFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          setTimeout(function(){
+            res.render("kids-meals", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+
+
+
+/*---------------------------------------------------------------
+---------------------------------------------------------------
+FILTERING KID'S MEAL MENU
+---------------------------------------------------------------
+-----------------------------------------------------------------*/
+router.get("/guest-desserts/vegan/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Dessert" },
+          { Active: "yes" },
+          { VeganFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          console.log("No results! ERROR");
+          setTimeout(function(){
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+router.get("/guest-desserts/vegetarian/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Dessert" },
+          { Active: "yes" },
+          { VegetarianFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          console.log("No results! ERROR");
+          setTimeout(function(){
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);//we send an empty list anyways
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+router.get("/guest-desserts/spicy/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Dessert" },
+          { Active: "yes" },
+          { SpicyFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          console.log("No results! ERROR");
+          setTimeout(function(){
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+router.get("/guest-desserts/gf/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Dessert" },
+          { Active: "yes" },
+          { GlutenFreeFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          setTimeout(function(){
+            res.render("desserts", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+
+
+/*---------------------------------------------------------------
+---------------------------------------------------------------
+FILTERING DRINKS MENU
+---------------------------------------------------------------
+-----------------------------------------------------------------*/
+router.get("/guest-drinks/vegan/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Drink" },
+          { Active: "yes" },
+          { VeganFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          console.log("No results! ERROR");
+          setTimeout(function(){
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+router.get("/guest-drinks/vegetarian/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Drink" },
+          { Active: "yes" },
+          { VegetarianFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          console.log("No results! ERROR");
+          setTimeout(function(){
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);//we send an empty list anyways
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+router.get("/guest-drinks/spicy/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Drink" },
+          { Active: "yes" },
+          { SpicyFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          console.log("No results! ERROR");
+          setTimeout(function(){
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+router.get("/guest-drinks/gf/", function (req, res) {
+  var dt = new Date();
+  var time = dt.getHours();
+  var drinks = [];//empty drinks array
+  MongoClient.connect(url, function(err, db){//grabs the ordered drinks
+    if(err){
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else{
+      console.log("Drink connection to server successful");
+
+      var query = {table: currentTable.toString()}
+      var collection = db.collection("submitted_orders");
+      collection.find(query).toArray(function(err, results){
+        if(err){
+          console.log(err);
+        }
+        else if(results.length){//not empty
+          //need to find all drinks and put in object
+          //results[0].items[i].item
+          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+            var t_query = {
+              $and: [
+                { Category: "Drink" },
+                {_id: new ObjectId(results[0].orderedItems[i].item)}
+              ]
+            };
+            var t_collection = db.collection("menu_items");
+            t_collection.find(t_query).toArray(function(err, drinkResults){
+              if(err){
+                console.log(err);
+              }
+              else if(drinkResults.length){//if is a drink
+                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                //console.log("Found drink "+drinkResults[0].Name);
+                drinks.push(drinkResults[0].Name);
+              }
+              else{
+                console.log("Not a drink");
+              }
+            });
+          }
+        }
+        else{//empty
+          //set as empty variable
+        }
+        //db.close();
+      });
+    }
+  });
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to Connect to the MongoDB Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+
+      //attempting and query
+      var query = {
+        $and: [
+          { Category: "Drink" },
+          { Active: "yes" },
+          { GlutenFreeFlag: "yes" }
+        ]
+      };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          //want to send info to db
+          var dt = new Date();
+          var time = dt.getHours();
+          setTimeout(function(){
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        else {
+          setTimeout(function(){
+            res.render("drinks", { menu_items: results, hour: time, refill: drinks, tablenum: currentTable });
+          }, 500);
+        }
+        console.log("Connection closed with MongoDB Server");
+        db.close();
+      });
+    }
+  });
+});
+
 
 
 
