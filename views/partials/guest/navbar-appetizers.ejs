@@ -7,9 +7,9 @@
                     Tap to Select
                     Refill</button></li>
             <div id="ass-drop" class="ass-dropdown-content">
-                <a href="#">Milk</a>
-                <a href="#">Leche</a>
-                <a href="#">Cow Juice</a>
+                <% refill.forEach(function(item, index){ %>
+                <a href="#"><%= item %></a>
+                <% }) %>
             </div>
         </div>
         <div class="ass-dropdown">
