@@ -250,10 +250,6 @@ router.get("/manager", function (req, res) {
 //TODO: MAY NEED TABLE VARIABLE PASSED-IN FOR ALL?
 // Terminal View for Guests
 router.get("/guest", function (req, res) {
-<<<<<<< HEAD
-  console.log("accessing guest index page, table " + req.body.tablenum);
-  res.render("guest", { page: "Guest View", tablenum: req.body.tablenum });
-=======
   var dt = new Date();
   var time = dt.getHours();
   var drinks = [];//empty drinks array
@@ -346,35 +342,10 @@ router.get("/guest", function (req, res) {
       });
     }
   });
->>>>>>> origin/guest-as
 });
 
 //appetizers
 router.get("/guest-appetizers", function (req, res) {
-<<<<<<< HEAD
-  var MongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/4quad";
-
-  MongoClient.connect(url, function (err, db) {
-    if (err) {
-      console.log("Unable to Connect to the MongoDB Server");
-    }
-    else {
-      console.log("Connection established with MongoDB Server");
-
-      var query = { Category: "Appetizer" };
-      var collection = db.collection("menu_items");
-      console.log("attempting " + query);
-      collection.find(query).toArray(function (err, results) {
-        if (err) {
-          console.log(err);
-        }
-        else if (results.length) {
-          //want to send info to db
-          res.render("appetizers", { menu_items: results });
-        }
-        else {
-=======
   var dt = new Date();
   var time = dt.getHours();
   var drinks = [];//empty drinks array
@@ -553,7 +524,6 @@ router.get("/guest-entrees", function (req, res) {
           }, 500);
         }
         else {//still need to load page even if all items are not active
->>>>>>> origin/guest-as
           console.log("No results! ERROR");
           console.log("All drinks are: " + drinks);
           setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
@@ -568,9 +538,6 @@ router.get("/guest-entrees", function (req, res) {
 
 //games
 router.get("/guest-games", function (req, res) {
-<<<<<<< HEAD
-  res.render("guest-games");
-=======
   var dt = new Date();
   var time = dt.getHours();
   var drinks = [];//empty drinks array
@@ -626,35 +593,10 @@ router.get("/guest-games", function (req, res) {
   setTimeout(function(){//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
     res.render("guest-games", {hour: time, refill: drinks, tablenum: currentTable });
   }, 500);
->>>>>>> origin/guest-as
 });
 
 //order
 router.get("/guest-order", function (req, res) {
-<<<<<<< HEAD
-  //res.render("guest-order");
-  var MongoClient = mongodb.MongoClient;
-  var url = "mongodb://localhost:27017/4quad";
-
-  MongoClient.connect(url, function (err, db) {
-    if (err) {
-      console.log("Unable to Connect to the MongoDB Server");
-    }
-    else {
-      console.log("Connection established with MongoDB Server");
-
-      var query = { table: currentTable };
-      var collection = db.collection("active_orders");
-      console.log("attempting " + query + " " + currentTable);
-      collection.find(query).toArray(function (err, results) {
-        if (err) {
-          console.log(err);
-        }
-        else if (results.length) {
-          //want to send info to db
-          res.render("guest-order", { order_items: results });
-        }
-=======
   var dt = new Date();
   var time = dt.getHours();
   var drinks = [];//empty drinks array
@@ -795,7 +737,6 @@ router.get("/guest-order", function (req, res) {
             }
           });
         }
->>>>>>> origin/guest-as
         else {
           console.log("No results! ERROR");
 
@@ -840,16 +781,10 @@ router.post("/getMenuItemById/*", function (req, res) {
   );
 });
 
-<<<<<<< HEAD
-router.post("/submitToOrder/:objId/:notes", function (req, res) {
-  console.log("Trying to submit to order with menu_items.objId " + req.params.objId +
-    " and notes as " + req.params.notes);
-=======
 //submites to 'active_orders' w/ the price (for happy-hour), notes, and objectID.
 router.post("/submitToOrder/:objId/:notes/:price", function (req, res) {
   console.log("Trying to submit to order with menu_items.objId " + req.params.objId +
     " and notes as " + req.params.notes + " and price of $" + req.params.price);
->>>>>>> origin/guest-as
 
   MongoClient.connect(
     url,
@@ -858,25 +793,6 @@ router.post("/submitToOrder/:objId/:notes/:price", function (req, res) {
         console.log("Unable to connect to the Server");
       }
       else {
-<<<<<<< HEAD
-        console.log("Connection established");
-        //var objID = new ObjectId(req.params.objId);
-        var itemId = req.params.objId
-        var query = { table: currentTable.toString() };
-        var collection = db.collection("active_orders");
-        var newvalues = { $push: { items: { item: itemId, notes: req.params.notes } } };
-
-        console.log("Running the query collection.update(table: " + currentTable.toString()
-          + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes);
-        var itemId = req.params.objId
-        var query = { table: currentTable.toString() };
-        var collection = db.collection("active_orders");
-        var newvalues = { $push: { items: { item: itemId, notes: req.params.notes } } };
-        collection.update(query, newvalues, function (err, res) {
-          if (err) throw err;
-          console.log("order updated");
-          db.close();
-=======
         var itemId = req.params.objId
         var query = { table: currentTable.toString() };
         var collection = db.collection("active_orders");
@@ -937,7 +853,6 @@ router.post("/submitToDB", function(req, res){
           else{
             console.log("Should not happen, a table should be instantiated for everyone.");
           }
->>>>>>> origin/guest-as
         });
       }
     }
@@ -1042,14 +957,6 @@ router.post("/editOrder/:index/:notes", function(req, res){
               console.log(err);
             }
             db.close();
-<<<<<<< HEAD
-            console.log("Connection closed");
-        });*/
-      }
-
-    }
-  );
-=======
             res.send("ok");
           });
         }
@@ -1059,7 +966,6 @@ router.post("/editOrder/:index/:notes", function(req, res){
       });
     }
   });  
->>>>>>> origin/guest-as
 });
 
 router.post("/validateCredentials", function (req, res) {
@@ -1093,6 +999,7 @@ router.post("/validateCredentials", function (req, res) {
             } else {
               //redirect to guest view we have 16 logins and if we get here they hit somethng. if we manage the db correctly we shouldn't have issues.
               let tblNumber = req.body.username.replace("table", "");
+              currentTable = tblNumber;
               var dt = new Date();
               var time = dt.getHours();
               var drinks = [];//empty drinks array
@@ -1103,7 +1010,7 @@ router.post("/validateCredentials", function (req, res) {
                 else{
                   console.log("Drink connection to server successful");
                   console.log("In here");
-
+                  console.log(currentTable)
                   var query = {table: currentTable.toString()}
                   var collection = db.collection("submitted_orders");
                   collection.find(query).toArray(function(err, results){
