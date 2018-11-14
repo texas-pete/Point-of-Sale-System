@@ -99,20 +99,18 @@ io.on('connection', function (socket) {
   // need to know about service requests
   socket.on("joinSR", function(){
     socket.join("sr");
+    // initial update
+    sendServiceRequestsArray();
   });
 
-  // inserts a new service request in the DB
+  // inserts a new service request in the DB and informs all pages in sr room
   socket.on('serviceRequest', function (msg) {
     createServiceRequest(msg, MongoClient, mongoURL);
-    // lets everyone in the SR room know that the DB has been updated
-    io.to("sr").emit("updatedSR");
   });
 
-  // removes service a service request from the db
+  // removes service a service request from the db and informs all pages in sr room
   socket.on('clearServiceRequest', function (msg) {
     deleteServiceRequest(msg, MongoClient, mongoURL);
-    // lets everyone in the SR room know that the DB has been updated
-    io.to("sr").emit("updatedSR");
   });
 
 });
@@ -167,7 +165,7 @@ function deleteServiceRequest(msg, MongoClient, mongoURL){
       else
         console.log(results.result.n + " Document(s) Deleted");
 
-      db.close();
+      sendServiceRequestsArray();
     });
   });
 };
