@@ -93,13 +93,13 @@ function hideContent(whichDiv) {
 }
 
 // creates buttons for view order tab
-function createOrderItem(id){
-    let spnName = '<span class= "item_name"> Item: Name</span>'
-    let removeBtn = '<button type="button" id="remove' + id +'" onclick="edit_remove(this.id)" class="btn">X</button>'
-    let spnDesc = '<span class= "item_desc" >Item: Description/Allergies</span>'
-    let editBtn = '<button type="button" id="edit' + id + '" onclick="edit_remove(this.id)" class="btn">Edit</button>'
+function createOrderItem(id) {
+  let spnName = '<span class= "item_name" id="item_name' + id + '"> Item: Name</span>'
+  let removeBtn = '<button type="button" id="remove' + id + '" onclick="edit_remove(this.id)" class="btn">X</button>'
+  let spnDesc = '<span class= "item_desc" id="item_desc' + id + '">Item: Description/Allergies</span>'
+  let editBtn = '<button type="button" id="edit' + id + '" onclick="edit_remove(this.id)" class="btn">Edit</button>'
 
-    output = spnName + removeBtn + '<p></p>' + spnDesc + editBtn + '<hr>';
+  output = spnName + removeBtn + '<p></p>' + spnDesc + editBtn + '<hr>';
 
-    return output;
+  return output;
 }

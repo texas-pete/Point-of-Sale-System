@@ -1,41 +1,41 @@
 function edit_remove(whichOperation) {
 
-    console.log(document.getElementById("remove").previousSibling);
-    // if (whichOperation === 'remove') { //we need to remove the element from our submitted_orders
-    //     //route to remove from database
+    let item = whichOperation[whichOperation.length - 1];
+
+    if (whichOperation.length == 7) { //we need to remove the element from our submitted_orders
+        //route to remove from database
+        let content = $("#item_name" + item).text();
+        console.log(content);
+
+        $.ajax({
+            url: "/removeSubmitted/" + content,
+            type: "POST",
+            sucess: function (responseData) {
+                console.log("yeah");
+            },
+            error: console.error
+        });
+        //refresh current look
+    }
+    else if (whichOperation.length == 5) {
+        //we need to get the content within the #item_desc(num) content
+        let content = $("#item_desc" + item).text();
+        console.log(content);
+
+        // $.ajax({
+        //     url: "/editSubmitted/" + "test",
+        //     type: "POST",
+        //     sucess: function (responseData) {
+        //         console.log("yeah");
+        //     },
+        //     error: console.error
+        // });
 
 
 
-
-    //     console.log("Hello");
-    //     $.ajax({
-    //         url: "/removeSubmitted/" + "test",
-    //         type: "POST",
-    //         sucess: function (responseData) {
-    //             console.log("yeah");
-    //         },
-    //         error: console.error
-    //     });
-    //     //refresh current look
-    // }
-    // else if (whichOperation === 'edit') {
-    //     console.log("bye");
-
-
-    //     $.ajax({
-    //         url: "/editSubmitted/" + "test",
-    //         type: "POST",
-    //         sucess: function (responseData) {
-    //             console.log("yeah");
-    //         },
-    //         error: console.error
-    //     });
-
-
-
-    // }
-    // else {
-    //     //We should never get here.
-    // }
+    }
+    else {
+        //We should never get here.
+    }
 
 }
