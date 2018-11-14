@@ -35,7 +35,7 @@ function addToOrder() {
 		success: function (responseData) {
 			console.log(responseData[0].Name);
 			document.querySelector('.modal-menu-name').innerHTML = responseData[0].Name;
-			document.querySelector('.modal-menu-img').src = 'http://localhost:3000/images/appetizers/' + responseData[0].ImageName;
+			document.querySelector('.modal-menu-img').src = 'http://localhost:3000/images/' + responseData[0].ImageName;
 			document.querySelector('.modal-menu-img').alt = responseData[0].Name;
 			var d = new Date();
 			var hour = d.getHours();
@@ -50,6 +50,7 @@ function addToOrder() {
 			document.querySelector('.modal-menu-desc').innerHTML = responseData[0].Description;
 			//sets the modal's submit button to contain objId information
 			var id = document.querySelector('.modal-submit');
+			console.log("Attribute is set as " + objId);
 			id.setAttribute('data-id', objId);
 			//console.log(document.querySelector('.modal-submit').data-id);
 		},
@@ -81,8 +82,7 @@ function submitToOrder() {
 		type: "POST",
 		success: function (responseData) {
 			alert("Your order has been added. View and submit complete order in the 'View Order' tab.");
-			//TODO: maybe include alert that says 'your order has been added. add more and submit in the 'View Order' tab
-			//TODO: have to clear notes section for next order
+			document.querySelector('.clear-this').value = '';
 		},
 		error: console.error
 	});
