@@ -105,6 +105,22 @@ router.post("/getItemName/:db_name", function (req, res) { //Verify the value is
   });
 });
 
+router.post("/removeSubmitted/:item_name", function (req, res) {
+
+
+  res.send();
+});
+
+router.post("/editSubmitted/:item_desc", function (req, res) {
+
+
+  res.send();
+});
+
+
+
+
+
 
 // Terminal View for Kitchen Staff
 router.get("/kitchenstaff", function (req, res) {
