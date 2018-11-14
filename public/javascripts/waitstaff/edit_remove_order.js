@@ -13,8 +13,8 @@ function edit_remove(whichOperation) {
                 console.log(responseData);
 
                 $.ajax({
-                    url: "/removeSubmitted/" + 1, //we are going to need to pass in a table number. I think we can get this by retreiving the active class?
-                    type: "POST",
+                    url: "/removeSubmitted/" + responseData + "/" + desc, //I realized the fields inside of an array of objects
+                    type: "POST", //we probably need to send in the table number to actually retrieve the data. 
                     sucess: function (responseData) {
                         console.log("yeah");
                     },
