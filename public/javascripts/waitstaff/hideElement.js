@@ -49,7 +49,7 @@ function hideContent(whichDiv) {
         for (let i = 0; i < responseData[0].items.length; i++) { //loop through the number of ITEMs ordered
 
           if (typeof responseData[0].items[i].item !== 'undefined') { //if the name of an item is undefined, omit it.
-            myDiv.insertAdjacentHTML('beforeend', ' <span class= "item_name"> Item: Name</span > <button type="button" id="remove" onclick="edit_remove(this.id)" class="btn">X</button><p></p><span class= "item_desc" >Item: Description/Allergies</span><button type="button" id="edit" onclick="edit_remove(this.id)" class="btn">Edit</button><hr>');
+            myDiv.insertAdjacentHTML('beforeend', createOrderItem(i));
           }
         }
         var submitted_item_names = document.querySelectorAll('.item_name'); //stores all instances of this class into an array
@@ -90,4 +90,16 @@ function hideContent(whichDiv) {
     z.style.display = "block";
 
   }
+}
+
+// creates buttons for view order tab
+function createOrderItem(id){
+    let spnName = '<span class= "item_name"> Item: Name</span>'
+    let removeBtn = '<button type="button" id="remove' + id +'" onclick="edit_remove(this.id)" class="btn">X</button>'
+    let spnDesc = '<span class= "item_desc" >Item: Description/Allergies</span>'
+    let editBtn = '<button type="button" id="edit' + id + '" onclick="edit_remove(this.id)" class="btn">Edit</button>'
+
+    output = spnName + removeBtn + '<p></p>' + spnDesc + editBtn + '<hr>';
+
+    return output;
 }
