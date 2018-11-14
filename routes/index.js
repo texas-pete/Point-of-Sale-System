@@ -105,10 +105,70 @@ router.post("/getItemName/:db_name", function (req, res) { //Verify the value is
   });
 });
 
-router.post("/removeSubmitted/:item_name", function (req, res) {
 
 
-  res.send();
+router.post("/fromNameToID/:db_name", function (req, res) {
+
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
+
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to connect to the Server");
+    }
+    else {
+      console.log("Connection established with MongoDB Server");
+      var query = { "Name": req.params.db_name };
+      var collection = db.collection("menu_items");
+      collection.find(query).toArray(function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) { //if we return a result
+          res.send(results[0]._id); //send the name of the object to the page.
+        }
+        else {
+          console.log("No menu items with this id " + req.params.db_name);
+          res.sendStatus(404); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
+        }
+        console.log("Connection Closed"); //prints to the node.js command prompt
+        db.close();
+      });
+    }
+  });
+});
+
+router.post("/removeSubmitted/:item_name/:item_description/", function (req, res) {
+  //this does not check the current table number. there is a possibility that the wrong table number will be deleted if the message is exactly the same
+  //we need to go in and remove element
+  var MongoClient = mongodb.MongoClient;
+  var url = "mongodb://localhost:27017/4quad";
+
+  console.log(req.params.item_name);
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log("Unable to connect to the Server");
+    }
+    else {
+      var query = { Name: req.params.item_name, Description: req.params.item_description };
+      var collection = db.collection("submitted_orders");
+      collection.deleteOne(query, function (err, results) {
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          console.log("hello");
+          res.sendStatus(200);
+        }
+        else {
+          console.log("No orders match this critera.");
+          res.sendStatus(404); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
+        }
+        console.log("Connection Closed"); //prints to the node.js command prompt
+        db.close();
+      });
+    }
+  });
 });
 
 router.post("/editSubmitted/:item_desc", function (req, res) {
