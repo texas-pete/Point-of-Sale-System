@@ -1596,29 +1596,35 @@ router.get("/guest-appetizers/vegan/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -1689,29 +1695,35 @@ router.get("/guest-appetizers/vegetarian/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -1782,29 +1794,35 @@ router.get("/guest-appetizers/spicy/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -1875,29 +1893,35 @@ router.get("/guest-appetizers/gf/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -1976,29 +2000,35 @@ router.get("/guest-entrees/vegan/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2069,29 +2099,35 @@ router.get("/guest-entrees/vegetarian/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2159,32 +2195,38 @@ router.get("/guest-entrees/spicy/", function (req, res) {
         if(err){
           console.log(err);
         }
-        else if(results.length){//not empty
+         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2255,29 +2297,35 @@ router.get("/guest-entrees/gf/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2355,29 +2403,35 @@ router.get("/guest-kids-meals/vegan/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2448,29 +2502,35 @@ router.get("/guest-kids-meals/vegetarian/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2541,29 +2601,35 @@ router.get("/guest-kids-meals/spicy/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2634,29 +2700,35 @@ router.get("/guest-kids-meals/gf/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2734,29 +2806,35 @@ router.get("/guest-desserts/vegan/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2827,29 +2905,35 @@ router.get("/guest-desserts/vegetarian/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -2920,29 +3004,35 @@ router.get("/guest-desserts/spicy/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -3013,29 +3103,35 @@ router.get("/guest-desserts/gf/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -3112,29 +3208,35 @@ router.get("/guest-drinks/vegan/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -3205,29 +3307,35 @@ router.get("/guest-drinks/vegetarian/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -3298,29 +3406,35 @@ router.get("/guest-drinks/spicy/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
@@ -3391,29 +3505,35 @@ router.get("/guest-drinks/gf/", function (req, res) {
         else if(results.length){//not empty
           //need to find all drinks and put in object
           //results[0].items[i].item
-          console.log("The user does have orders, going through " + results[0].orderedItems.length + " iters");
-          for(var i = 0; i < results[0].orderedItems.length; i++){
-            console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
-            var t_query = {
-              $and: [
-                { Category: "Drink" },
-                {_id: new ObjectId(results[0].orderedItems[i].item)}
-              ]
-            };
-            var t_collection = db.collection("menu_items");
-            t_collection.find(t_query).toArray(function(err, drinkResults){
-              if(err){
-                console.log(err);
-              }
-              else if(drinkResults.length){//if is a drink
-                //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
-                //console.log("Found drink "+drinkResults[0].Name);
-                drinks.push(drinkResults[0].Name);
-              }
-              else{
-                console.log("Not a drink");
-              }
-            });
+          console.log("The user does have orders, going through " + results.length + " iters");
+          console.log(util.inspect(results, {showHidden:false, depth: null}));
+          //attempting this fix drinks w/ this
+          for(var j = 0; j < results.length; j++){
+          
+            for(var i = 0; i < results[j].orderedItems.length; i++){
+              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              var t_query = {
+                $and: [
+                  { Category: "Drink" },
+                  {_id: new ObjectId(results[j].orderedItems[i].item)}
+                ]
+              };
+              var t_collection = db.collection("menu_items");
+              t_collection.find(t_query).toArray(function(err, drinkResults){
+                if(err){
+                  console.log(err);
+                }
+                else if(drinkResults.length){//if is a drink
+                  console.log("Is a drink!");
+                  //console.log(util.inspect(drinkResults, {showHidden:false, depth: null}));
+                  //console.log("Found drink "+drinkResults[0].Name);
+                  drinks.push(drinkResults[0].Name);
+                }
+                else{
+                  console.log("Not a drink");
+                }
+              });
+            }
           }
         }
         else{//empty
