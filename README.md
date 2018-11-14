@@ -29,11 +29,12 @@
     Minimum 1hr meeting
   - [x] Code reviews
 - [x] Set up Discord
-- [ ] Define MVP
+- [x] Define MVP
   - Customer
     - [x] Allow customers to substitute ingredients in an order
     - [x] Allow customers to note allergies
     - [ ] Allow customers to submit order to necessary screens
+    - [ ] Allow customers to edit notes or remove menu item from order
     - [ ] Allow customers to request waitstaff assistance
     - [ ] Allow customers to request specific refills
     - [x] Allow customers to play a game (of 2)
@@ -60,7 +61,7 @@
   - What is 10%?
     - [x] Allow customers to filter menu items from dropdown (3)
     - [x] Allow management, waitstaff, and kitchenstaff to clock out (1)
-    - [ ] Allow for happy hour pricing which discounts meals (2)
+    - [x] Allow for happy hour pricing which discounts meals (2)
     - [ ] Allow for inventory tracking (3)
     - [ ] Magnifying glass needs to magnify (1/2) 
     - [ ] Text to speech needs to speech (1/2)
