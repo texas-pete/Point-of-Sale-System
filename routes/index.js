@@ -121,11 +121,37 @@ router.get("/guest-games", function (req, res) {
 });
 
 //pay
-router.get("/guest-pay", function (req, res) {
-  res.render("guest-pay");
-});
+// router.get("/guest-pay", function (req, res) {
+//   res.render("guest-pay");
+// });
 
-router.get('/getTotalCost', function(req, res, next){
+
+//DONT USE JUST FOR OBSERVATION/TESTING
+// //opens a modal to add to order and make any changes or note any allergies
+// function addToOrder(){
+// 	console.log($(this).data('id'))
+// 	var objId = $(this).data('id')
+// 	document.querySelector('.bg-modal').style.display = 'flex';
+// 	$.ajax({
+// 		url: "/getMenuItemById/" + $(this).data('id'),
+// 		type: "POST",
+// 		success: function(responseData) {
+// 			console.log(responseData[0].Name);
+// 			document.querySelector('.modal-menu-name').innerHTML = responseData[0].Name;
+// 			document.querySelector('.modal-menu-img').src = 'http://localhost:3000/images/appetizers/' + responseData[0].ImageName;
+// 			document.querySelector('.modal-menu-img').alt = responseData[0].Name;
+// 			document.querySelector('.modal-menu-price').innerHTML = '$' + responseData[0].Price;
+// 			document.querySelector('.modal-menu-desc').innerHTML = responseData[0].Description;
+// 			//sets the modal's submit button to contain objId information
+// 			var id = document.querySelector('.modal-submit');
+// 			id.setAttribute('data-id', objId);
+// 			//console.log(document.querySelector('.modal-submit').data-id);
+// 		},
+// 		error: console.error
+// 	});
+// }
+
+router.get('/guest-pay', function(req, res, next){
 //res.render("guest-order");
 var MongoClient = mongodb.MongoClient;
 var url = "mongodb://localhost:27017/4quad";
@@ -136,23 +162,45 @@ MongoClient.connect(url, function (err, db) {
   }
   else {
     console.log("Connection established with MongoDB Server");
-
-    var resiltArray = [];
+    //var order_total = 0;
     var query = { table: currentTable };
     var collection = db.collection("submitted_orders");
     console.log("attempting " + query + " " + currentTable);
-    collection.find(query).forEach(function (err, results) {
+    collection.find(query).toArray(function (err, results) {
       if (err) {
         console.log(err);
       }
       else if (results.length) {//send the object to the page
-        resultArray.push(results)
+      //  results.push(results)
+       
+    //   db.collection.aggregate(
+    //     [
+    //         {
+    //             $group : {
+    //                 _id : null,
+    //                 totalPrice: { $sum: price }
+    //             }
+    //         }
+    //     ]
+    // ).exec(function(err, result) {
+    //     if (err) return next(err);
+    //     res.send(result)
+    // });
+      // for(var x = 0; x < results.items.length){
+       //     order_total += results.items.price;
+       // }
+       // document.getElementById('OT').value = order_total;
+         console.log(results[0].items[0].price); //this prints the PRICE of a returned result.
+         console.log(results);
+          //console.log(items[i].price); //this prints the PRICE of a returned result.
+          res.render('guest-pay', {order_items: results});
       }
       else {
         console.log("Menu item not found!");
+       // res.render('guest-pay', {order_items: results});
+       res.send(404);
       }
-      db.close();
-      res.render('guest-pay', {order_items: resultArray});
+      db.close();     
     });
   }
 });

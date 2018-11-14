@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+/*COPY AND PASTE OF CUSTOMERSTYLE SO NO CONFLICTS WITH MODAL*/
 
 html, body {
   height: 100%;
@@ -167,12 +168,12 @@ html, body {
 }
 
 .modal-content {
-  width: 75%;
-  height: 75%;
+  width: 140%;
+  height: 140%;
   background-color: white;
   border-radius: 4px;
   padding: 2px;
-  text-align: center;
+  text-align: left;
   position: relative;
   overflow: hidden;
 }
@@ -387,11 +388,3 @@ Large (lg) devices (desktops, 992px and up)
 Extra (xl) large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { ... }
 */
-
-
-
-
-
-
-
-

@@ -9,10 +9,18 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 		<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-		<link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
+		<link href="http://localhost:3000/stylesheets/payStyle.css" rel="stylesheet">
 
 	</head>
 <body>
+
+<!--<script>
+//function getTotal(a, b) {
+//		a = a += b;
+//		return a
+//}
+//document.getElementById("demo").innerHTML = window.myFunction(10, 2);
+//</script>-->
 
 <!--payment-->
 <div class= "left">
@@ -20,24 +28,25 @@
 	<br>
 	<br>
 	<div class="Order Total">
-		<h2>Order Total</h2>
-		
+		<h2>Order Total: </h2>
+		<% for(let i =0; i<order_items[0].items.length; i++){ %>
+			<h5>$<%= order_items[0].items[i].price %>			<%= order_items[0].items[i].item %></h5>
+		  <!--<h5 class="menu_name"><%= order_items[0].items[i].item %></h5>-->
+		<% } %>	
+	</div><br><br>
 
-	</div>
+
+
 	<div class="pay-method">
-		<h2>Pay with Cash</h2>
-		<h4>Tap the 'Tap for Assistance' Button</h4>
-	</div>
-	<div>
-		<h2>Pay with Credit Card</h2>
-		<form>
-			Credit Card #: <input type="text" name="ccNum">
-		</form>
+		<h3>Pay with Cash:</h3>
+		<h6>Tap the 'Tap for Assistance' Button</h6>
 	</div>
 	<br>
 
 	<div class="pay-method">
-		<button type="button" class="btn btn-primary">Submit Payment</button>
+		<button type="button" class="btn btn-primarymodal-submit" data-toggle="modal" data-target="#ModalLong2">
+				Single Payment
+				</button>
 	</div>
 	<br>
 	<button type="button" class="btn btn-primary modal-submit" data-toggle="modal" data-target="#ModalLong">
@@ -57,33 +66,44 @@
 		  <div class="close" data-dismiss="modal">+</div>
 		</div>
 		<div class="modal-body">
-		  ...
-		  <label class="container">One
-				<input type="checkbox">
-				<span class="checkmark"></span>
-		  </label>
+			Select What You Are Paying For
+			<% for(let i =0; i<order_items[0].items.length; i++){ %>
+					<label class="container">
+							<input type="checkbox"><h5><%= order_items[0].items[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								$<%= order_items[0].items[i].price %></h5>
+						 <!--<h5 class="menu_name"><%= order_items[0].items[i].item %></h5>-->
+							<span class="checkmark"></span>
+						</label>
+			<% } %>	
 		</div>
 		<div class="modal-footer">
 				<div class="col-50">
 						<h3>Payment</h3>
-						<label for="cname">Name on Card</label>
+						<label for="cname">Name on Card</label><br>
 						<input type="text" id="cname" name="cardname" placeholder="John More Doe">
-						<label for="ccnum">Credit card number</label>
+						<br><label for="ccnum">Credit card number</label><br>
 						<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-						<label for="expmonth">Exp Month</label>
+						<br><label for="expmonth">Exp Month</label><br>
 						<input type="text" id="expmonth" name="expmonth" placeholder="September">
 						<div class="row">
 						  <div class="col-50">
-							<label for="expyear">Exp Year</label>
+							<label for="expyear">Exp Year</label><br>
 							<input type="text" id="expyear" name="expyear" placeholder="2018">
 						  </div>
 						  <div class="col-50">
-							<label for="cvv">CVV</label>
+							<label for="cvv">CVV</label><br>
 							<input type="text" id="cvv" name="cvv" placeholder="352">
-						  </div>
+							</div><br><br><br><br>
+							<div class="col-50">
+							<!--<form action>="/action_page.php">-->
+								<label for ="numsplit">Split Amongst:</label>
+								<input type="number" name="quantity" min="1" max="9">
+								<!--<input type="submit">-->
+							<!--</form>--><br>
 						</div>
-						<button type="button" class="btn btn-primary">Submit Payment</button>
-				</div> 
+							<button type="button" class="btn btn-primary">Submit Payment</button>
+					</div> 
+						</div>
 				
 			<!--<form>
 				Credit Card #: <input type="text" name="ccNum">
@@ -94,28 +114,51 @@
 	</div>
   </div>
 
-<!--Modal-->
-<!--<div class="bg-modal">
-	<div class="modal-content">
-		<div class="close">+</div>
-		<div class="modal-main-content">
-			<h3 class="modal-menu-name">Name</h3>
-			<img class="modal-menu-img" src="img" alt="nameOfImage" style="float:left" width="390" height="300" hspace="20">
-			<h4 class="modal-menu-price">Price</h4>
-			<h5 class="modal-menu-desc">Description</h5>
+<!-- Single Pay Modal -->
+<div class="modal fade" id="ModalLong2" tabindex="-1" role="dialog" aria-labelledby="ModalLong2Title" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalLong2Title">Single Pay</h5>
+				<div class="close" data-dismiss="modal">+</div>
+			</div>
+			<div class="modal-body">
+					<% for(let i =0; i<order_items[0].items.length; i++){ %>
+							<h5><%= order_items[0].items[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 $<%= order_items[0].items[i].price %></h5>
+							<!--<h5 class="menu_name"><%= order_items[0].items[i].item %></h5>-->
+						<% } %>	
+			</div>
+			<div class="modal-footer">
+					<div class="col-50">
+							<h3>Payment</h3>
+							<label for="cname">Name on Card</label><br>
+							<input type="text" id="cname" name="cardname" placeholder="John More Doe">
+							<br><label for="ccnum">Credit card number</label><br>
+							<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+							<br><label for="expmonth">Exp Month</label><br>
+							<input type="text" id="expmonth" name="expmonth" placeholder="September">
+							<div class="row">
+								<div class="col-50">
+								<label for="expyear">Exp Year</label><br>
+								<input type="text" id="expyear" name="expyear" placeholder="2018">
+								</div>
+								<div class="col-50">
+								<label for="cvv">CVV</label><br>
+								<input type="text" id="cvv" name="cvv" placeholder="352">
+								</div>
+								<br><br><br><br><button type="button" class="btn btn-primary">Submit Payment</button>
+						</div> 
+							</div>
+					
+				<!--<form>
+					Credit Card #: <input type="text" name="ccNum">
+				</form>-->
+				<!--<button type="button" class="btn btn-primary">Submit Payment</button>-->
+			</div>
+			</div>
 		</div>
-		<br>
-		<form>
-			<textarea name="notes" placeholder="Type in any allergies or anything you want added/removed from the item." cols = "60" rows="5"></textarea>
-		</form>-->
-		<!--<form method="post" action="/submitToOrder">
-			<textarea name="allergiesEdit" placeholder="Type in any allergies or anything you want added/removed from the item." cols = "60" rows="5"></textarea>
-			<input type="submit" class="btn btn-secondary btn-sm" value="Submit to Order">
-		</form>-->
-		<!--<button type="button" class="btn btn-secondary btn-sm modal-submit">Split Payment</button>
-	</div>
-</div>-->
-
+		</div>
 
 </body>
 
