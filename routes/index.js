@@ -69,6 +69,7 @@ router.post("/getTableOrder/:tblNum", function (req, res) {
 
 // Terminal View for Kitchen Staff
 router.get("/kitchenstaff", function (req, res) {
+
   res.render("kitchenstaff", { page: "Kitchen Staff View" });
 });
 
