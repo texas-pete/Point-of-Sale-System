@@ -33,7 +33,6 @@ function hideContent(whichDiv) {
     z.style.display = "none";
     //we want to show the orderinfo information
     y.style.display = "block";
-    console.log('here');
     for (let i = 0; i < 16; i++) //hacky way to fix the input received from the table number
     {
       if (i + 1 == sidebarVal) {
@@ -45,36 +44,60 @@ function hideContent(whichDiv) {
       url: "/getTableOrder/" + sidebarVal,
       type: "POST",
       success: function (responseData) { //upon a successful post, we run below code.
-        for (let i = 0; i < responseData[0].orderedItems.length; i++) { //loop through the number of ITEMs ordered
+        let totalDiv = 0;
+        for (let j = 0; j < responseData.length; j++) { //for each query result for table 1
 
-          if (typeof responseData[0].orderedItems[i].item !== 'undefined') { //if the name of an item is undefined, omit it.
-            myDiv.insertAdjacentHTML('beforeend', createOrderItem(i));
+          for (let i = 0; i < responseData[j].orderedItems.length; i++) { //we want to print the contents of 
+
+            if (typeof responseData[j].orderedItems[i].item !== 'undefined') {
+              myDiv.insertAdjacentHTML('beforeend', createOrderItem(totalDiv));
+              totalDiv++;
+            }
+            else {
+
+            }
+          }
+        } //we fill the contents at least
+
+        var submitted_item_names = document.querySelectorAll('.item_name');//now we personalize them
+        var submitted_item_descr = document.querySelectorAll('.item_desc');
+        var q = 0;
+        for (var index = 0; index < responseData.length; index++) {
+          for (var index2 = 0; index2 < responseData[index].orderedItems.length; index2++) {
+
+            let id = q;
+            $.ajax({ //there is a way to do this via $.post("/getTableOrder/" + sidebarVal) but keeping ajax as such
+              url: "/getItemName/" + responseData[index].orderedItems[index2].item,
+              type: "POST",
+              success: function (retVal) { //responseData contains the returned 'name' from our ID
+
+
+
+                submitted_item_names[id].innerHTML = retVal; //we know we are only returning a string for a name.
+                //anytime we insert a value, we have to increment the q value because there are only q slots avaialble to store names.
+              },
+              error: function () { //if we can't find the name in our database
+                submitted_item_names[id].innerHTML = responseData[index].orderedItems[index2].item;
+                //anytime we insert a value, we have to increment the q value because there are only q slots avaialble to store names.
+              }
+            });
+            q++;
           }
         }
-        var submitted_item_names = document.querySelectorAll('.item_name'); //stores all instances of this class into an array
-        var submitted_item_descr = document.querySelectorAll('.item_desc');
-
-        submitted_item_names.forEach(function (userItem, index) {
-
-          $.ajax({ //there is a way to do this via $.post("/getTableOrder/" + sidebarVal) but keeping ajax as such
-            url: "/getItemName/" + responseData[0].orderedItems[index].item,
-            type: "POST",
-            success: function (responseData) { //responseData contains the returned 'name' from our ID
-              userItem.innerHTML = responseData;
-            },
-            error: function () { //if we can't find the name in our database
-              userItem.innerHTML = responseData[0].orderedItems[index].item;
+        var k = 0;
+        for (var index = 0; index < responseData.length; index++) {
+          for (var index2 = 0; index2 < responseData[index].orderedItems.length; index2++) {
+            if (typeof responseData[index].orderedItems[index2].notes != 'undefined') {
+              submitted_item_descr[k].innerHTML = responseData[index].orderedItems[index2].notes;; //for loop starts at 0 and we don't want the null index
+              k++;
             }
-          });
-        });
-        submitted_item_descr.forEach(function (userItem, index) {
-          if (typeof responseData[0].orderedItems[index].notes != 'undefined') {
-            userItem.innerHTML = responseData[0].orderedItems[index].notes; //for loop starts at 0 and we don't want the null index
+            else {
+              submitted_item_descr[k].innerHTML = "No notes provided";
+              k++;
+            }
           }
-          else {
-            userItem.innerHTML = "No notes provided";
-          }
-        });
+        }
+
       },
       error: console.error
     });

@@ -54,7 +54,6 @@ function edit_remove(whichOperation) {
         let desc = $("#item_desc" + item).text();//converted name.
         let newDescription = "ttest";
         //we need to convert from a name to a string version of the object ID
-
         var txt;
         var input = prompt("Please enter the new description:", "Customer wants:");
         if (input == null || input == "") {
