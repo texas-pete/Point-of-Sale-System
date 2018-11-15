@@ -62,7 +62,7 @@
     height: 200px;
     width: 400px;
     background-color: #99AAB5;
-    display: inline-block;
+    display: inline-block !important;
     color:#fff;
     font-family: 'Whitney,Helvetica Neue,Helvetica,Arial,sans-serif';
     position: relative;

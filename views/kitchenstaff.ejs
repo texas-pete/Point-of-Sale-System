@@ -4,7 +4,6 @@
     <head>
         <% include partials/head %>
         <link rel="stylesheet" href="http://localhost:3000/stylesheets/kitchenstaff/newkitchen.css">
-        <script src="http://localhost:3000/javascripts/kitchenstaff.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <% include partials/script %>
     </head>
@@ -14,14 +13,12 @@
 
 <div class="sidebar">
       <% orderItems.forEach(function(item, index){ %>
-            <div class= "order_display_sidebar" id='<%= item._id %>' onclick="showOrderInfo('order_display_sidebar')"> 
+            <div class= "order_display_sidebar" id='<%= item._id %>'> 
                   <h5>  Table #<%= item.table %></h5>
             </div>
       <% }) %>
-      </div>
 </div>
  
-    
 <body>
 <!--Main Page-->
 <div class="main">
@@ -33,28 +30,25 @@
     </div>
     <div class="button">
           <h3>Cooking</h3>
-    </div>
-
-    <div>
+    </div> 
+</div> 
+<div>
+  <div>
       <% orderItems.forEach(function(item, index){ %>
         <% for(let j = 0; j < item.orderedItems.length; j++){  %> 
-            <div class= "order_display_main"> 
-                  <h5 id='<_%= item._id %>'> Menu Item ID: <%= orderItems[index].orderedItems[j].item %></h5>
-                  <h5 id='<_%= item._id %>'> Notes and Allergies: <%= orderItems[index].orderedItems[j].notes %></h5>
+            <div id='_<%= item._id %>' class= "order_display_main"> 
+                  <h5> Menu Item ID: <%= orderItems[index].orderedItems[j].item %></h5>
+                  <h5> Notes and Allergies: <%= orderItems[index].orderedItems[j].notes %></h5>
             </div>
       <% } %>  
       <% }) %>
       </div>
-</div> 
-  
-
 </div>
-
 </body>
 
 
 <footer>
   <% include partials/navbar %>
 </footer>
-
+<script src="http://localhost:3000/javascripts/kitchenstaff.js"></script>
 </html>
