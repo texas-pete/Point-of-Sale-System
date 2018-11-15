@@ -3,16 +3,18 @@ $(document).ready(function(){
 	$('.play-tic').on('click', playTic);
 });
 
-//gets called on by 'play now' button, hides navbar and opens up game modal
+//gets called on by 'play now' button, hides navbar and opens up game modal, also hides assistance
 function playTic(){
 	console.log("Trying to play tic-tac-toe.")
   document.querySelector('.navbar').style.display = 'none';
-	document.querySelector('.tic').style.display = 'flex';
+	document.querySelector('.assistance').style.display = 'none';
+  document.querySelector('.tic').style.display = 'flex';
 }
 
-//closes the modal if clicked on and un-hides navbar
+//closes the modal if clicked on and un-hides navbar and assistance
 document.querySelector('.close-tic').addEventListener('click', function(){
   document.querySelector('.navbar').style.display = 'flex';
+  document.querySelector('.assistance').style.display = 'flex';
 	document.querySelector('.tic').style.display = 'none';
 });
 
@@ -21,20 +23,20 @@ $(document).ready(function(){
 	$('.play-snake').on('click', playSnake);
 });
 
-//gets called on by 'play now' button, hides navbar and opens up game modal
+//gets called on by 'play now' button, hides navbar and assistance and opens up game modal
 function playSnake(){
 	console.log("Trying to play snake.");
   document.querySelector('.navbar').style.display = 'none';
+  document.querySelector('.assistance').style.display = 'none';
 	document.querySelector('.snake').style.display = 'flex';
 }
 
 //closes the modal if clicked on and un-hides navbar
 document.querySelector('.close-snake').addEventListener('click', function(){
 	document.querySelector('.navbar').style.display = 'flex';
+  document.querySelector('.assistance').style.display = 'flex';
   document.querySelector('.snake').style.display = 'none';
 });
-
-
 
 
 

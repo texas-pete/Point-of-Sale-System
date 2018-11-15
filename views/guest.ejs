@@ -19,11 +19,6 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
-
-    <script>
-        var tblNumber = <%= tablenum %>
-    </script>
-
 </head>
 
 <body>
@@ -53,9 +48,23 @@
     </div>
 
     <!--Assistance Buttons-->
-    <header>
-        <%include partials/guestheader.ejs %>
-    </header>
+    <div class="assistance">
+        <ul id="requester">
+            <li><button><img src="http://localhost:3000/images/MAG.png"> Magnifying Glass</button></li>
+            <li><button><img src="http://localhost:3000/images/txt2spch.png"> Text to Speech</button></li>
+            <div class="ass-dropdown">
+                <li><button id="drinkrq" onclick="showDrinks()" class="ass-dropbtn"><img src="http://localhost:3000/images/refill.png">
+                        Tap to Select
+                        Refill</button></li>
+                <div id="ass-drop" class="ass-dropdown-content">
+                    <% refill.forEach(function(item, index){ %>
+                    <a href="#" class="drink"><%= item %></a>
+                    <% }) %>
+                </div>
+            </div>
+            <li><button id="servicerq"><img src="http://localhost:3000/images/assistance.png"> Tap for Assistance</button></li>
+        </ul>
+    </div>
 
     <!--Modal-->
     <div class="bg-modal">
@@ -77,11 +86,6 @@
     </div>
     
 </body>
-
-<header>
-    <!--Assistance Buttons-->
-    <%include partials/guestheader.ejs %>
-</header>
 
 <footer>
     <!-- Navigation -->
