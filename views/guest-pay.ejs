@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Order</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+		<link href="http://localhost:3000/stylesheets/payStyle.css" rel="stylesheet">
+
+	</head>
+<body>
+
+<!--payment-->
+<div class= "left">
+	<h1>Payment</h1>
+	<br>
+	<br>
+	<div class="Order Total">
+		<h2>Order Total: </h2>
+		<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+			<h5>$<%= order_items[0].orderedItems[i].price %>			<%= order_items[0].orderedItems[i].item %></h5>
+		  <!--<h5 class="menu_name"><%= order_items[0].orderedItems[i].item %></h5>-->
+		<% } %>	
+	</div><br><br>
+
+
+
+	<div class="pay-method">
+		<h3>Pay with Cash:</h3>
+		<h6>Tap the 'Tap for Assistance' Button</h6>
+	</div>
+	<br>
+
+	<div class="pay-method">
+		<button type="button" class="btn btn-primarymodal-submit" data-toggle="modal" data-target="#ModalLong2">
+				Single Payment
+				</button>
+	</div>
+	<br>
+	<button type="button" class="btn btn-primary modal-submit" data-toggle="modal" data-target="#ModalLong">
+		Split Payment
+	  </button>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="ModalLongTitle">Split Pay</h5>
+		  <div class="close" data-dismiss="modal">+</div>
+		</div>
+		<div class="modal-body">
+			Select What You Are Paying For
+			<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+					<label class="container">
+							<input type="checkbox"><h5><%= order_items[0].orderedItems[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								$<%= order_items[0].orderedItems[i].price %></h5>
+						 <!--<h5 class="menu_name"><%= order_items[0].orderedItems[i].item %></h5>-->
+							<span class="checkmark"></span>
+						</label>
+			<% } %>	
+		</div>
+		<div class="modal-footer">
+				<div class="col-50">
+						<h3>Payment</h3>
+						<label for="cname">Name on Card</label><br>
+						<input type="text" id="cname" name="cardname" placeholder="John More Doe">
+						<br><label for="ccnum">Credit card number</label><br>
+						<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+						<br><label for="expmonth">Exp Month</label><br>
+						<input type="text" id="expmonth" name="expmonth" placeholder="September">
+						<div class="row">
+						  <div class="col-50">
+							<label for="expyear">Exp Year</label><br>
+							<input type="text" id="expyear" name="expyear" placeholder="2018">
+						  </div>
+						  <div class="col-50">
+							<label for="cvv">CVV</label><br>
+							<input type="text" id="cvv" name="cvv" placeholder="352">
+							</div><br><br><br><br>
+							<div class="col-50">
+							<!--<form action>="/action_page.php">-->
+								<label for ="numsplit">Split Amongst:</label>
+								<input type="number" name="quantity" min="1" max="9">
+								<!--<input type="submit">-->
+							<!--</form>--><br>
+						</div>
+							<button type="button" class="btn btn-primary">Submit Payment</button>
+					</div> 
+						</div>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+<!-- Single Pay Modal -->
+<div class="modal fade" id="ModalLong2" tabindex="-1" role="dialog" aria-labelledby="ModalLong2Title" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalLong2Title">Single Pay</h5>
+				<div class="close" data-dismiss="modal">+</div>
+			</div>
+			<div class="modal-body">
+					<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+							<h5><%= order_items[0].orderedItems[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 $<%= order_items[0].orderedItems[i].price %></h5>
+							<!--<h5 class="menu_name"><%= order_items[0].orderedItems[i].item %></h5>-->
+						<% } %>	
+			</div>
+			<div class="modal-footer">
+					<div class="col-50">
+							<h3>Payment</h3>
+							<label for="cname">Name on Card</label><br>
+							<input type="text" id="cname" name="cardname" placeholder="John More Doe">
+							<br><label for="ccnum">Credit card number</label><br>
+							<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+							<br><label for="expmonth">Exp Month</label><br>
+							<input type="text" id="expmonth" name="expmonth" placeholder="September">
+							<div class="row">
+								<div class="col-50">
+								<label for="expyear">Exp Year</label><br>
+								<input type="text" id="expyear" name="expyear" placeholder="2018">
+								</div>
+								<div class="col-50">
+								<label for="cvv">CVV</label><br>
+								<input type="text" id="cvv" name="cvv" placeholder="352">
+								</div>
+								<br><br><br><br><button type="button" class="btn btn-primary">Submit Payment</button>
+						</div> 
+							</div>
+			</div>
+			</div>
+		</div>
+		</div>
+
+</body>
+
+<footer>
+    <!-- Navigation -->
+	<% include partials/guestnavbar %>
+</footer>
+</html>
