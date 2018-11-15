@@ -1,8 +1,8 @@
 # 4Quad
-4444 POS Project
+4444 Point Of Sale Project
 
 ### Todo:
-- [ ] Assign roles
+- [X] Assign roles
   - Team Members:
     - [x] Zachary Ferris  - Paired w/ Dak and working on Waitstaff
     - [x] Travis Pete     - Enforcer, working on Kitchenstaff
