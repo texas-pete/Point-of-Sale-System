@@ -29,39 +29,39 @@
     Minimum 1hr meeting
   - [x] Code reviews
 - [x] Set up Discord
-- [ ] Define MVP
-  - What is necessary?
-    - [ ] Magnifying glass needs to magnify 
-    - [ ] Text to speech needs to speech
-    - [ ] Allow customers to substitute ingredients in an order
-    - [ ] Allow customers to note allergies
-    - [ ] Allow customers to filter menu items from dropdown
-    - [ ] Allow customers to submit order to necessary screens
-    - [ ] Allow customers to request waitstaff assistance
-    - [ ] Allow customers to request specific refills
-    - [ ] Allow customers to play a game (of 2)
-    - [ ] Allow customers to split the check
+- [x] Define MVP
+  - Customer
+    - [x] Allow customers to substitute ingredients in an order
+    - [x] Allow customers to note allergies
+    - [x] Allow customers to submit order to necessary screens
+    - [x] Allow customers to edit notes or remove menu item from order
+    - [x] Allow customers to request waitstaff assistance
+    - [x] Allow customers to request specific refills
+    - [x] Allow customers to play a game (of 2)
+    - [ ] Allow customers to split the check 
     - [ ] Allow customers to pay at any time and have payment prevent refilling, help, play games ability
     - [ ] Allow customers to have 1/5 chance in winning a coupon when paying
-    - [ ] Allow waitstaff to view all 16 tables
-    - [ ] Allow waitstaff to press a table button to view payment and order details for table
-    - [ ] Allow waitstaff to press a table button to edit the table order
-    - [ ] Allow waitstaff to press a table button to remove notifications regarding refills or requests
+  - Waitstaff
+    - [x] Allow waitstaff to view all 16 tables
+    - [x] Allow waitstaff to press a table button to view payment and order details for table
+    - [x] Allow waitstaff to press a table button to edit the table order
+    - [x] Allow waitstaff to press a table button to remove notifications regarding refills or requests
+  - Kitchen Staff
     - [ ] Allow kitchenstaff to signal to the other kitchen staff an order is being prepared through button
     - [ ] Allow kitchenstaff to tap order button to view order details
+  - Management
     - [ ] Allow manager to view business essential data
     - [ ] Allow manager to edit the menu 
     - [ ] Allow manager to provide complimentary meals by changing price to zero
     - [ ] Allow manager to lookup orders using ticket numbering system
-    - [ ] Allow waitstaff, kitchenstaff, and managers to login/clockin 
-    - [ ] Allow for happy hour pricing which discounts meals
-    - [ ] Allow for inventory tracking
-    - [ ] Allow for hour tracking of employees
-    - [ ] Allow management, waitstaff, and kitchenstaff to clock out
+  - Shared by All
+    - [x] Allow waitstaff, kitchenstaff, and managers to login/clockin     
+    - [x] Allow for hour tracking of employees
+    
   - What is 10%?
-    - [ ] Allow customers to filter menu items from dropdown (3)
-    - [ ] Allow management, waitstaff, and kitchenstaff to clock out (1)
-    - [ ] Allow for happy hour pricing which discounts meals (2)
+    - [x] Allow customers to filter menu items from dropdown (3)
+    - [x] Allow management, waitstaff, and kitchenstaff to clock out (1)
+    - [x] Allow for happy hour pricing which discounts meals (2)
     - [ ] Allow for inventory tracking (3)
     - [ ] Magnifying glass needs to magnify (1/2) 
     - [ ] Text to speech needs to speech (1/2)
