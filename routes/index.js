@@ -399,7 +399,7 @@ router.get("/guest-appetizers", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -501,7 +501,7 @@ router.get("/guest-entrees", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -605,7 +605,7 @@ router.get("/guest-kids-meals", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -708,7 +708,7 @@ router.get("/guest-desserts", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -810,7 +810,7 @@ router.get("/guest-drinks", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -913,7 +913,7 @@ router.get("/guest-games", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -1013,7 +1013,7 @@ router.get("/guest-order", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -1426,7 +1426,7 @@ router.post("/validateCredentials", function (req, res) {
                       for (var j = 0; j < results.length; j++) {
 
                         for (var i = 0; i < results[j].orderedItems.length; i++) {
-                          console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+                          //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
                           var t_query = {
                             $and: [
                               { Category: "Drink" },
@@ -1662,7 +1662,7 @@ router.get("/guest-appetizers/vegan/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -1761,7 +1761,7 @@ router.get("/guest-appetizers/vegetarian/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -1860,7 +1860,7 @@ router.get("/guest-appetizers/spicy/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -1959,7 +1959,7 @@ router.get("/guest-appetizers/gf/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2066,7 +2066,7 @@ router.get("/guest-entrees/vegan/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2165,7 +2165,7 @@ router.get("/guest-entrees/vegetarian/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2264,7 +2264,7 @@ router.get("/guest-entrees/spicy/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2363,7 +2363,7 @@ router.get("/guest-entrees/gf/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2469,7 +2469,7 @@ router.get("/guest-kids-meals/vegan/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2568,7 +2568,7 @@ router.get("/guest-kids-meals/vegetarian/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2667,7 +2667,7 @@ router.get("/guest-kids-meals/spicy/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2766,7 +2766,7 @@ router.get("/guest-kids-meals/gf/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2872,7 +2872,7 @@ router.get("/guest-desserts/vegan/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -2971,7 +2971,7 @@ router.get("/guest-desserts/vegetarian/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -3070,7 +3070,7 @@ router.get("/guest-desserts/spicy/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -3169,7 +3169,7 @@ router.get("/guest-desserts/gf/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -3274,7 +3274,7 @@ router.get("/guest-drinks/vegan/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -3373,7 +3373,7 @@ router.get("/guest-drinks/vegetarian/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -3472,7 +3472,7 @@ router.get("/guest-drinks/spicy/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
@@ -3571,7 +3571,7 @@ router.get("/guest-drinks/gf/", function (req, res) {
           for (var j = 0; j < results.length; j++) {
 
             for (var i = 0; i < results[j].orderedItems.length; i++) {
-              console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
+              //console.log("In iter: " + i + " looking for id " + results[0].orderedItems[i].item);
               var t_query = {
                 $and: [
                   { Category: "Drink" },
