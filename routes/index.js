@@ -985,6 +985,42 @@ router.get("/guest-order", function (req, res) {
     }
   });
 
+  router.get('/guest-pay', function(req, res, next){
+    var MongoClient = mongodb.MongoClient;
+    var url = "mongodb://localhost:27017/4quad";
+    
+    MongoClient.connect(url, function (err, db) {
+      if (err) {
+        console.log("Unable to Connect to the MongoDB Server");
+      }
+      else {
+        console.log("Connection established with MongoDB Server");
+        var query = { table: currentTable };
+        var collection = db.collection("submitted_orders");
+        console.log("attempting " + query + " " + currentTable);
+        collection.find(query).toArray(function (err, results) {
+          if (err) {
+            console.log(err);
+          }
+          else if (results.length) {//send the object to the page
+           
+             console.log(results[0].orderedItems[0].price); //this prints the PRICE of a returned result.
+             console.log(results);
+              //console.log(orderedItems[i].price); //this prints the PRICE of a returned result.
+              res.render('guest-pay', {order_items: results});
+          }
+          else {
+            console.log("Menu item not found!");
+           // res.render('guest-pay', {order_items: results});
+           res.send(404);
+          }
+          db.close();     
+        });
+      }
+    });
+    });
+
+
   MongoClient.connect(url, function (err, db) {
     if (err) {
       console.log("Unable to Connect to the MongoDB Server");
