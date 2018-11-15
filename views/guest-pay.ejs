@@ -21,9 +21,9 @@
 	<br>
 	<div class="Order Total">
 		<h2>Order Total: </h2>
-		<% for(let i =0; i<order_items[0].items.length; i++){ %>
-			<h5>$<%= order_items[0].items[i].price %>			<%= order_items[0].items[i].item %></h5>
-		  <!--<h5 class="menu_name"><%= order_items[0].items[i].item %></h5>-->
+		<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+			<h5>$<%= order_items[0].orderedItems[i].price %>			<%= order_items[0].orderedItems[i].item %></h5>
+		  <!--<h5 class="menu_name"><%= order_items[0].orderedItems[i].item %></h5>-->
 		<% } %>	
 	</div><br><br>
 
@@ -59,11 +59,11 @@
 		</div>
 		<div class="modal-body">
 			Select What You Are Paying For
-			<% for(let i =0; i<order_items[0].items.length; i++){ %>
+			<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
 					<label class="container">
-							<input type="checkbox"><h5><%= order_items[0].items[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								$<%= order_items[0].items[i].price %></h5>
-						 <!--<h5 class="menu_name"><%= order_items[0].items[i].item %></h5>-->
+							<input type="checkbox"><h5><%= order_items[0].orderedItems[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								$<%= order_items[0].orderedItems[i].price %></h5>
+						 <!--<h5 class="menu_name"><%= order_items[0].orderedItems[i].item %></h5>-->
 							<span class="checkmark"></span>
 						</label>
 			<% } %>	
@@ -115,10 +115,10 @@
 				<div class="close" data-dismiss="modal">+</div>
 			</div>
 			<div class="modal-body">
-					<% for(let i =0; i<order_items[0].items.length; i++){ %>
-							<h5><%= order_items[0].items[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								 $<%= order_items[0].items[i].price %></h5>
-							<!--<h5 class="menu_name"><%= order_items[0].items[i].item %></h5>-->
+					<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+							<h5><%= order_items[0].orderedItems[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 $<%= order_items[0].orderedItems[i].price %></h5>
+							<!--<h5 class="menu_name"><%= order_items[0].orderedItems[i].item %></h5>-->
 						<% } %>	
 			</div>
 			<div class="modal-footer">
@@ -142,11 +142,6 @@
 								<br><br><br><br><button type="button" class="btn btn-primary">Submit Payment</button>
 						</div> 
 							</div>
-					
-				<!--<form>
-					Credit Card #: <input type="text" name="ccNum">
-				</form>-->
-				<!--<button type="button" class="btn btn-primary">Submit Payment</button>-->
 			</div>
 			</div>
 		</div>

@@ -120,52 +120,7 @@ router.get("/guest-games", function (req, res) {
   res.render("guest-games");
 });
 
-//pay
-// router.get("/guest-pay", function (req, res) {
-//   res.render("guest-pay");
-// });
-
-
-//DONT USE JUST FOR OBSERVATION/TESTING
-// router.post("/getItemName/:db_name", function (req, res) { //Verify the value is in our database.
-
-//   var MongoClient = mongodb.MongoClient;
-//   var url = "mongodb://localhost:27017/4quad";
-
-//   MongoClient.connect(url, function (err, db) {
-//     if (err) {
-//       console.log("Unable to connect to the Server");
-//     }
-//     else {
-//       console.log("Connection established with MongoDB Server");
-//       if (req.params.db_name.length != 24) {
-//         res.sendStatus(404);
-//       }
-//       else {
-//         var objID = new ObjectId(req.params.db_name);
-//         var query = { "_id": objID }; //we need to pass the table number requesting
-//         var collection = db.collection("menu_items");
-//         collection.find(query).toArray(function (err, results) {
-//           if (err) {
-//             console.log(err);
-//           }
-//           else if (results.length) { //if we return a result
-//             res.send(results[0].Name); //send the name of the object to the page.
-//           }
-//           else {
-//             console.log("No menu items with this id " + req.params.db_name);
-//             res.sendStatus(404); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
-//           }
-//           console.log("Connection Closed"); //prints to the node.js command prompt
-//           db.close();
-//         });
-//       }
-//     }
-//   });
-// });
-
 router.get('/guest-pay', function(req, res, next){
-//res.render("guest-order");
 var MongoClient = mongodb.MongoClient;
 var url = "mongodb://localhost:27017/4quad";
 
@@ -175,7 +130,6 @@ MongoClient.connect(url, function (err, db) {
   }
   else {
     console.log("Connection established with MongoDB Server");
-    //var order_total = 0;
     var query = { table: currentTable };
     var collection = db.collection("submitted_orders");
     console.log("attempting " + query + " " + currentTable);
@@ -184,12 +138,10 @@ MongoClient.connect(url, function (err, db) {
         console.log(err);
       }
       else if (results.length) {//send the object to the page
-      //  results.push(results)
        
-       // document.getElementById('OT').value = order_total;
-         console.log(results[0].items[0].price); //this prints the PRICE of a returned result.
+         console.log(results[0].orderedItems[0].price); //this prints the PRICE of a returned result.
          console.log(results);
-          //console.log(items[i].price); //this prints the PRICE of a returned result.
+          //console.log(orderedItems[i].price); //this prints the PRICE of a returned result.
           res.render('guest-pay', {order_items: results});
       }
       else {
@@ -290,14 +242,14 @@ router.post("/submitToOrder/:objId/:notes", function (req, res) {
         var itemId = req.params.objId
         var query = { table: currentTable.toString() };
         var collection = db.collection("active_orders");
-        var newvalues = { $push: { items: { item: itemId, notes: req.params.notes } } };
+        var newvalues = { $push: { orderedItems: { item: itemId, notes: req.params.notes } } };
 
         console.log("Running the query collection.update(table: " + currentTable.toString()
-          + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes);
+          + " $push: {orderedItems: {item: " + itemId + ", notes: " + req.params.notes);
         var itemId = req.params.objId
         var query = { table: currentTable.toString() };
         var collection = db.collection("active_orders");
-        var newvalues = { $push: { items: { item: itemId, notes: req.params.notes } } };
+        var newvalues = { $push: { orderedItems: { item: itemId, notes: req.params.notes } } };
         collection.update(query, newvalues, function (err, res) {
           if (err) throw err;
           console.log("order updated");
