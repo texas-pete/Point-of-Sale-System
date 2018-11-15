@@ -127,29 +127,42 @@ router.get("/guest-games", function (req, res) {
 
 
 //DONT USE JUST FOR OBSERVATION/TESTING
-// //opens a modal to add to order and make any changes or note any allergies
-// function addToOrder(){
-// 	console.log($(this).data('id'))
-// 	var objId = $(this).data('id')
-// 	document.querySelector('.bg-modal').style.display = 'flex';
-// 	$.ajax({
-// 		url: "/getMenuItemById/" + $(this).data('id'),
-// 		type: "POST",
-// 		success: function(responseData) {
-// 			console.log(responseData[0].Name);
-// 			document.querySelector('.modal-menu-name').innerHTML = responseData[0].Name;
-// 			document.querySelector('.modal-menu-img').src = 'http://localhost:3000/images/appetizers/' + responseData[0].ImageName;
-// 			document.querySelector('.modal-menu-img').alt = responseData[0].Name;
-// 			document.querySelector('.modal-menu-price').innerHTML = '$' + responseData[0].Price;
-// 			document.querySelector('.modal-menu-desc').innerHTML = responseData[0].Description;
-// 			//sets the modal's submit button to contain objId information
-// 			var id = document.querySelector('.modal-submit');
-// 			id.setAttribute('data-id', objId);
-// 			//console.log(document.querySelector('.modal-submit').data-id);
-// 		},
-// 		error: console.error
-// 	});
-// }
+// router.post("/getItemName/:db_name", function (req, res) { //Verify the value is in our database.
+
+//   var MongoClient = mongodb.MongoClient;
+//   var url = "mongodb://localhost:27017/4quad";
+
+//   MongoClient.connect(url, function (err, db) {
+//     if (err) {
+//       console.log("Unable to connect to the Server");
+//     }
+//     else {
+//       console.log("Connection established with MongoDB Server");
+//       if (req.params.db_name.length != 24) {
+//         res.sendStatus(404);
+//       }
+//       else {
+//         var objID = new ObjectId(req.params.db_name);
+//         var query = { "_id": objID }; //we need to pass the table number requesting
+//         var collection = db.collection("menu_items");
+//         collection.find(query).toArray(function (err, results) {
+//           if (err) {
+//             console.log(err);
+//           }
+//           else if (results.length) { //if we return a result
+//             res.send(results[0].Name); //send the name of the object to the page.
+//           }
+//           else {
+//             console.log("No menu items with this id " + req.params.db_name);
+//             res.sendStatus(404); //we need to send a response to our requester to ensure our content doesnt get stuck waiting.
+//           }
+//           console.log("Connection Closed"); //prints to the node.js command prompt
+//           db.close();
+//         });
+//       }
+//     }
+//   });
+// });
 
 router.get('/guest-pay', function(req, res, next){
 //res.render("guest-order");
@@ -173,22 +186,6 @@ MongoClient.connect(url, function (err, db) {
       else if (results.length) {//send the object to the page
       //  results.push(results)
        
-    //   db.collection.aggregate(
-    //     [
-    //         {
-    //             $group : {
-    //                 _id : null,
-    //                 totalPrice: { $sum: price }
-    //             }
-    //         }
-    //     ]
-    // ).exec(function(err, result) {
-    //     if (err) return next(err);
-    //     res.send(result)
-    // });
-      // for(var x = 0; x < results.items.length){
-       //     order_total += results.items.price;
-       // }
        // document.getElementById('OT').value = order_total;
          console.log(results[0].items[0].price); //this prints the PRICE of a returned result.
          console.log(results);
