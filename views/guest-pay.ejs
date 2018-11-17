@@ -140,7 +140,7 @@
 					</form>
 
 
-					<% var sumTotal = 0; %> <% var Tip = 0; %> <% var Tax = 0; %>
+					<% var sumTotal = 0; %> <% var TaxRate = 0.0825; %>
 					<!--Print Order Total-->
 					<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
 						<% sumTotal += parseFloat(order_items[0].orderedItems[i].price); %>
@@ -148,7 +148,11 @@
 					<h5>Order Total: $<%= parseFloat(sumTotal); %></h5>
 					<% var serviceQual = 'serviceQual'.value %>
 					<% var Tip = serviceQual * parseFloat(sumTotal); %>
-					<h5>After Tip: $<%= parseFloat(Tip); %></h5>
+					<h5>Gratuity: $<%= parseFloat(Tip); %></h5>
+					<% var Tax = parseFloat(sumTotal * TaxRate); %>
+					<h5>Sales Tax: $<%= Tax.toFixed(2) %></h5>
+					<% var OverallTot = sumTotal + Tip + Tax; %>
+					<h5>Overall Total: $<%= OverallTot.toFixed(2) %></h5>
 			</div>
 			<div class="modal-footer">
 					<div class="col-50">
