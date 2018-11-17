@@ -19,11 +19,17 @@
 	<h1>Payment</h1>
 	<br>
 	<br>
+	<% var sumTotal = 0; %>
+	<!--Print Order Total-->
 	<div class="Order Total">
-		<h2>Order Total: </h2>
+		<h2>Order Total:
 		<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
-			<h5>$<%= order_items[0].orderedItems[i].price %>			<%= order_items[0].orderedItems[i].item %></h5>
-		  <!--<h5 class="menu_name"><%= order_items[0].orderedItems[i].item %></h5>-->
+				<% sumTotal += parseFloat(order_items[0].orderedItems[i].price); %>
+		<% } %>	
+		$<%= parseFloat(sumTotal); %></h2>
+		<!--Print Individual Items and Prices-->
+		<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+				<h5>$<%= order_items[0].orderedItems[i].price %> <%= order_items[0].orderedItems[i].item%></h5>
 		<% } %>	
 	</div><br><br>
 
@@ -74,7 +80,6 @@
 					<label class="container">
 							<input type="checkbox"><h5><%= order_items[0].orderedItems[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								$<%= order_items[0].orderedItems[i].price %></h5>
-						 <!--<h5 class="menu_name"><%= order_items[0].orderedItems[i].item %></h5>-->
 							<span class="checkmark"></span>
 						</label>
 			<% } %>	
@@ -121,11 +126,29 @@
 				<div class="close" data-dismiss="modal">+</div>
 			</div>
 			<div class="modal-body">
+					<form>
+						<p>Leave A Tip: How was your service?<p>
+							<select id="serviceQual">
+					 			<option disabled selected value="0">-- Choose an Option --</option>
+								<option value="0.3">30&#37; &#45; Outstanding</option>
+								<option value="0.2">20&#37; &#45; Good</option>
+								<option value="0.15">15&#37; &#45; Okay</option>
+								<option value="0.1">10&#37; &#45; Bad</option>
+								<option value="0.05">5&#37; &#45; Terrible</option>
+							</select>
+							  
+					</form>
+
+
+					<% var sumTotal = 0; %> <% var Tip = 0; %> <% var Tax = 0; %>
+					<!--Print Order Total-->
 					<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
-							<h5><%= order_items[0].orderedItems[i].item%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								 $<%= order_items[0].orderedItems[i].price %></h5>
-							<!--<h5 class="menu_name"><%= order_items[0].orderedItems[i].item %></h5>-->
-						<% } %>	
+						<% sumTotal += parseFloat(order_items[0].orderedItems[i].price); %>
+					<% } %>	
+					<h5>Order Total: $<%= parseFloat(sumTotal); %></h5>
+					<% var serviceQual = 'serviceQual'.value %>
+					<% var Tip = serviceQual * parseFloat(sumTotal); %>
+					<h5>After Tip: $<%= parseFloat(Tip); %></h5>
 			</div>
 			<div class="modal-footer">
 					<div class="col-50">
@@ -145,7 +168,21 @@
 								<label for="cvv">CVV</label><br>
 								<input type="text" id="cvv" name="cvv" placeholder="352">
 								</div>
-								<br><br><br><br><button type="button" class="btn btn-primary">Submit Payment</button>
+								<br><br><br><br>
+								<!--<form>
+									<p>Leave A Tip: How was your service?<p>
+											<select id="serviceQual">
+										  <option disabled selected value="0">-- Choose an Option --</option>
+										  <option value="0.3">30&#37; &#45; Outstanding</option>
+										  <option value="0.2">20&#37; &#45; Good</option>
+										  <option value="0.15">15&#37; &#45; Okay</option>
+										  <option value="0.1">10&#37; &#45; Bad</option>
+										  <option value="0.05">5&#37; &#45; Terrible</option>
+									  </select>
+							  
+								  </form>-->
+								
+								<button type="button" class="btn btn-primary">Submit Payment</button>
 						</div> 
 							</div>
 			</div>
