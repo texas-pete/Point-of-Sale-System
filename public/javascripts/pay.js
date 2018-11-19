@@ -1,29 +1,18 @@
-const socket = io();//MIGHT NEED
 
-socket.on('connect', function() {
-    // Connected, let's sign-up for to receive messages for this room
-
-    //service requests
-    socket.emit("joinSR");
-    //drink requests
-    socket.emit("joinDR");
- });
-  
-  $(document).ready(() => {
-	  $('#calculate').click(() => {
-		  console.log('clicked!' + new Date());
-		  $.ajax({
-			  url: 'guest-pay/',
-			  type: 'GET',
-			  dataType: '',
-			  success: (data) => {
-				  console.log('ajax success!', data);
-				  location.reload();
-			  }
-		  });
-	  });
-  });
-
+$(document).ready(() => {
+	$('#calculate').click(() => {
+		console.log('clicked!' + new Date());
+		$.ajax({
+			url: 'guest-pay/',
+			type: 'GET',
+			dataType: '',
+			success: (data) => {
+				console.log('ajax success!', data);
+				location.reload();
+			}
+		});
+	});
+});
 
 function calculateTip(){
 	console.log('clicked!' + new Date());
@@ -53,8 +42,8 @@ function sub() {
 	console.log('clicked!' + new Date());
 }
 
-document.getElementById("singlesub").onclick = function() {
-	console.log('hi')
+document.getElementById("singleSub").onclick = function() {
+	console.log('hi');
 };
 
 

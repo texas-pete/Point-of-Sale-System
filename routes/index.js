@@ -973,7 +973,7 @@ router.get('/guest-pay', function(req, res, next){
            console.log(results[0].orderedItems[0].price); //this prints the PRICE of a returned result.
            console.log(results);
             //console.log(orderedItems[i].price); //this prints the PRICE of a returned result.
-            res.render('guest-pay', {order_items: results});
+            res.render('guest-pay', {order_items: results, tablenum: currentTable});
         }
         else {
           console.log("Menu item not found!");
