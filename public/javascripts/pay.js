@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io();//MIGHT NEED
 
 socket.on('connect', function() {
     // Connected, let's sign-up for to receive messages for this room
@@ -54,7 +54,7 @@ function sub() {
 }
 
 document.getElementById("singlesub").onclick = function() {
-
+	console.log('hi')
 };
 
 
