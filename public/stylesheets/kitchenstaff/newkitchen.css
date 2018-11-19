@@ -75,6 +75,7 @@
     width: 20px;
     background-color: #66FFB2;
     float: right;
+    display: none;
 }
 
 .main {

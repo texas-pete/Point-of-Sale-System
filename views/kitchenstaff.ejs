@@ -14,7 +14,7 @@
 <div class="sidebar">
       <% orderItems.forEach(function(item, index){ %>
             <div class= "order_display_sidebar" id='<%= item._id %>'> 
-                  <h5>  Table #<%= item.table %></h5>
+                  <h5>  Table #<%= item.table %> <div id = '__<%= item._id %>'class = "status_indicator"></div></h5>
             </div>
       <% }) %>
 </div>
@@ -22,13 +22,13 @@
 <body>
 <!--Main Page-->
 <div class="main">
-    <div class="button">
+    <div class="button" id = "Help">
           <h3>Help</h3>
     </div>
-    <div class="button">
+    <div class="button" id = "Ready">
           <h3>Ready</h3>
     </div>
-    <div class="button">
+    <div class="button" id = "Cooking">
           <h3>Cooking</h3>
     </div> 
 </div> 
