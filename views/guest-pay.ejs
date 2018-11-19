@@ -134,19 +134,19 @@
 					<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
 						<% sumTotal += parseFloat(order_items[0].orderedItems[i].price); %>
 					<% } %>	
-					<h5>Order Total: $<%= parseFloat(sumTotal); %></h5>
+					<h5 class='singlePayTotal'>Order Total: $<%= parseFloat(sumTotal); %></h5>
 					<% var serviceQual = 'serviceQual'.value %>
 					<% var Tip = parseFloat(serviceQual * sumTotal); %>
-					<h5>Gratuity: $<%= Tip; %></h5>
+					<h5 class = totalTip>Gratuity: $<%= Tip; %></h5>
 
-					<script type="text/javascript">
+					<!-- <script type="text/javascript">
 						$(document).ready(() => {
 							$('#calculate').click(() => {
 								console.log('clicked!' + new Date());
 							});
 						});
 					
-					</script>
+					</script> -->
 					<script>
 					//document.getElementById("calculate").onclick = function() {
 					//	var serviceQual = document.getElementById("serviceQual").value;
@@ -202,7 +202,7 @@
 							</select>		  
 						</form>
 							
-						<button type="button" class="btn btn-primary btn-sm" id="calculate" onclick="calculateTip()">CALCULATE TIP</button>
+						<button type="button" class="btn btn-primary btn-sm" id="calculate" >CALCULATE TIP</button>
 						<button type="button" class="btn btn-primary" id="singleSub">Submit Payment</button>
 						<!--<script>
 								document.getElementById("singlesub").onclick = function() {

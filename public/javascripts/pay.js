@@ -1,4 +1,4 @@
-const socket = io();//MIGHT NEED
+/*const socket = io();//MIGHT NEED
 
 socket.on('connect', function() {
     // Connected, let's sign-up for to receive messages for this room
@@ -7,7 +7,7 @@ socket.on('connect', function() {
     socket.emit("joinSR");
     //drink requests
     socket.emit("joinDR");
- });
+ });*/
   
   $(document).ready(() => {
 	  $('#calculate').click(() => {
@@ -28,14 +28,14 @@ socket.on('connect', function() {
 function calculateTip(){
 	console.log('clicked!' + new Date());
     var serviceQual = document.getElementById("serviceQual").value;
-    var billAmt = document.getElementById("sumTotal").value;
+    var billAmt = document.getElementById("singlePayTotal").value;
 	var total = (billAmt * serviceQual);
 	//round to two decimal places
 	total = Math.round(total * 100) / 100;
     //next line allows us to always have two digits after decimal point
 	total = total.toFixed(2);
 	//Display the tip
-    //document.getElementById("totalTip").style.display = "block";
+    document.getElementById("totalTip").style.display = "block";
 	//document.getElementById("tip").innerHTML = total;
 }	  
 //click to call function
@@ -45,17 +45,17 @@ document.getElementById("calculate").onclick = function() {
 };
 
 //for submitting order
-$(document).ready(function () {
-	$('.btn btn-primary').on('click', sub);
-});
+//$(document).ready(function () {
+//	$('.btn btn-primary').on('click', sub);
+//});
 
-function sub() {
-	console.log('clicked!' + new Date());
-}
+//function sub() {
+//	console.log('clicked!' + new Date());
+//}
 
-document.getElementById("singlesub").onclick = function() {
-	console.log('hi')
-};
+//document.getElementById("singlesub").onclick = function() {
+//	console.log('hi')
+//};
 
 
 // //opens a modal to add to order and make any changes or note any allergies
