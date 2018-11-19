@@ -53,8 +53,9 @@
     color:#fff;
     font-family: 'Whitney,Helvetica Neue,Helvetica,Arial,sans-serif';
     position: relative;
-    margin-left: 50%;
-    margin-top: 10%;
+    margin-left: 25%;
+    margin-top: 0%;
+    padding: 0px 5px;
     display: none;
 }
 
@@ -77,6 +78,15 @@
     float: right;
     display: none;
 }
+
+.status_indicator_on{
+    height: 20px;
+    width: 20px;
+    background-color: #66FFB2;
+    float: right;
+    display: block;
+}
+
 
 .main {
     height:100%;
