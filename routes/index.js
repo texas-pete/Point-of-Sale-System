@@ -74,7 +74,8 @@ router.post("/getItemName/:db_name", function (req, res) { //Verify the value is
 
   var MongoClient = mongodb.MongoClient;
   var url = "mongodb://localhost:27017/4quad";
-
+  console.log(req.params.db_name.length)
+  console.log(" LOOK AT ME OBJECT ID" + req.params.db_name);
   MongoClient.connect(url, function (err, db) {
     if (err) {
       console.log("Unable to connect to the Server");
@@ -88,6 +89,7 @@ router.post("/getItemName/:db_name", function (req, res) { //Verify the value is
         var objID = new ObjectId(req.params.db_name);
         var query = { "_id": objID }; //we need to pass the table number requesting
         var collection = db.collection("menu_items");
+        console.log(" LOOK AT ME OBJECT ID" + req.params.db_name);
         collection.find(query).toArray(function (err, results) {
           if (err) {
             console.log(err);
