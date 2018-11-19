@@ -3644,7 +3644,52 @@ router.get("/guest-drinks/gf/", function (req, res) {
   });
 });
 
+// //ARCHIVE ORDER
+// // newdb is the database we drop
+// var url = "mongodb://localhost:27017/4quad/submitted_orders";
+ 
+// // create a client to mongodb
+// var MongoClient = require('mongodb').MongoClient;
+ 
+// // make client connect to mongo service
+// MongoClient.connect(url, function(err, db) {
+//     if (err) throw err;
+//     console.log("Connected to Database!");
+//     // print database name
+//     console.log("db object points to the database : "+ db.submitted_orders);
+//     // delete the database
+//     var mongoCommand = { copydb: 1, fromhost: "localhost", fromdb: "submitted_orders", todb: "archived_orders" }
+//     db.copyDatabase(mongoCommand, function(err, result){
+//         console.log("Error : "+err);
+//         if (err) throw err;
+//         console.log("Operation Success ? "+result);
+//         // after all the operations with db, close it.
+//         db.close();
+//     });
+// });
 
+// //DROPPING SUBMITTED ORDER
+// // newdb is the database we drop
+// var url = "mongodb://localhost:27017/4quad/submitted_orders";
+ 
+// // create a client to mongodb
+// var MongoClient = require('mongodb').MongoClient;
+ 
+// // make client connect to mongo service
+// MongoClient.connect(url, function(err, db) {
+//     if (err) throw err;
+//     console.log("Connected to Database!");
+//     // print database name
+//     console.log("db object points to the database : "+ db.submitted_orders);
+//     // delete the database
+//     db.dropDatabase(function(err, result){
+//         console.log("Error : "+err);
+//         if (err) throw err;
+//         console.log("Operation Success ? "+result);
+//         // after all the operations with db, close it.
+//         db.close();
+//     });
+// });
 
 
 

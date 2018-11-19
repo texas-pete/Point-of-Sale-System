@@ -9,6 +9,8 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 		<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+	 	crossorigin="anonymous"></script>
 		<link href="http://localhost:3000/stylesheets/payStyle.css" rel="stylesheet">
 
 	</head>
@@ -119,27 +121,14 @@
 
 <!-- Single Pay Modal -->
 <div class="modal fade" id="ModalLong2" tabindex="-1" role="dialog" aria-labelledby="ModalLong2Title" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="ModalLong2Title">Single Pay</h5>
 				<div class="close" data-dismiss="modal">+</div>
 			</div>
 			<div class="modal-body">
-					<form>
-						<p>Leave A Tip: How was your service?<p>
-							<select id="serviceQual">
-					 			<option disabled selected value="0">-- Choose an Option --</option>
-								<option value="0.3">30&#37; &#45; Outstanding</option>
-								<option value="0.2">20&#37; &#45; Good</option>
-								<option value="0.15">15&#37; &#45; Okay</option>
-								<option value="0.1">10&#37; &#45; Bad</option>
-								<option value="0.05">5&#37; &#45; Terrible</option>
-							</select>
-							  
-					</form>
-
-
+					
 					<% var sumTotal = 0; %> <% var TaxRate = 0.0825; %>
 					<!--Print Order Total-->
 					<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
@@ -147,52 +136,84 @@
 					<% } %>	
 					<h5>Order Total: $<%= parseFloat(sumTotal); %></h5>
 					<% var serviceQual = 'serviceQual'.value %>
-					<% var Tip = serviceQual * parseFloat(sumTotal); %>
-					<h5>Gratuity: $<%= parseFloat(Tip); %></h5>
+					<% var Tip = parseFloat(serviceQual * sumTotal); %>
+					<h5>Gratuity: $<%= Tip; %></h5>
+
+					<script type="text/javascript">
+						$(document).ready(() => {
+							$('#calculate').click(() => {
+								console.log('clicked!' + new Date());
+							});
+						});
+					
+					</script>
+					<script>
+					//document.getElementById("calculate").onclick = function() {
+					//	var serviceQual = document.getElementById("serviceQual").value;
+					//	var total = (<%sumTotal%> * serviceQual);//??????????????????????????
+						//round to two decimal places
+					//	total = Math.round(total * 100) / 100;
+    					//next line allows us to always have two digits after decimal point
+					//	total = total.toFixed(2);
+						//Display the tip
+    					//document.getElementById("totalTip").style.display = "block";
+					//	document.getElementById("tip").innerHTML = total;
+					//};</script>
+					<!--<form>
+							<select id="serviceQual">
+					 			<option disabled selected value="0">-- Choose an Option --</option>
+								<option value="0.3">30&#37; &#45; Outstanding</option>
+								<option value="0.2">20&#37; &#45; Good</option>
+								<option value="0.15">15&#37; &#45; Okay</option>
+								<option value="0.1">10&#37; &#45; Bad</option>
+								<option value="0.05">5&#37; &#45; Terrible</option>
+							</select>		  
+					</form>-->
 					<% var Tax = parseFloat(sumTotal * TaxRate); %>
 					<h5>Sales Tax: $<%= Tax.toFixed(2) %></h5>
 					<% var OverallTot = sumTotal + Tip + Tax; %>
 					<h5>Overall Total: $<%= OverallTot.toFixed(2) %></h5>
 			</div>
 			<div class="modal-footer">
-					<div class="col-50">
-							<h3>Payment</h3>
-							<label for="cname">Name on Card</label><br>
-							<input type="text" id="cname" name="cardname" placeholder="John More Doe">
-							<br><label for="ccnum">Credit card number</label><br>
-							<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-							<br><label for="expmonth">Exp Month</label><br>
-							<input type="text" id="expmonth" name="expmonth" placeholder="September">
-							<div class="row">
-								<div class="col-50">
-								<label for="expyear">Exp Year</label><br>
-								<input type="text" id="expyear" name="expyear" placeholder="2018">
-								</div>
-								<div class="col-50">
-								<label for="cvv">CVV</label><br>
-								<input type="text" id="cvv" name="cvv" placeholder="352">
-								</div>
-								<br><br><br><br>
-								<!--<form>
-									<p>Leave A Tip: How was your service?<p>
-											<select id="serviceQual">
-										  <option disabled selected value="0">-- Choose an Option --</option>
-										  <option value="0.3">30&#37; &#45; Outstanding</option>
-										  <option value="0.2">20&#37; &#45; Good</option>
-										  <option value="0.15">15&#37; &#45; Okay</option>
-										  <option value="0.1">10&#37; &#45; Bad</option>
-										  <option value="0.05">5&#37; &#45; Terrible</option>
-									  </select>
-							  
-								  </form>-->
-								
-								<button type="button" class="btn btn-primary">Submit Payment</button>
-						</div> 
-							</div>
-			</div>
+				<div class="col-50">
+					<h3>Payment</h3>
+					<label for="cname">Name on Card</label><br>
+					<input type="text" id="cname" name="cardname" placeholder="John More Doe">
+					<br><label for="ccnum">Credit card number</label><br>
+					<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+					<br><label for="expmonth">Exp Month</label><br>
+					<input type="text" id="expmonth" name="expmonth" placeholder="September">
+					<div class="row">
+						<div class="col-50">
+							<label for="expyear">Exp Year</label><br>
+							<input type="text" id="expyear" name="expyear" placeholder="2018">
+						</div>
+						<div class="col-50">
+							<label for="cvv">CVV</label><br>
+							<input type="text" id="cvv" name="cvv" placeholder="352">
+						</div>
+						<br><br><br><br>
+						<form><!--TIP-->
+							<select id="serviceQual">
+					 			<option disabled selected value="0">-- Choose an Option --</option>
+								<option value="0.2">20&#37; &#45; Great</option>
+								<option value="0.15">15&#37; &#45; Good</option>
+								<option value="0.1">10&#37; &#45; Bad</option>
+							</select>		  
+						</form>
+							
+						<button type="button" class="btn btn-primary btn-sm" id="calculate" onclick="calculateTip()">CALCULATE TIP</button>
+						<button type="button" class="btn btn-primary" id="singleSub">Submit Payment</button>
+						<script>
+								document.getElementById("singlesub").onclick = function() {
+								};
+						</script>
+					</div> 
+				</div>
 			</div>
 		</div>
-		</div>
+	</div>
+</div>
 
 </body>
 
@@ -200,4 +221,6 @@
     <!-- Navigation -->
 	<% include partials/guestnavbar %>
 </footer>
+<script type ="text/javascript" src="pay.js"></script>
+
 </html>
