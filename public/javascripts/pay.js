@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*const socket = io();//MIGHT NEED
 
 socket.on('connect', function() {
@@ -23,7 +24,23 @@ socket.on('connect', function() {
 		  });
 	  });
   });
+=======
+>>>>>>> fdbd1810386a8f2265f320051c5cc2eef36ef0c6
 
+$(document).ready(() => {
+	$('#calculate').click(() => {
+		console.log('clicked!' + new Date());
+		$.ajax({
+			url: 'guest-pay/',
+			type: 'GET',
+			dataType: '',
+			success: (data) => {
+				console.log('ajax success!', data);
+				location.reload();
+			}
+		});
+	});
+});
 
 function calculateTip(){
 	console.log('clicked!' + new Date());
@@ -53,9 +70,15 @@ document.getElementById("calculate").onclick = function() {
 //	console.log('clicked!' + new Date());
 //}
 
+<<<<<<< HEAD
 //document.getElementById("singlesub").onclick = function() {
 //	console.log('hi')
 //};
+=======
+document.getElementById("singleSub").onclick = function() {
+	console.log('hi');
+};
+>>>>>>> fdbd1810386a8f2265f320051c5cc2eef36ef0c6
 
 
 // //opens a modal to add to order and make any changes or note any allergies
