@@ -3644,30 +3644,51 @@ router.get("/guest-drinks/gf/", function (req, res) {
   });
 });
 
-// //ARCHIVE ORDER
-// // newdb is the database we drop
-// var url = "mongodb://localhost:27017/4quad/submitted_orders";
- 
-// // create a client to mongodb
-// var MongoClient = require('mongodb').MongoClient;
- 
-// // make client connect to mongo service
-// MongoClient.connect(url, function(err, db) {
-//     if (err) throw err;
-//     console.log("Connected to Database!");
-//     // print database name
-//     console.log("db object points to the database : "+ db.submitted_orders);
-//     // delete the database
-//     var mongoCommand = { copydb: 1, fromhost: "localhost", fromdb: "submitted_orders", todb: "archived_orders" }
-//     db.copyDatabase(mongoCommand, function(err, result){
-//         console.log("Error : "+err);
-//         if (err) throw err;
-//         console.log("Operation Success ? "+result);
-//         // after all the operations with db, close it.
-//         db.close();
-//     });
-// });
+router.post("/guest-pay/submit/", function (req, res) {
 
+//submits the active order to submited order db
+
+  console.log(currentTable + " is submitting their order!");
+
+  MongoClient.connect(
+    url,
+    function (err, db) {
+      if (err) {
+        console.log("Unable to connect to the db server");
+      }
+      else {//attempt making query
+        var query = { table: currentTable.toString() };
+        var collection = db.collection("submitted_orders");
+
+        collection.find(query).toArray(function (err, results) {
+          if (err) {
+            console.log(err);
+          }
+          else if (results.length) {//want to insert the values of the ordered items for the current table to submitted orders
+            var t_insert = { table: results[0].table, archivedItems: results[0].orderedItems, tax: req.params.order_tax, total: req.params.order_total, tips: req.params.order_tips, orderID: results[0]._id };
+            //console.log(util.inspect(t_insert, {showHidden:false, depth: null}));
+
+            var t_collection = db.collection("archived_orders");
+            t_collection.insert(t_insert, function (err) {
+              if (err) {
+                console.log(err);
+              }
+              else {//we want to clear out the current order
+                  collection.remove({table: results[0].table, archivedItems: results[0].orderedItems}, {justOne: 1} )
+              }
+            });
+            //need to clear out contents
+            //
+          }
+          else {
+            console.log("Should not happen, a table should be instantiated for everyone.");
+          }
+        });
+      }
+    }
+  );
+});
+}
 // //DROPPING SUBMITTED ORDER
 // // newdb is the database we drop
 // var url = "mongodb://localhost:27017/4quad/submitted_orders";

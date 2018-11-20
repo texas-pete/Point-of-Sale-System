@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*const socket = io();//MIGHT NEED
 
 socket.on('connect', function() {
@@ -10,7 +9,7 @@ socket.on('connect', function() {
     socket.emit("joinDR");
  });*/
   
-  $(document).ready(() => {
+  /*$(document).ready(() => {
 	  $('#calculate').click(() => {
 		  console.log('clicked!' + new Date());
 		  $.ajax({
@@ -24,8 +23,6 @@ socket.on('connect', function() {
 		  });
 	  });
   });
-=======
->>>>>>> fdbd1810386a8f2265f320051c5cc2eef36ef0c6
 
 $(document).ready(() => {
 	$('#calculate').click(() => {
@@ -40,26 +37,33 @@ $(document).ready(() => {
 			}
 		});
 	});
-});
+});*/
 
 function calculateTip(){
-	console.log('clicked!' + new Date());
-    var serviceQual = document.getElementById("serviceQual").value;
-    var billAmt = document.getElementById("singlePayTotal").value;
-	var total = (billAmt * serviceQual);
+	var serviceQual = document.getElementById("serviceQual").value;
+	console.log(serviceQual);
+	var billAmt = document.getElementById("singlePayTotal").innerText;
+	console.log(billAmt);
+	var tax = parseFloat(billAmt * 0.0825).toFixed(2);
+	console.log(tax);
+	//tax = Math.round(0.0825 * billAmt);
+	var total = (parseFloat(billAmt) * serviceQual);
 	//round to two decimal places
 	total = Math.round(total * 100) / 100;
     //next line allows us to always have two digits after decimal point
 	total = total.toFixed(2);
+	var overallTot = parseFloat(total) + parseFloat(tax) + parseFloat(billAmt);
+	overallTot = overallTot.toFixed(2);
 	//Display the tip
-    document.getElementById("totalTip").style.display = "block";
-	//document.getElementById("tip").innerHTML = total;
+    document.getElementById("totalTip").innerHTML = total;
+	document.getElementById("overallTotal").innerHTML = overallTot;
 }	  
 //click to call function
 document.getElementById("calculate").onclick = function() {
-  console.log('clicked!' + new Date());
   calculateTip();
 };
+
+
 
 //for submitting order
 //$(document).ready(function () {
@@ -70,15 +74,9 @@ document.getElementById("calculate").onclick = function() {
 //	console.log('clicked!' + new Date());
 //}
 
-<<<<<<< HEAD
-//document.getElementById("singlesub").onclick = function() {
+//document.getElementById("singleSub").onclick = function() {
 //	console.log('hi')
 //};
-=======
-document.getElementById("singleSub").onclick = function() {
-	console.log('hi');
-};
->>>>>>> fdbd1810386a8f2265f320051c5cc2eef36ef0c6
 
 
 // //opens a modal to add to order and make any changes or note any allergies
