@@ -274,7 +274,166 @@ router.get("/kitchenstaff", function (req, res) {
 
 // Terminal View for Management
 router.get("/manager", function (req, res) {
-  res.render("manager", { page: "Management View" });
+  MongoClient.connect(url, function (err, db) {
+    if(err){
+      console.log("Could not connect to db")
+    }
+    else{
+      console.log("Connection established with MongoDB Server");
+      var collection = db.collection("menu_items");
+      collection.find({}).toArray(function (err, results) {//gets all menu items and stores in var menuItems
+        if (err) {
+          console.log(err);
+        }
+        else if (results.length) {
+          var menuItems = results
+
+          collection = db.collection('submitted_orders');
+          collection.find({}).toArray(function(err, results){//gets submitted items
+            if(err){
+              console.log(err);
+            }
+            else{
+              console.log('received submitted orders')
+              //console.log(results)
+              var submittedOrders = results
+              setTimeout(function () {//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+                res.render("manager", { page: 'Management View', items: menuItems, orders: submittedOrders });
+              }, 500);
+
+            }
+          });
+
+          //res.render("kitchenstaff", { page: "Kitchen Staff View", orderItems: results});
+          //res.render("manager", { page: "Management View", items: results });
+          /*setTimeout(function () {//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+            res.render("manager", { page: 'Management View', items: menuItems });
+          }, 500);*/
+        }
+        else {
+          console.log("No results! ERROR");
+        }
+      });
+    }
+  });
+    
+});
+
+router.post("/hideMenuItem/:id", function(req, res){
+  console.log('ok')
+  MongoClient.connect(url, function (err, db) {
+    if(err){
+      console.log("Could not connect to db")
+    }
+    else{
+      console.log("Connection established with MongoDB Server");
+      var collection = db.collection("menu_items");
+
+      var objId = new ObjectId(req.params.id);
+
+      collection.find({_id: objId}).toArray(function (err, results) {
+        if(err){
+          console.log(err)
+        }
+        else if(results.length){
+          console.log('got results');
+          //change from active to not active
+          console.log(results[0].Active)
+          var isActive = results[0].Active
+          if(isActive == 'yes'){
+            isActive = 'no'
+          }
+          else{
+            isActive = 'yes'
+          }
+          results[0].active = isActive
+          console.log(results[0].active)
+
+          console.log(results)
+          collection.updateOne({_id: objId}, {$set: {'Active': isActive}}, function(){
+            console.log('Successfully removed or added a menu item');
+            res.send('ok')
+          });
+        }
+        else{
+          console.log('no results,should not happen!')
+        }
+      });
+    }
+  });
+});
+
+router.post("/compensate/:id", function(req, res){
+  console.log('compensating')
+  MongoClient.connect(url, function (err, db) {
+    if(err){
+      console.log("Could not connect to db")
+    }
+    else{
+      console.log("Connection established with MongoDB Server");
+      var collection = db.collection("submitted_orders");
+
+      var objId = new ObjectId(req.params.id);
+
+      collection.find({_id: objId}).toArray(function (err, results) {
+        if(err){
+          console.log(err)
+        }
+        else if(results.length){
+          console.log('got results, setting price to zero');
+          //change to zero
+          console.log(results[0].orderedItems)
+          for(var i = 0; i < results[0].orderedItems.length; i++){
+            results[0].orderedItems[i].price = '0.00'
+          }
+          console.log(results[0].orderedItems)
+
+
+
+
+            //update
+            var priceChange = results[0].orderedItems
+            collection.updateOne({_id: objId}, {$set: {'orderedItems': priceChange}}, function(){
+              console.log('Successfully made the price = 0');
+              res.send('ok')
+            });           
+
+
+        }
+        else{
+          console.log('no results,should not happen!')
+        }
+      });
+    }
+  });
+});
+
+router.post("/lookup/:id", function(req, res){
+  console.log('loking up')
+  MongoClient.connect(url, function (err, db) {
+    if(err){
+      console.log("Could not connect to db")
+    }
+    else{
+      console.log("Connection established with MongoDB Server");
+      var collection = db.collection("archived_orders");//looking at archived orders
+      var objId =req.params.id;
+
+      collection.find({orderID: objId}).toArray(function (err, results) {
+        if(err){
+          console.log(err)
+        }
+        else if(results.length){
+          console.log('got results, need to send to manager.ejs')           
+          res.send(results)
+        }
+        else{
+          console.log('can happen')
+          res.send('empty')
+        }
+      });
+    }
+  });
 });
 
 //TODO: MAY NEED TABLE VARIABLE PASSED-IN FOR ALL?
