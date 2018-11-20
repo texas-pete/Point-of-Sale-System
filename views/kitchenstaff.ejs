@@ -4,8 +4,11 @@
     <head>
         <% include partials/head %>
         <link rel="stylesheet" href="http://localhost:3000/stylesheets/kitchenstaff/newkitchen.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <% include partials/script %>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
     </head>
 
 
@@ -22,9 +25,6 @@
 <body>
 <!--Main Page-->
 <div class="main">
-    <div class="button" id = "Help">
-          <h3>Help</h3>
-    </div>
     <div class="button" id = "Ready">
           <h3>Ready</h3>
     </div>
@@ -37,7 +37,7 @@
       <% orderItems.forEach(function(item, index){ %>
         <% for(let j = 0; j < item.orderedItems.length; j++){  %> 
             <div id='_<%= item._id %>' class= "order_display_main"> 
-                  <h5> Menu Item ID: <%= orderItems[index].orderedItems[j].item %></h5>
+                  <h5> Menu Item ID: <span id= '___<%= item._id %>'><%=orderItems[index].orderedItems[j].item%></span></h5>
                   <h5> Notes and Allergies: <%= orderItems[index].orderedItems[j].notes %></h5>
             </div>
       <% } %>  

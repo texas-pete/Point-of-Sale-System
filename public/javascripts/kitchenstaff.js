@@ -17,10 +17,32 @@ $(document).ready(function () {
 		currentID = id;
 		divID = "_" + id;
 		divID2 = "__" + id;
-		console.log(divID);
-
+		divID3 = "___" + id;
+		
+		let x = $('#' + divID3).html();
+		console.log(x);
+		console.log(x.length);
 		// hide the others
 		$(".order_display_main").hide();
+		$.ajax({ //there is a way to do this via $.post("/getTableOrder/" + sidebarVal) but keeping ajax as such
+              url: "/getItemName/" + $('#' + divID3).html(),
+              type: "POST",
+              success: function (retVal) { //responseData contains the returned 'name' from our ID
+
+
+
+            	$('#' + divID3).html(retVal); //we know we are only returning a string for a name.
+                //anytime we insert a value, we have to increment the q value because there are only q slots avaialble to store names.
+              },
+              error: function () { //if we can't find the name in our database
+			 	 $('#' + divID3).html($('#' + divID3).html());	
+                //anytime we insert a value, we have to increment the q value because there are only q slots avaialble to store names.
+              }
+            });
+
+		//  ___divid.innerhtml = retval  
+
+
 		// show this one
 		$("#"+divID).show();
 
@@ -30,20 +52,14 @@ $(document).ready(function () {
 //asks the user whether they're sure if they want to delete this item
 function removeFromOrder(){
 	if(confirm('Are you sure this item is ready?')){
-		var index = id;
-		console.log("Item ready " + index);
-
-		//communicates w/ server that we want to remove the index value from current active orders
-		$.ajax({
-			url: "/removeFromOrder/" + index,
-			type: "POST",
-			success: function(responseData){//reloads the order to reflect changes
-				alert("The item has been cleared since it is ready.");
-				location.reload();
-			},
-			error: console.error
-		});
+		var index = currentID;
+		if(currentID !== 0){
+			$('#'+ currentID).hide();
+			$('#_'+ currentID).hide();
+			currentID = 0; 
+		}
 	}
+	
 }
 
 
