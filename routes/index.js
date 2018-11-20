@@ -3690,7 +3690,6 @@ router.post("/guest-pay/submit/", function (req, res) {
     }
   );
 });
-}
 // //DROPPING SUBMITTED ORDER
 // // newdb is the database we drop
 // var url = "mongodb://localhost:27017/4quad/submitted_orders";

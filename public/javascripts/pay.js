@@ -64,6 +64,26 @@ document.getElementById("calculate").onclick = function() {
 };
 
 
+$("#singleSub").click(function () {
+
+	console.log("hello");
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //for submitting order
 //$(document).ready(function () {
