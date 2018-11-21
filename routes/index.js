@@ -3828,7 +3828,7 @@ router.post("/guest-pay/submit/:order_tax/:order_total/:order_tips/", function (
           else if (results.length) {//want to insert the values of the ordered items for the current table to submitted orders
             var t_id = results[0]._id
             console.log('The id is: ' + t_id)
-            var t_insert = { table: results[0].table, archivedItems: results[0].orderedItems, tax: req.params.order_tax, total: req.params.order_total, tips: req.params.order_tips, orderID: t_id };
+            var t_insert = { table: results[0].table, archivedItems: results[0].orderedItems, tax: req.params.order_tax, total: req.params.order_total, tips: req.params.order_tips, orderID: t_id.toString() };
             //console.log(util.inspect(t_insert, {showHidden:false, depth: null}));
 
             var t_collection = db.collection("archived_orders");
