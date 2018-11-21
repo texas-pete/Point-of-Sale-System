@@ -57,9 +57,8 @@ crossorigin="anonymous"></script>
               <div style="margin-left:25%">
                 <div id="Lookup" class="w3-container tab" style="display:none">
                   <h2>Lookup</h2>
-                  <input type="text" class="w3-bar-item w3-input" placeholder="Search...">
                   <form>
-                    <input type="text" name="objID" id='objID'><br>
+                    <input type="text" name="objID" id='objID' placeholder="Search..."><br>
                   </form>
                   <a href="#" class="w3-bar-item w3-button w3-green" onclick="lookupOrder()">Go</a>
                 
@@ -69,7 +68,7 @@ crossorigin="anonymous"></script>
                   <table class="w3-table-all">
                   <tr>
                     <th>Order Number</th>
-                    <th>Order Details</th>
+                    <th>Table Number</th>
                     <th>Served by</th>
                     <th>Total price</th>
                     <th>Tip</th>
@@ -99,45 +98,24 @@ crossorigin="anonymous"></script>
                   <tr>
                     <th>Ingredients</th>
                     <th>Quality</th>
+                    <th>Decrease</th>
+                    <th>Increase</th>
                   </tr>
+                  <% products.forEach(function(product, index) { %>
+                    <tr>
+                        <th><%= product.Name %></th>
+                        <th><%= product.Quantity %></th>
+                        <th><button onclick="inventoryD($(this))" data-id=<%= product._id %>>-</button></th>
+                        <th><button onclick="inventoryI($(this))" data-id=<%= product._id %>>+</button></th>
+                    </tr>
+
+                  <% }) %>
                   <tr>
                     <td>Row 1</td>
                     <td>
                   <button class="w3-button w3-small w3-teal">-</button>
                     <button class="w3-button w3-small w3-teal">+</button>
                   <td>23</td>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Row 2</td>
-                    <td>
-                  <button class="w3-button w3-small w3-teal">-</button>
-                    <button class="w3-button w3-small w3-teal">+</button>
-                  <td>55</td>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Row 3</td>
-                    <td>
-                  <button class="w3-button w3-small w3-teal">-</button>
-                    <button class="w3-button w3-small w3-teal">+</button>
-                  <td>104</td>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Row 4</td>
-                    <td>
-                  <button class="w3-button w3-small w3-teal">-</button>
-                    <button class="w3-button w3-small w3-teal">+</button>
-                  <td>79</td>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Row 5</td>
-                    <td>
-                  <button class="w3-button w3-small w3-teal">-</button>
-                    <button class="w3-button w3-small w3-teal">+</button>
-                  <td>44</td>
                     </td>
                   </tr>
                   </table>
@@ -174,72 +152,24 @@ crossorigin="anonymous"></script>
               <div style="margin-left:25%">
                 <div id="General Revenue" class="w3-container tab" style="display:none">
                   <h2>General Revenue</h2>
-                  <input type="text" class="w3-bar-item w3-input" placeholder="Search... (Ex: 01/02/18)">
-                  <a href="#" class="w3-bar-item w3-button w3-green">Go</a>
               
                   <div class="w3-container">
                   <h3> </h3>
                   <div class="w3-responsive">
                   <table class="w3-table-all">
                   <tr>
-                    <th>Date</th>
-                    <th>Total Revenue</th>
-                    <th>Total Orders</th>
-                    <th>Total Compensations</th>
+                    <th>Order ID</th>
+                    <th>Tip</th>
+                    <th>Tax</th>
+                    <th>Total</th>
                   </tr>
                   <tr>
-                    <td>04/08/18</td>
-                    <td>$23,725.53</td>
-                    <td>327</td>
-                    <td>21</td>
                   </tr>
                   <tr>
-                    <td>04/07/18</td>
-                    <td>$18,674.22</td>
-                    <td>205</td>
-                    <td>6</td>
-                  </tr>
-                  <tr>
-                    <td>04/06/18</td>
-                    <td>$24,998.11</td>
-                    <td>405</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <td>04/05/18</td>
-                    <td>$28,712.45</td>
-                    <td>455</td>
-                    <td>22</td>
-                  </tr>
-                  <tr>
-                    <td>04/04/18</td>
-                    <td>$15,677.54</td>
-                    <td>167</td>
-                    <td>14</td>
-                  </tr>
-                  <tr>
-                    <td>04/03/18</td>
-                    <td>$17,345.77</td>
-                    <td>201</td>
-                    <td>3</td>
-                  </tr>
-                  <tr>
-                    <td>04/02/18</td>
-                    <td>$30,501.03</td>
-                    <td>501</td>
-                    <td>25</td>
-                  </tr>
-                  <tr>
-                    <td>04/01/18</td>
-                    <td>$29,233.41</td>
-                    <td>455</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                    <td>03/31/18</td>
-                    <td>$22,592.33</td>
-                    <td>397</td>
-                    <td>12</td>
+                    <td>23424243</td>
+                    <td>$2.53</td>
+                    <td>$3.37</td>
+                    <td>$21.75</td>
                   </tr>
                   </table>
                   </div>
@@ -282,6 +212,38 @@ crossorigin="anonymous"></script>
                     }
                 });
               }
+              function inventoryD(btn){
+                id = $(btn).attr("data-id");
+                console.log(id)
+                $.ajax({
+                    url: "/inventoryD/" + id,
+                    type: "POST",
+                    success: function (responseData) {
+                        console.log(responseData);
+                        location.reload();
+                        //refresh
+                    },
+                    error: function (responseData) { //if we have a fake item in our dbase, we can still remove it
+                        console.log(responseData);
+                    }
+                });
+              }
+              function inventoryI(btn){
+                id = $(btn).attr("data-id");
+                console.log(id)
+                $.ajax({
+                    url: "/inventoryI/" + id,
+                    type: "POST",
+                    success: function (responseData) {
+                        console.log(responseData);
+                        location.reload();
+                        //refresh
+                    },
+                    error: function (responseData) { //if we have a fake item in our dbase, we can still remove it
+                        console.log(responseData);
+                    }
+                });
+              }
               function freeMeal(btn){
                   id = $(btn).attr('data-id')
                   console.log(id)
@@ -291,7 +253,7 @@ crossorigin="anonymous"></script>
                     success: function (responseData) {
                         console.log(responseData);
                         location.reload();
-                        // refresh
+                        //refresh
                     },
                     error: function (responseData) { //if we have a fake item in our dbase, we can still remove it
                         console.log(responseData);

@@ -286,10 +286,12 @@ router.get("/manager", function (req, res) {
           console.log(err);
         }
         else if (results.length) {
+          console.log('received menu items')
+          console.log(results)
           var menuItems = results
 
           collection = db.collection('submitted_orders');
-          collection.find({}).toArray(function(err, results){//gets submitted items
+          collection.find({}).toArray(function(err, results){ //gets submitted items
             if(err){
               console.log(err);
             }
@@ -297,18 +299,27 @@ router.get("/manager", function (req, res) {
               console.log('received submitted orders')
               //console.log(results)
               var submittedOrders = results
-              setTimeout(function () {//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
-                res.render("manager", { page: 'Management View', items: menuItems, orders: submittedOrders });
-              }, 500);
 
+              collection = db.collection('ingredients');
+              collection.find({}).toArray(function(err, results){ //gets ingredients
+                if(err){
+                  console.log(err);
+                }
+                else if (results.length) {
+                  console.log('received inventory stuff')
+                  console.log(results)
+                  var pulledIngredients = results
+                  
+                  setTimeout(function () { //need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+                  res.render("manager", { page: 'Management View', items: menuItems, orders: submittedOrders, products: pulledIngredients });
+                  }, 500);
+                }
+                else {
+                  console.log("No results! ERROR");
+                }
+              });
             }
           });
-
-          //res.render("kitchenstaff", { page: "Kitchen Staff View", orderItems: results});
-          //res.render("manager", { page: "Management View", items: results });
-          /*setTimeout(function () {//need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
-            res.render("manager", { page: 'Management View', items: menuItems });
-          }, 500);*/
         }
         else {
           console.log("No results! ERROR");
@@ -316,7 +327,84 @@ router.get("/manager", function (req, res) {
       });
     }
   });
-    
+});
+
+router.post("/inventoryD/:id", function(req, res){
+  console.log('ok')
+  MongoClient.connect(url, function (err, db) {
+    if(err){
+      console.log("Could not connect to db")
+    }
+    else{
+      console.log("Connection established with MongoDB Server");
+      var collection = db.collection("ingredients");
+
+      var objId = new ObjectId(req.params.id);
+
+      collection.find({_id: objId}).toArray(function (err, results) {
+        if(err){
+          console.log(err)
+        }
+        else if(results.length){
+          console.log('got results');
+          //decrease quantity
+          console.log(results[0].Quantity)
+          var isQuantity = results[0].Quantity
+          isQuantity = isQuantity - 1
+          results[0].Quantity = isQuantity
+          console.log(results[0].Quantity)
+
+          console.log(results)
+          collection.updateOne({_id: objId}, {$set: {'Quantity': isQuantity}}, function(){
+            console.log('Successfully decreases by 1');
+            res.send('ok')
+          });
+        }
+        else{
+          console.log('no results, should not happen!')
+        }
+      });
+    }
+  });
+});
+
+router.post("/inventoryI/:id", function(req, res){
+  console.log('ok')
+  MongoClient.connect(url, function (err, db) {
+    if(err){
+      console.log("Could not connect to db")
+    }
+    else{
+      console.log("Connection established with MongoDB Server");
+      var collection = db.collection("ingredients");
+
+      var objId = new ObjectId(req.params.id);
+
+      collection.find({_id: objId}).toArray(function (err, results) {
+        if(err){
+          console.log(err)
+        }
+        else if(results.length){
+          console.log('got results');
+          //increase quantity
+          console.log(results[0].Quantity)
+          var isQuantity = results[0].Quantity
+          isQuantity = isQuantity + 1
+          results[0].Quantity = isQuantity
+          console.log(results[0].Quantity)
+
+          console.log(results)
+          collection.updateOne({_id: objId}, {$set: {'Quantity': isQuantity}}, function(){
+            console.log('Successfully increases by 1');
+            res.send('ok')
+          });
+        }
+        else{
+          console.log('no results, should not happen!')
+        }
+      });
+    }
+  });
 });
 
 router.post("/hideMenuItem/:id", function(req, res){
@@ -388,17 +476,12 @@ router.post("/compensate/:id", function(req, res){
           }
           console.log(results[0].orderedItems)
 
-
-
-
             //update
             var priceChange = results[0].orderedItems
             collection.updateOne({_id: objId}, {$set: {'orderedItems': priceChange}}, function(){
               console.log('Successfully made the price = 0');
               res.send('ok')
             });           
-
-
         }
         else{
           console.log('no results,should not happen!')
