@@ -3888,10 +3888,10 @@ router.get("/guest-drinks/gf/", function (req, res) {
   });
 });
 
-router.post("/guest-pay/submit/", function (req, res) {
+router.post("/guest-pay/submit/:order_tax/:order_total/:order_tips/", function (req, res) {
 
 //submits the active order to submited order db
-
+  console.log("HELLO");
   console.log(currentTable + " is submitting their order!");
 
   MongoClient.connect(
@@ -3909,7 +3909,9 @@ router.post("/guest-pay/submit/", function (req, res) {
             console.log(err);
           }
           else if (results.length) {//want to insert the values of the ordered items for the current table to submitted orders
-            var t_insert = { table: results[0].table, archivedItems: results[0].orderedItems, tax: req.params.order_tax, total: req.params.order_total, tips: req.params.order_tips, orderID: results[0]._id };
+            var t_id = results[0]._id
+            console.log('The id is: ' + t_id)
+            var t_insert = { table: results[0].table, archivedItems: results[0].orderedItems, tax: req.params.order_tax, total: req.params.order_total, tips: req.params.order_tips, orderID: t_id.toString() };
             //console.log(util.inspect(t_insert, {showHidden:false, depth: null}));
 
             var t_collection = db.collection("archived_orders");
@@ -3918,7 +3920,7 @@ router.post("/guest-pay/submit/", function (req, res) {
                 console.log(err);
               }
               else {//we want to clear out the current order
-                  collection.remove({table: results[0].table, archivedItems: results[0].orderedItems}, {justOne: 1} )
+                  collection.remove({table: results[0].table, orderedItems: results[0].orderedItems}, {justOne: 1} )
               }
             });
             //need to clear out contents

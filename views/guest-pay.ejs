@@ -18,6 +18,7 @@
 			var tblNumber = <%= tablenum %>
 		</script>
 	</head>
+
 <body>
 
 <!--payment-->
@@ -44,19 +45,23 @@
 	<div class="pay-method">
 		<h3>Pay with Cash:</h3>
 		<h6>Tap the 'Tap for Assistance' Button</h6>
+		<p>Paying with cash? Tell us how much you're tipping.</p>
+		<button type="button" class="btn btn-primarymodal-submit" data-toggle="modal" data-target="#ModalLong3">
+				CASH TIP
+				</button>
 	</div>
 	<br>
 
 	<div class="pay-method">
 		<button type="button" class="btn btn-primarymodal-submit" data-toggle="modal" data-target="#ModalLong2">
-				Single Payment
+				Credit Payment
 				</button>
 	</div>
-	<br>
+	<!-- <br>
 	<button type="button" class="btn btn-primary modal-submit" data-toggle="modal" data-target="#ModalLong">
 		Split Payment
 	  </button>
-</div>
+</div> -->
 
 <!--Assistance Buttons-->
 <div class="assistance">
@@ -73,7 +78,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 	  <div class="modal-content">
 		<div class="modal-header">
@@ -109,11 +114,8 @@
 							<input type="text" id="cvv" name="cvv" placeholder="352">
 							</div><br><br><br><br>
 							<div class="col-50">
-							<!--<form action>="/action_page.php">-->
 								<label for ="numsplit">Split Amongst:</label>
-								<input type="number" name="quantity" min="1" max="9">
-								<!--<input type="submit">-->
-							<!--</form>--><br>
+								<input type="number" name="quantity" min="1" max="9"><br>
 						</div>
 							<button type="button" class="btn btn-primary">Submit Payment</button>
 					</div> 
@@ -121,14 +123,17 @@
 		</div>
 	  </div>
 	</div>
-  </div>
+  </div> -->
 
 <!-- Single Pay Modal -->
 <div class="modal fade" id="ModalLong2" tabindex="-1" role="dialog" aria-labelledby="ModalLong2Title" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
+				<div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
+						<div class="carousel-inner">
+								<div class="carousel-item active">
 			<div class="modal-header">
-				<h5 class="modal-title" id="ModalLong2Title">Single Pay</h5>
+				<h5 class="modal-title" id="ModalLong2Title">Credit Pay</h5>
 				<div class="close" data-dismiss="modal">+</div>
 			</div>
 			<div class="modal-body">
@@ -143,10 +148,14 @@
 					<h5 id='totalTip'></h5>
 
 					<% var Tax = parseFloat(sumTotal * TaxRate); %>
-					<h5>Sales Tax: $<%= Tax.toFixed(2) %></h5>
+					<h5>Sales Tax: $<span id = "totTax"><%=Tax.toFixed(2)%></span></h5>
 					
-					<h5>Overall Total: </h5>
+					<h5>Overall Total: $</h5>
 					<h5 id='overallTotal'></h5>
+					<h5>Total People:</h5>
+					<h5 id='totPPL'></h5>
+					<h5>Total Per Person: $</h5>
+					<h5 id='splitVal'></h5>
 					
 			</div>
 			<div class="modal-footer">
@@ -168,6 +177,13 @@
 							<input type="text" id="cvv" name="cvv" placeholder="352">
 						</div>
 						<br><br><br><br>
+						<div class="col-50">
+								<!--<form action>="/action_page.php">-->
+									<label for ="numsplit">Split Amongst:</label>
+									<input type="number" id = "peopleamt" name="quantity" min="1" max="9">
+									<!--<input type="submit">-->
+								<!--</form>--><br>
+							</div>
 						<form><!--TIP-->
 							<select id="serviceQual">
 					 			<option disabled selected value="0">-- Choose an Option --</option>
@@ -179,16 +195,78 @@
 							
 						<button type="button" class="btn btn-primary btn-sm" id="calculate" >CALCULATE TIP</button>
 						<button type="button" class="btn btn-primary" id="singleSub">Submit Payment</button>
-						<!--<script>
-								document.getElementById("singlesub").onclick = function() {
-								};
-						</script>-->
 					</div> 
 				</div>
 			</div>
 		</div>
+
+<!-- 		<div class="carousel-item">
+				<img class="img-responsive" src="http://placehold.it/1200x600/fffccc/000&text=Two" alt="...">
+				<div class="carousel-caption">
+				  Another Image
+				</div>
+			  </div> -->
+
+		</div>
+			    <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+		<span class="carousel-control-prev-icon"></span>
+	  </a>
+	  <a class="carousel-control-next" href="#demo" data-slide="next">
+		<span class="carousel-control-next-icon"></span>
+	  </a>
+	</div>
+		</div>
 	</div>
 </div>
+
+<!-- Cash Modal -->
+<div class="modal fade" id="ModalLong3" tabindex="-1" role="dialog" aria-labelledby="ModalLong3Title" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ModalLong3Title">Cash Tip</h5>
+					<div class="close" data-dismiss="modal">+</div>
+				</div>
+				<div class="modal-body">
+						
+						<% var sumTotal = 0; %> <% var TaxRate = 0.0825; %>
+						<!--Print Order Total-->
+						<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+							<% sumTotal += parseFloat(order_items[0].orderedItems[i].price); %>
+						<% } %>	
+						<h5>Order Total: $<span id = "singlePayTotal2"><%= parseFloat(sumTotal); %></span></h5>
+						<h5>Gratuity: $</h5>
+						<h5 id='totalTip2'></h5>
+	
+						<% var Tax = parseFloat(sumTotal * TaxRate); %>
+						<h5>Sales Tax: $<span id = "totTax2"><%=Tax.toFixed(2)%></span></h5>
+						
+						<h5>Overall Total: $</h5>
+						<h5 id='overallTotal2'></h5>
+						
+				</div>
+				<div class="modal-footer">
+							<form><!--TIP-->
+								<select id="serviceQual2">
+									 <option disabled selected value="0">-- Choose an Option --</option>
+									<option value="0.2">20&#37; &#45; Great</option>
+									<option value="0.15">15&#37; &#45; Good</option>
+									<option value="0.1">10&#37; &#45; Bad</option>
+									<option value="0.0">0&#37; &#45; No Tip</option>
+								</select>		  
+							</form>
+								
+							<button type="button" class="btn btn-primary btn-sm" id="calculate2">CALCULATE TIP</button>
+							<button type="button" class="btn btn-primary" id="cashSub">Submit</button>
+						</div> 
+					</div>
+				</div>
+			</div>	
+	</div>
+</div>
+
+
 
 </body>
 
