@@ -1,0 +1,53 @@
+Name,Description,Price,VeganFlag,VegetarianFlag,GlutenFreeFlag,SpicyFlag,Category,ImageName,Ingredients,Active,HappyHour
+Buttermilk Pie,"Smooth, mild, and sweet, our buttermilk filling is like a cross between a chess pie and a custard.",7.99,no,yes,no,no,Dessert,desserts/buttermilk-pie.jpg,"Bread, Avocado, Tomatoes, Eggs",yes,3.99
+Cinnamon Roll,"Organic acai blended with strawberries and bananas, and topped with crunchy granola, fresh blueberries and raspberries, sliced bananas, almonds, and chia seeds",7.99,yes,yes,no,no,Dessert,desserts/cinamon-Roll.jpeg,"Bread, Acai, Strawberries, Bananas, Granola, Blueberries",yes,3.99
+Monkey Bread,One country style open-faced biscuit with two freshly cooked sausages topped with homemade white gravy,4.99,no,yes,no,no,Dessert,desserts/monkey-bread.jpg,"Biscuits, Sausage",yes,2.49
+Chocolate Scone,Your classic scone with dark chocolate chunks and sprinkled with coarse sugar and chocolate sauce.,4.99,yes,yes,no,no,Dessert,desserts/chocolate-scone.jpg,"Bacon, Red Peppers, Onions, Chocolate, Bread ",yes,2.49
+Chocolate Crepes,"Chocolate Fudge with creme fraiche, pine nuts and caramelized pears.",4.99,no,yes,no,no,Dessert,desserts/chocolate-crepes.jpg,"Greek Yogurt, Blueberries, Blackberries, Granola",yes,2.49
+Blueberry Breakfast Cakes,,2.99,yes,yes,no,no,Dessert,desserts/blueberry-breakfast-cakes.jpg,"Bread, Almonds, Sugar, Chocolate ",yes,1.49
+The Benny,One poached egg with half a toasted english muffin served two strips of bacon,5.99,no,no,no,no,Kids Meal,kidsmeals/the-benny.jpg,"Eggs, English Muffins, Bacon",yes,2.99
+Rise and Shine,Two sunny side up eggs served with hashbrowns and two stips of bacon,6.99,no,no,yes,no,Kids Meal,kidsmeals/rise-and-shine.jpg,"Eggs, Potatoes, Bacon",yes,3.49
+The English,Two slices of rye bread topped with black beans and shredded sharp cheddar,4.99,no,yes,no,no,Kids Meal,kidsmeals/the-english.jpg,"Bread, Black Beans ",yes,2.49
+Yogurt Parfait,"Creamy vanilla Greek yogurt layered with blueberries, raspberries, blackberries, and granola.",2.99,no,yes,no,no,Appetizer,appetizers/fruity-yogurt-parfait.jpg,"Greek Yogurt, Blueberries, Blackberries, Granola",yes,1.49
+Acai Bowl,"Organic acai blended with strawberries and bananas, and topped with crunchy granola, fresh blueberries and raspberries, sliced bananas, almonds, granola, and chia seeds.",2.99,yes,yes,yes,no,Appetizer,appetizers/acai-bowl.jpg,"Granola, Acai, Strawberries, Blueberries, Bananas, Almond Milk",yes,1.49
+Biscuits & Gravy,One country style open-faced biscuit with two freshly cooked sausages topped with homemade white gravy.,4.99,no,no,no,no,Appetizer,appetizers/biscuits-gravy.jpg,Biscuits,yes,2.49
+Chocolate Croissant,"A light, flaky pastry topped with almonds and powdered sugar and filled with handmade chocolate.",2.99,yes,yes,no,no,Appetizer,appetizers/chocolate-croissant.jpg,"Bread, Chocolate, Almonds, Sugar",yes,1.49
+Crustless Mini Quiche Lorraine,"Bacon, swiss cheese, red bell peppers, and light onions combine in this timeless classic.",4.99,no,no,yes,no,Appetizer,appetizers/quiche.jpg,"Bacon, Red Peppers, Onions",yes,2.49
+Breakfast Bruschetta,"A twist on classic bruschetta! Three slices of toasted rustic whole grain bread topped with california avocados, tomato, hard-boiled eggs and ricotta with basil.",6.99,no,yes,no,no,Appetizer,appetizers/breakfast-bruschetta.jpg,"Bread, Eggs, Avocado, Tomatoes",yes,3.49
+Berry Smoothie,"Strawberry, banana, vanilla, agave, soy milk",3.99,yes,yes,yes,no,Drink,drinks/berry-smoothie.jpg,"Strawberry, Banana, Milk,",yes,1.99
+Mean Green Smoothie,"Pineapples, Bananas, Spinach, Carrots, Lemon Juice Blend, Almonds, Pineapple Mango Juice",3.99,yes,yes,yes,no,Drink,drinks/fruity-mean-green-smoothie.jpg,"Pineapple Mango Juice, Lemon Juice, Banana, Spinach, Almonds ",yes,1.99
+Orange Juice,Freshly squeezed orange juice. ,1.99,yes,yes,yes,no,Drink,drinks/orange-juice.jpg,Orange Juice,yes,0.99
+Apple Juice,"Pasteurized, great tasting apple juice. ",1.99,yes,yes,yes,no,Drink,drinks/apple-juice.jpeg,Apple Juice,yes,0.99
+Milk,Whole milk to go with a delicious breakfast. ,1.49,no,yes,yes,no,Drink,drinks/milk-milk.jpg,Milk,yes,0.75
+Hand Roasted Coffee,"A delicious, warm dark blend of coffee. ",2.49,yes,yes,yes,no,Drink,drinks/hand-coffee.JPG,Coffee Beans ,yes,1.25
+Lemonade,Freshly squeezed lemonade. ,2.49,yes,yes,yes,no,Drink,drinks/lemonade-lemonade.jpg,Lemonade ,yes,1.25
+Iced Tea,A revitalizing tea with hints of citrus and lemongrass ,2.49,yes,yes,yes,no,Drink,drinks/iced-tea.jpg,Iced Tea,yes,1.25
+Arnold Palmer,A tasty combination of lemonade and iced tea. ,2.49,yes,yes,yes,no,Drink,drinks/arnold-palmer.jpg,"Lemonade, Iced Tea",yes,1.25
+Coke,A sugary classic to compliment your lunch. ,1.99,no,no,no,no,Drink,drinks/coke-coke.jpg,Coke,yes,0.99
+Sprite,A sugary classic to compliment your lunch. ,1.99,no,no,no,no,Drink,drinks/sprite-sprite.jpg,Sprite,yes,0.99
+Dr. Pepper,A sugary classic to compliment your lunch. ,1.99,no,no,no,no,Drink,drinks/dr-pepper.jpg,Dr. Pepper ,yes,0.99
+Fanta,A sugary classic to compliment your lunch. ,1.99,no,no,no,no,Drink,drinks/fanta-fanta.jpg,Fanta,yes,0.99
+Almond Milk,Delicious milk made with almonds ground in house. ,1.49,yes,yes,yes,no,Drink,drinks/almond-milk.jpg,Almond Milk,yes,0.75
+Eggs Benedict,Two poached eggs over a toasted english muffin served with hollandaise sauce and a side of canadian bacon.,9.99,no,no,no,no,Entree,entrees/eggs-benedict.jpeg,"Eggs, English Muffins, Bacon",yes,4.99
+Migas ,"Scrambled eggs with tortilla chips, jalapenos, chorizo, onions, tomatoes, cheese, and avocado. Served with black beans and tortillas.",8.99,no,no,yes,yes,Entree,entrees/migas-migas.jpg,"Eggs, Chorizo, Onions. Tomatoes, Black Beans, Avocado, Tortillas ",yes,4.49
+Huevos Rancheros,"Corn tortilla topped with black beans, pulled pork, ranchero sauce, cheese, and 2 over easy eggs.",8.99,no,no,yes,yes,Entree,entrees/huevos-rancheros.jpg,"Eggs, Pork, Tortillas, Black Beans",yes,4.49
+Loaded Hash Browns,"Hash browns mixed with 2 veggies or meats, melted jack and cheddar, 2 eggs any style, garnished with scallions.",7.99,no,no,yes,no,Entree,entrees/loaded-browns.jpg,"Potatoes, Eggs, Onions, Spinach",yes,3.99
+Chocolate Chip Pancakes,"Delicious chocolate chip pancakes served with syrup, whipped cream, and butter.",5.99,yes,yes,no,no,Entree,entrees/chocolate-pancakes.jpg,"Pancakes, Chocolate Chips, Whipped Cream, Butter ",yes,2.99
+Banana Nutella Pancakes,"Warm, caramelized bananas served with whipped cream and covered with nutella. ",6.99,no,yes,no,no,Entree,entrees/banana-pancakes.jpg,"Pancakes, Bananas, Sugar, Whipped Cream, Nutella, Butter  ",yes,3.49
+Blueberry Pancakes,"These pancakes are topped with blueberry compote, and served with vanilla anglaise. ",6.99,yes,yes,no,no,Entree,entrees/blueberry-pancakes.jpg,"Pancakes, Blueberries, Butter ",yes,3.49
+Johnny Cakes,Savory cornmeal pancakes served with maple butter and syrup. ,5.99,yes,yes,yes,no,Entree,entrees/johnny-cakes.jpg,"Pancakes, Syrup ",yes,2.99
+Apple Walnut Pancakes," Four fluffy buttermilk pancakes topped with caramelized apples, cinnamon crunch streusel and toasted walnuts served with vanilla maple syrup and Applewood smoked bacon",7.99,no,no,no,no,Entree,entrees/apple-pancakes.jpg,"Pancakes, Apples, walnuts, Bacon, Syrup, Cinnamon",yes,3.99
+Stuffed French Toast,"Sliced brioche stuffed with sweet cream cheese glaze topped with chocolate, strawberries, toasted coconut flakes, vanilla anglaise",6.99,no,yes,no,no,Entree,entrees/stuffed-toast.jpg,"French Toast, Chocolate, Strawberries, Coconut",yes,3.49
+Wild Berry French Toast,"Sliced brioche stuffed with sweet cream cheese glaze, topped with blackberry coulis, fresh blueberries, strawberries, vanilla anglaise.",6.99,no,yes,no,no,Entree,entrees/wild-toast.jpg,"French Toast, Blackberries, Blueberries, Strawberries",yes,3.49
+Belgian Waffle,"Fluffy, sugar dusted waffle served with whipped butter.",5.99,no,yes,no,no,Entree,entrees/belgian-waffle.jpg,"Waffles, Sugar, Butter",yes,2.99
+Chicken and Waffles,Hand bread fried chicken on a Belgian waffle. Served with a side of country gravy.,10.99,no,no,no,no,Entree,entrees/chicken-waffles.jpg,"Chicken, Waffles",yes,5.49
+Chilled Swiss Oats,"Our European muesli made with low fat yogurt, rolled oats, green apples, bananas, currants, cranberries and skim milk served with a homemade raisin pecan sweet crisp",6.99,no,yes,yes,no,Entree,entrees/chilled-oats.jpg,"Oats, Greek Yogurt, Apples, Bananas",yes,3.49
+Steel-Cut Oatmeal,"steel cut oats made with vanilla almond milk, topped with brown sugar, fresh fruit, and almonds.",4.99,yes,yes,yes,no,Entree,entrees/steel-oatmeal.jpg,"Oats, Almond Milk, Sugar, Strawberries, Blueberries, Almonds ",yes,2.49
+Berry Almond Sweet Oats,Large bowl of Chilled Swiss Oats topped with toasted almonds and fresh strawberries & blueberries served with a homemade raisin pecan sweet crisp,5.99,yes,yes,yes,no,Entree,entrees/berry-oats.jpg,"Oats, Almonds, Strawberries, Blueberries ",yes,2.99
+Apple Walnut Oatmeal,"Whole grain steel-cut oatmeal topped with caramelized apples, cinnamon crunch streusel and toasted walnuts",5.99,yes,yes,yes,no,Entree,entrees/apple-oatmeal.jpg,"Oats, Walnuts, Apples, Sugar, Cinnamon",yes,2.99
+Liquado,Fresh banana milkshake.,3.99,yes,yes,no,no,Special1,specials/liquado.jpg,"Banana, Milk",yes,1.99
+Croissant,A freshly baked croissant served with a side of berries.,3.99,yes,yes,no,no,Special1,specials/croissant.jpg,"Strawberries, Bread",yes,1.99
+Blueberry Waffles,Good-ol' blueberry waffles.,4.99,yes,yes,no,no,Special1,specials/blueberry.jpg,"Waffles, Blueberries",yes,2.49
+Apple Walnut Oatmeal,"Whole grain steel-cut oatmeal topped with caramelized apples, cinnamon crunch streusel and toasted walnuts",5.99,yes,yes,yes,no,Special2,entrees/apple-oatmeal.jpg,"Oats, Walnuts, Apples, Sugar, Cinnamon",yes,1.99
+Arnold Palmer,A tasty combination of lemonade and iced tea. ,2.49,yes,yes,yes,no,Special2,drinks/arnold-palmer.jpg,"Lemonade, Iced Tea",yes,0.99
+Monkey Bread,One country style open-faced biscuit with two freshly cooked sausages topped with homemade white gravy,4.99,no,yes,no,no,Special2,desserts/monkey-bread.jpg,"Biscuits, Sausage",yes,1.49
