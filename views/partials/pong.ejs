@@ -1,0 +1,22 @@
+    <div id="container">
+        <div id="terrain">
+            <div id="ball"></div>
+            <div id="wall"></div>
+            <div id="player"></div>
+            <!-- <div id="test">test</div> -->
+        </div>
+        <div id="bottom"> 
+            <div id="setup">
+                <div>Your highscore: <span id="highscore">0</span> points</div>
+                <div>Your score (speed increases over time): <span id="score">0</span> points</div>
+                <label id = "label1"> Use keyboard / direction buttons </label>
+                <br>
+                <button id="start" onclick="start()">START</button>
+                <button id="stop" onclick="stop()">STOP</button>
+            </div>
+            <div id = controls>
+                <button id="up" onmousedown="control()">UP</button>
+                <button id="down" onmousedown="control()">DOWN</button>
+            </div>
+        </div>   
+    </div>
