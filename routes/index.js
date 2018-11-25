@@ -523,6 +523,7 @@ router.post("/lookup/:id", function(req, res){
 // Terminal View for Guests
 router.get("/guest", function (req, res) {
   var dt = new Date();
+  var day = dt.getDay();
   var time = dt.getHours();
   var drinks = [];//empty drinks array
   MongoClient.connect(url, function (err, db) {//grabs the ordered drinks
@@ -580,14 +581,24 @@ router.get("/guest", function (req, res) {
     }
     else {
       console.log("Connection established with MongoDB Server");
-
+      console.log("The current day number is: " + day);
       //attempting and query
-      var query = {
-        $and: [
-          { Category: "Special" },
-          { Active: "yes" }
-        ]
-      };
+      if(day != 0 && day != 6){//if the day is a weekday, then get special 1
+        var query = {
+          $and: [
+            { Category: "Special1" },
+            { Active: "yes" }
+          ]
+        };
+      }
+      else{//weekend, get special2
+        var query = {
+          $and: [
+            { Category: "Special2" },
+            { Active: "yes" }
+          ]
+        };
+      }
       var collection = db.collection("menu_items");
       collection.find(query).toArray(function (err, results) {
         if (err) {
@@ -1648,6 +1659,7 @@ router.post("/validateCredentials", function (req, res) {
               let tblNumber = req.body.username.replace("table", "");
               currentTable = tblNumber;
               var dt = new Date();
+              var day = dt.getDay();
               var time = dt.getHours();
               var drinks = [];//empty drinks array
               MongoClient.connect(url, function (err, db) {//grabs the ordered drinks
@@ -1711,12 +1723,22 @@ router.post("/validateCredentials", function (req, res) {
                           console.log("Connection established with MongoDB Server");
 
                           //attempting and query
-                          var query = {
-                            $and: [
-                              { Category: "Special" },
-                              { Active: "yes" }
-                            ]
-                          };
+                          if(day != 0 && day != 6){//if the day is a weekday, then get special 1
+                            var query = {
+                              $and: [
+                                { Category: "Special1" },
+                                { Active: "yes" }
+                              ]
+                            };
+                          }
+                          else{//weekend, get special2
+                            var query = {
+                              $and: [
+                                { Category: "Special2" },
+                                { Active: "yes" }
+                              ]
+                            };
+                          }
                           var collection = db.collection("menu_items");
                           collection.find(query).toArray(function (err, results) {
                             if (err) {
