@@ -17,7 +17,7 @@
 <div class="sidebar">
       <% orderItems.forEach(function(item, index){ %>
             <div class= "order_display_sidebar" id='<%= item._id %>'> 
-                  <h5>  Table #<%= item.table %> <div id = '__<%= item._id %>'class = "status_indicator"></div></h5>
+                  <h3>  Table #<%= item.table %> <div id = '__<%= item._id %>'class = "status_indicator"></div></h3>
             </div>
       <% }) %>
 </div>
@@ -37,8 +37,8 @@
       <% orderItems.forEach(function(item, index){ %>
         <% for(let j = 0; j < item.orderedItems.length; j++){  %> 
             <div id='_<%= item._id %>' class= "order_display_main"> 
-                  <h5> Menu Item ID: <span id= '___<%= item._id %>'><%=orderItems[index].orderedItems[j].item%></span></h5>
-                  <h5> Notes and Allergies: <%= orderItems[index].orderedItems[j].notes %></h5>
+                  <h1> Menu Item: <span id= '___<%= item._id %>'><%=orderItems[index].orderedItems[j].item%></span></h1>
+                  <h1> Notes and Allergies: <%= orderItems[index].orderedItems[j].notes %></h1>
             </div>
       <% } %>  
       <% }) %>
