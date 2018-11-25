@@ -1426,7 +1426,10 @@ router.post("/getMenuItemById/*", function (req, res) {
 router.post("/submitToOrder/:objId/:notes/:price", function (req, res) {
   console.log("Trying to submit to order with menu_items.objId " + req.params.objId +
     " and notes as " + req.params.notes + " and price of $" + req.params.price);
-
+  if(req.params.objId == 0){
+    break;
+  }
+  else{
   MongoClient.connect(
     url,
     function (err, db) {
@@ -1447,7 +1450,7 @@ router.post("/submitToOrder/:objId/:notes/:price", function (req, res) {
         });
       }
     }
-  );
+  );}
   res.send("Ok");
 });
 
