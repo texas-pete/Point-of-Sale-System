@@ -1391,7 +1391,7 @@ router.get("/guest-order", function (req, res) {
 //is used to retrieve the necessary information for the modal popup
 router.post("/getMenuItemById/*", function (req, res) {
   console.log("Retrieving data from: " + req.params[0]);
-
+  console.log("Something should print here!")
   MongoClient.connect(
     url,
     function (err, db) {
@@ -1426,32 +1426,35 @@ router.post("/getMenuItemById/*", function (req, res) {
 router.post("/submitToOrder/:objId/:notes/:price", function (req, res) {
   console.log("Trying to submit to order with menu_items.objId " + req.params.objId +
     " and notes as " + req.params.notes + " and price of $" + req.params.price);
+  console.log(req.params.objId)
   if(req.params.objId == 0){
-    break;
+    console.log("ObjId is 0")
   }
   else{
-  MongoClient.connect(
-    url,
-    function (err, db) {
-      if (err) {
-        console.log("Unable to connect to the Server");
+    MongoClient.connect(
+      url,
+      function (err, db) {
+        if (err) {
+          console.log("Unable to connect to the Server");
+        }
+        else {
+          var itemId = req.params.objId
+          var query = { table: currentTable.toString() };
+          var collection = db.collection("active_orders");
+          var newvalues = { $push: { items: { item: itemId, notes: req.params.notes, price: req.params.price } } };
+          console.log("Running the query collection.update(table: " + currentTable.toString()
+            + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes + " ,price: " + req.params.price);
+          collection.update(query, newvalues, function (err, res) {
+            if (err) throw err;
+            console.log("Order updated");
+            //res.send("Ok");
+          });
+        }
       }
-      else {
-        var itemId = req.params.objId
-        var query = { table: currentTable.toString() };
-        var collection = db.collection("active_orders");
-        var newvalues = { $push: { items: { item: itemId, notes: req.params.notes, price: req.params.price } } };
-        console.log("Running the query collection.update(table: " + currentTable.toString()
-          + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes + " ,price: " + req.params.price);
-        collection.update(query, newvalues, function (err, res) {
-          if (err) throw err;
-          console.log("Order updated");
-          db.close();
-        });
-      }
-    }
-  );}
-  res.send("Ok");
+
+    );
+    
+  }
 });
 
 //submits the active order to submited order db
