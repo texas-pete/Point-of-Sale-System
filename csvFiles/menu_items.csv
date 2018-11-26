@@ -45,6 +45,9 @@ Chilled Swiss Oats,"Our European muesli made with low fat yogurt, rolled oats, g
 Steel-Cut Oatmeal,"steel cut oats made with vanilla almond milk, topped with brown sugar, fresh fruit, and almonds.",4.99,yes,yes,yes,no,Entree,entrees/steel-oatmeal.jpg,"Oats, Almond Milk, Sugar, Strawberries, Blueberries, Almonds ",yes,2.49
 Berry Almond Sweet Oats,Large bowl of Chilled Swiss Oats topped with toasted almonds and fresh strawberries & blueberries served with a homemade raisin pecan sweet crisp,5.99,yes,yes,yes,no,Entree,entrees/berry-oats.jpg,"Oats, Almonds, Strawberries, Blueberries ",yes,2.99
 Apple Walnut Oatmeal,"Whole grain steel-cut oatmeal topped with caramelized apples, cinnamon crunch streusel and toasted walnuts",5.99,yes,yes,yes,no,Entree,entrees/apple-oatmeal.jpg,"Oats, Walnuts, Apples, Sugar, Cinnamon",yes,2.99
-Liquado,Fresh banana milkshake.,3.99,yes,yes,no,no,Special,specials/liquado.jpg,"Banana, Milk",yes,1.99
-Croissant,A freshly baked croissant served with a side of berries.,3.99,yes,yes,no,no,Special,specials/croissant.jpg,"Strawberries, Bread",yes,1.99
-Blueberry Waffles,Good-ol' blueberry waffles.,4.99,yes,yes,no,no,Special,specials/blueberry.jpg,"Waffles, Blueberries",yes,2.49
+Liquado,Fresh banana milkshake.,3.99,yes,yes,no,no,Special1,specials/liquado.jpg,"Banana, Milk",yes,1.99
+Croissant,A freshly baked croissant served with a side of berries.,3.99,yes,yes,no,no,Special1,specials/croissant.jpg,"Strawberries, Bread",yes,1.99
+Blueberry Waffles,Good-ol' blueberry waffles.,4.99,yes,yes,no,no,Special1,specials/blueberry.jpg,"Waffles, Blueberries",yes,2.49
+Apple Walnut Oatmeal,"Whole grain steel-cut oatmeal topped with caramelized apples, cinnamon crunch streusel and toasted walnuts",5.99,yes,yes,yes,no,Special2,entrees/apple-oatmeal.jpg,"Oats, Walnuts, Apples, Sugar, Cinnamon",yes,1.99
+Arnold Palmer,A tasty combination of lemonade and iced tea. ,2.49,yes,yes,yes,no,Special2,drinks/arnold-palmer.jpg,"Lemonade, Iced Tea",yes,0.99
+Monkey Bread,One country style open-faced biscuit with two freshly cooked sausages topped with homemade white gravy,4.99,no,yes,no,no,Special2,desserts/monkey-bread.jpg,"Biscuits, Sausage",yes,1.49
