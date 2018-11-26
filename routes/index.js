@@ -162,7 +162,7 @@ router.post("/removeSubmitted/:item_name/:item_description/:table_num", function
           console.log(err);
         }
         else if (results.length) {
-          collectionID = new ObjectId(results[0]._id); //returns the element ID of a 
+          collectionID = ObjectId(results[0]._id); //returns the element ID of a 
           //we have the ID, now we need to update our array by unsetting the value that matches.
           collection.update(
             { _id: collectionID },
@@ -213,7 +213,7 @@ router.post("/editSubmitted/:item_name/:item_description/:table_num/:newDescript
         }
         else if (results.length) {
 
-          collectionID = new ObjectId(results[0]._id); //returns the element ID of a 
+          collectionID = ObjectId(results[0]._id); //returns the element ID of a 
           //we have the ID, now we need to update our array by unsetting the value that matches.
           collection.update(
             { _id: collectionID }, //insert our new value
