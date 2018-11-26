@@ -69,7 +69,6 @@ router.post("/getTableOrder/:tblNum", function (req, res) {
   });
 });
 
-
 router.post("/getItemName/:db_name", function (req, res) { //Verify the value is in our database.
 
   var MongoClient = mongodb.MongoClient;
@@ -108,8 +107,6 @@ router.post("/getItemName/:db_name", function (req, res) { //Verify the value is
     }
   });
 });
-
-
 
 router.post("/fromNameToID/:db_name", function (req, res) {
 
@@ -236,11 +233,6 @@ router.post("/editSubmitted/:item_name/:item_description/:table_num/:newDescript
   });
 });
 
-
-
-
-
-
 // Terminal View for Kitchen Staff
 router.get("/kitchenstaff", function (req, res) {
   var MongoClient = mongodb.MongoClient;
@@ -269,9 +261,9 @@ router.get("/kitchenstaff", function (req, res) {
     });
   }
 });
-  
-});
 
+});
+  
 // Terminal View for Management
 router.get("/manager", function (req, res) {
   MongoClient.connect(url, function (err, db) {
@@ -499,7 +491,7 @@ router.post("/lookup/:id", function(req, res){
     }
     else{
       console.log("Connection established with MongoDB Server");
-      var collection = db.collection("archived_orders");//looking at archived orders
+      var collection = db.collection("archived_orders"); //looking at archived orders
       var objId =req.params.id;
 
       collection.find({orderID: objId}).toArray(function (err, results) {
