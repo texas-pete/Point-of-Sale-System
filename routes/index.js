@@ -1775,12 +1775,22 @@ router.post("/validateCredentials", function (req, res) {
                           console.log("Connection established with MongoDB Server");
 
                           //attempting and query
-                          var query = {
-                            $and: [
-                              { Category: "Special" },
-                              { Active: "yes" }
-                            ]
-                          };
+                          if(day != 0 && day != 6){//if the day is a weekday, then get special 1
+                            var query = {
+                              $and: [
+                                { Category: "Special1" },
+                                { Active: "yes" }
+                              ]
+                            };
+                          }
+                          else{//weekend, get special2
+                            var query = {
+                              $and: [
+                                { Category: "Special2" },
+                                { Active: "yes" }
+                              ]
+                            };
+                          }
                           var collection = db.collection("menu_items");
                           collection.find(query).toArray(function (err, results) {
                             if (err) {
