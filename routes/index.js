@@ -515,6 +515,7 @@ router.post("/lookup/:id", function(req, res){
 // Terminal View for Guests
 router.get("/guest", function (req, res) {
   var dt = new Date();
+  var day = dt.getDay();
   var time = dt.getHours();
   var drinks = [];//empty drinks array
   MongoClient.connect(url, function (err, db) {//grabs the ordered drinks
@@ -572,14 +573,24 @@ router.get("/guest", function (req, res) {
     }
     else {
       console.log("Connection established with MongoDB Server");
-
+      console.log("The current day number is: " + day);
       //attempting and query
-      var query = {
-        $and: [
-          { Category: "Special" },
-          { Active: "yes" }
-        ]
-      };
+      if(day != 0 && day != 6){//if the day is a weekday, then get special 1
+        var query = {
+          $and: [
+            { Category: "Special1" },
+            { Active: "yes" }
+          ]
+        };
+      }
+      else{//weekend, get special2
+        var query = {
+          $and: [
+            { Category: "Special2" },
+            { Active: "yes" }
+          ]
+        };
+      }
       var collection = db.collection("menu_items");
       collection.find(query).toArray(function (err, results) {
         if (err) {
@@ -1383,7 +1394,7 @@ router.get("/guest-order", function (req, res) {
 //is used to retrieve the necessary information for the modal popup
 router.post("/getMenuItemById/*", function (req, res) {
   console.log("Retrieving data from: " + req.params[0]);
-
+  console.log("Something should print here!")
   MongoClient.connect(
     url,
     function (err, db) {
@@ -1418,29 +1429,35 @@ router.post("/getMenuItemById/*", function (req, res) {
 router.post("/submitToOrder/:objId/:notes/:price", function (req, res) {
   console.log("Trying to submit to order with menu_items.objId " + req.params.objId +
     " and notes as " + req.params.notes + " and price of $" + req.params.price);
+  console.log(req.params.objId)
+  if(req.params.objId == 0){
+    console.log("ObjId is 0")
+  }
+  else{
+    MongoClient.connect(
+      url,
+      function (err, db) {
+        if (err) {
+          console.log("Unable to connect to the Server");
+        }
+        else {
+          var itemId = req.params.objId
+          var query = { table: currentTable.toString() };
+          var collection = db.collection("active_orders");
+          var newvalues = { $push: { items: { item: itemId, notes: req.params.notes, price: req.params.price } } };
+          console.log("Running the query collection.update(table: " + currentTable.toString()
+            + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes + " ,price: " + req.params.price);
+          collection.update(query, newvalues, function (err, res) {
+            if (err) throw err;
+            console.log("Order updated");
+            //res.send("Ok");
+          });
+        }
+      }
 
-  MongoClient.connect(
-    url,
-    function (err, db) {
-      if (err) {
-        console.log("Unable to connect to the Server");
-      }
-      else {
-        var itemId = req.params.objId
-        var query = { table: currentTable.toString() };
-        var collection = db.collection("active_orders");
-        var newvalues = { $push: { items: { item: itemId, notes: req.params.notes, price: req.params.price } } };
-        console.log("Running the query collection.update(table: " + currentTable.toString()
-          + " $push: {items: {item: " + itemId + ", notes: " + req.params.notes + " ,price: " + req.params.price);
-        collection.update(query, newvalues, function (err, res) {
-          if (err) throw err;
-          console.log("Order updated");
-          db.close();
-        });
-      }
-    }
-  );
-  res.send("Ok");
+    );
+    
+  }
 });
 
 //submits the active order to submited order db
@@ -1634,6 +1651,7 @@ router.post("/validateCredentials", function (req, res) {
               let tblNumber = req.body.username.replace("table", "");
               currentTable = tblNumber;
               var dt = new Date();
+              var day = dt.getDay();
               var time = dt.getHours();
               var drinks = [];//empty drinks array
               MongoClient.connect(url, function (err, db) {//grabs the ordered drinks
@@ -1697,12 +1715,22 @@ router.post("/validateCredentials", function (req, res) {
                           console.log("Connection established with MongoDB Server");
 
                           //attempting and query
-                          var query = {
-                            $and: [
-                              { Category: "Special" },
-                              { Active: "yes" }
-                            ]
-                          };
+                          if(day != 0 && day != 6){//if the day is a weekday, then get special 1
+                            var query = {
+                              $and: [
+                                { Category: "Special1" },
+                                { Active: "yes" }
+                              ]
+                            };
+                          }
+                          else{//weekend, get special2
+                            var query = {
+                              $and: [
+                                { Category: "Special2" },
+                                { Active: "yes" }
+                              ]
+                            };
+                          }
                           var collection = db.collection("menu_items");
                           collection.find(query).toArray(function (err, results) {
                             if (err) {

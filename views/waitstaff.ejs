@@ -68,91 +68,35 @@
             <!-- Table Grid -->
             <!-- First ROW -->
             <div class="table-layout">
-                <div class="box" id="box1" class="container-fluid">
+                <% for(let i =1; i<9; i++){ %>
+                <div class="box" id='box<%= i %>' class="container-fluid">
                     <button class="boxButton" type="button">
-                        <span> 1 <span>
+                        <span>
+                            <%= i %> </span>
                     </button>
                 </div>
-                <div class="box" id="box2" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 2 <span>
-                    </button>
-                </div>
-                <div class="box" id="box3" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 3 <span>
-                    </button>
-                </div>
-                <div class="box" id="box4" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 4 <span>
-                    </button>
-                </div>
-                <div class="box" id="box5" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 5 <span>
-                    </button>
-                </div>
-                <div class="box" id="box6" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 6 <span>
-                    </button>
-                </div>
-                <div class="box" id="box7" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 7 <span>
-                    </button>
-                </div>
-                <div class="box" id="box8" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 8 <span>
-                    </button>
-                </div>
+                <% } %>
             </div>
-
             <div class="table-layout">
-                <div class="box" id="box9" class="container-fluid">
+                <% for(let i =9; i<17; i++){ %>
+                <div class="box" id='box<%= i %>' class="container-fluid">
                     <button class="boxButton" type="button">
-                        <span> 9 <span>
+                        <span>
+                            <%= i %> </span>
                     </button>
                 </div>
-                <div class="box" id="box10" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 10 <span>
-                    </button>
-                </div>
-                <div class="box" id="box11" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 11 <span>
-                    </button>
-                </div>
-                <div class="box" id="box12" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 12 <span>
-                    </button>
-                </div>
-                <div class="box" id="box13" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 13 <span>
-                    </button>
-                </div>
-                <div class="box" id="box14" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 14 <span>
-                    </button>
-                </div>
-                <div class="box" id="box15" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 15 <span>
-                    </button>
-                </div>
-                <div class="box" id="box16" class="container-fluid">
-                    <button class="boxButton" type="button">
-                        <span> 16 <span>
-                    </button>
-                </div>
+                <% } %>
             </div>
-
+            <div class="table-layout">
+                <% for(let i =17; i<25; i++){ %>
+                <div class="box" id='box<%= i %>' class="container-fluid">
+                    <button class="boxButton" type="button">
+                        <span>
+                            <%= i %> </span>
+                    </button>
+                </div>
+                <% } %>
+            </div>
 
         </div>
 

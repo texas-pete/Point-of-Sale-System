@@ -39,6 +39,27 @@ document.querySelector('.close-snake').addEventListener('click', function(){
 });
 
 
+//for opening up the game modal
+$(document).ready(function(){
+  $('.play-pong').on('click', playPong);
+});
+
+//gets called on by 'play now' button, hides navbar and assistance and opens up game modal
+function playPong(){
+  console.log("Trying to play pong.");
+  document.querySelector('.navbar').style.display = 'none';
+  document.querySelector('.assistance').style.display = 'none';
+  document.querySelector('.pong').style.display = 'flex';
+}
+
+//closes the modal if clicked on and un-hides navbar
+document.querySelector('.close-pong').addEventListener('click', function(){
+  console.log("Trying to close pong")
+  document.querySelector('.navbar').style.display = 'flex';
+  document.querySelector('.assistance').style.display = 'flex';
+  document.querySelector('.pong').style.display = 'none';
+});
+
 
 
 

@@ -8,7 +8,7 @@ function edit_remove(whichOperation) {
         //we need to convert from a name to a string version of the object ID
 
         var sidebarTblNum = $("#tblNumber").text(); //we need to clean up our input. No random garbage
-        for (let index = 0; index < 16; index++) {
+        for (let index = 0; index < 24; index++) {
             if (sidebarTblNum == index) {
                 sidebarTblNum = index;
             }
@@ -63,7 +63,7 @@ function edit_remove(whichOperation) {
         }
         newDescription = txt;
         var sidebarTblNum = $("#tblNumber").text(); //we need to clean up our input. No random garbage
-        for (let index = 0; index < 16; index++) {
+        for (let index = 0; index < 24; index++) {
             if (sidebarTblNum == index) {
                 sidebarTblNum = index;
             }

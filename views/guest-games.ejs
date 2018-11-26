@@ -14,7 +14,7 @@
 	 crossorigin="anonymous"></script>
 
 	<link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
-
+	<link href="http://localhost:3000/stylesheets/pongStyle.css" rel="stylesheet">
 	<script>
         var tblNumber = <%= tablenum %>
     </script>
@@ -45,8 +45,22 @@
 							<button class="play-snake btn btn-secondary btn-sm">Play Now</button>
 						</td>
 					</tr>
+					<tr>
+						<td><br><br><br></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<a href="#"><img src="http://localhost:3000/images/games/pong.gif"></a>							
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button class="play-pong btn btn-secondary btn-sm">Play Now</button>							
+						</td>						
+					</tr>
 				</tbody>
 			</table>
+			<br><br><br><br><br><br><br>
 		</div>
 	</div>
 
@@ -73,6 +87,19 @@
 		</div>
 	</div>
 
+	<!--https://code.sololearn.com/Wzc1m31AJ55h/#js-->
+ 	<!--Modal for pong-->
+	<div class="bg-modal pong">
+		<div class="modal-content">
+			<div class="close close-pong">+</div>
+			<br>
+			<div class="modal-main-content">
+				<% include partials/pong %>				
+			</div>
+			<br>
+		</div>
+	</div>
+
     <!--Assistance Buttons-->
 	<div class="assistance">
 	    <ul id="requester">
@@ -90,6 +117,8 @@
 	    </ul>
 	</div>
 
+
+
 </body>
 <footer>
     <!-- Navigation -->
@@ -97,5 +126,6 @@
     <!--@ bottom to allow DOM to fully load-->
     <script src="http://localhost:3000/javascripts/games.js"></script>
     <script src="http://localhost:3000/javascripts/customer.js"></script>
+    <script src="http://localhost:3000/javascripts/pong.js"></script>
 </footer>
 </html>
