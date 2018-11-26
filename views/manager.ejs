@@ -68,13 +68,13 @@ crossorigin="anonymous"></script>
                   <table class="w3-table-all">
                   <tr>
                     <th>Order Number</th>
-                    <th>Total</th>
+                    <th>Table</th>
                     <th>Tax</th>
                     <th>Tips</th>
                   </tr>
                   <tr>
                       <th class='orderedID'></th>
-                      <th class='total'></th>
+                      <th class='table'></th>
                       <th class='tax'></th>
                       <th class='tips'></th>
                       <th></th>
@@ -160,13 +160,18 @@ crossorigin="anonymous"></script>
                     <th>Tax</th>
                     <th>Total</th>
                   </tr>
+                  <% generals.forEach(function(general, index) { %>
+                    <tr>
+                        <th><%= general.orderID %></th>
+                        <th><%= general.tips %></th>
+                        <th><%= general.tax %></th>
+                        <th><%= general.total %></th>
+                    </tr>
+
+                  <% }) %>
                   <tr>
                   </tr>
                   <tr>
-                    <td>23424243</td>
-                    <td>$2.53</td>
-                    <td>$3.37</td>
-                    <td>$21.75</td>
                   </tr>
                   </table>
                   </div>

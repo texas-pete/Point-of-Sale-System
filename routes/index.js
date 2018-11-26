@@ -273,7 +273,7 @@ router.get("/manager", function (req, res) {
     else{
       console.log("Connection established with MongoDB Server");
       var collection = db.collection("menu_items");
-      collection.find({}).toArray(function (err, results) {//gets all menu items and stores in var menuItems
+      collection.find({}).toArray(function (err, results) { //gets all menu items and stores in var menuItems
         if (err) {
           console.log(err);
         }
@@ -281,7 +281,7 @@ router.get("/manager", function (req, res) {
           console.log('received menu items')
           console.log(results)
           var menuItems = results
-
+          //--------------------------------------------------------------------------------------------------
           collection = db.collection('submitted_orders');
           collection.find({}).toArray(function(err, results){ //gets submitted items
             if(err){
@@ -291,7 +291,7 @@ router.get("/manager", function (req, res) {
               console.log('received submitted orders')
               //console.log(results)
               var submittedOrders = results
-
+              //--------------------------------------------------------------------------------------------------
               collection = db.collection('ingredients');
               collection.find({}).toArray(function(err, results){ //gets ingredients
                 if(err){
@@ -301,13 +301,25 @@ router.get("/manager", function (req, res) {
                   console.log('received inventory stuff')
                   console.log(results)
                   var pulledIngredients = results
-                  
-                  setTimeout(function () { //need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
-                  res.render("manager", { page: 'Management View', items: menuItems, orders: submittedOrders, products: pulledIngredients });
-                  }, 500);
-                }
-                else {
-                  console.log("No results! ERROR");
+                  //--------------------------------------------------------------------------------------------------
+                  collection = db.collection('archived_orders');
+                  collection.find({}).toArray(function(err, results){ //gets archived_orders info
+                    if(err){
+                      console.log(err);
+                    }
+                    else if (results.length) {
+                      console.log('received archived_orders stuff')
+                      console.log(results)
+                      var archivedOrders = results
+                      //--------------------------------------------------------------------------------------------------
+                    setTimeout(function () { //need a timeout otherwise node's asyncrhonous nature messed up loading of drinks
+                    res.render("manager", { page: 'Management View', items: menuItems, orders: submittedOrders, products: pulledIngredients, generals: archivedOrders });
+                    }, 500);
+                    }
+                    else {
+                      console.log("No results! ERROR");
+                    }
+                  });
                 }
               });
             }
@@ -492,8 +504,8 @@ router.post("/lookup/:id", function(req, res){
     else{
       console.log("Connection established with MongoDB Server");
       var collection = db.collection("archived_orders"); //looking at archived orders
-      var objId =req.params.id;
-
+      var objId = req.params.id;
+      
       collection.find({orderID: objId}).toArray(function (err, results) {
         if(err){
           console.log(err)
