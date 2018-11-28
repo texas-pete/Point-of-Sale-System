@@ -3940,7 +3940,6 @@ router.get("/guest-drinks/gf/", function (req, res) {
 router.post("/guest-pay/submit/:order_tax/:order_total/:order_tips/", function (req, res) {
 
 //submits the active order to submited order db
-  console.log("HELLO");
   console.log(currentTable + " is submitting their order!");
 
   MongoClient.connect(
