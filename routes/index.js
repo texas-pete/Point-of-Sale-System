@@ -4601,9 +4601,10 @@ router.get('/takeout-pay', function(req, res, next){
     }
     else {
       console.log("Connection established with MongoDB Server");
-      var query = { table: currentTable };
+      var query = { table: "0" };
       var collection = db.collection("submitted_orders");
-      console.log("attempting " + query + " " + currentTable);
+      
+      console.log("attempting ", query ," " + currentTable);
       collection.find(query).toArray(function (err, results) {
         if (err) {
           console.log(err);
@@ -4613,7 +4614,7 @@ router.get('/takeout-pay', function(req, res, next){
            console.log(results[0].orderedItems[0].price); //this prints the PRICE of a returned result.
            console.log(results);
             //console.log(orderedItems[i].price); //this prints the PRICE of a returned result.
-            res.render('takeout/takeout-pay', {order_items: results, tablenum: currentTable});
+            res.render("takeout/takeout-pay", {order_items: results, tablenum: currentTable});
         }
         else {
           console.log("Menu item not found!");
