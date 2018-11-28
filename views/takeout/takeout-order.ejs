@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Takeout</title>
+	<script>
+        var tblNumber = 0
+    </script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+	 crossorigin="anonymous"></script>
+
+	<link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
+	
+</head>
+<body>
+
+<h1>Order</h1>
+<div class="container">
+	<% notes.forEach(function(o_item, index){ %>
+		<% order_items.forEach(function(i_item, index1){ %>
+			<% if(o_item.item == i_item._id){ %>
+			<div class="row">
+				<div class = "col-md-6">
+					<h3><%= i_item.Name %></h3>
+					<h5>$<%= o_item.price %></h5>
+
+					<hr style="clear:both;"/>
+					<!--TODO: the appetizers path wont work b.c. not all will be appetizers-->
+					<p><img src='http://localhost:3000/images/<%= i_item.ImageName %>' alt=<%= i_item.Name %> style="float:left" width="290" height="200" hspace="20"><h6><%= i_item.Description %></h6></p>
+					<h5>Notes/Allergies:</h5>
+					<h6><%= o_item.notes %></h6>
+					<div class= "left">
+						<div class="centered">
+						</div>
+						<!--we give each button a data-id as index and a unique class, we can pull from the class and use the index to manipulate the database-->
+						<div class = "right">
+							<div class = orderbtn>
+									<button type="button" class="btn btn-secondary btn-lg edit-item" data-id="<%= index %>" data-parent="<%= i_item._id %>" data-columns="<%= o_item.notes %>">Edit</button>
+									<button type="button" class="btn btn-secondary btn-lg remove-item" data-id="<%= index %>">X</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% } %>
+		<% }) %>
+	<% }) %>
+</div>
+<br><br><br><br>
+<!--only shows submit button if there exist orders-->
+<% if(notes.length){ %>
+<button type="button" class="btn btn-secondary btn-lg btn-block submit-db">Submit Order</button>
+<% } %>
+<br><br><br><br>
+
+<br><br>
+</body>
+<footer>
+	<br><br>
+    <!-- Navigation -->
+    <% include takeout-navbar %>
+
+	<!--Modal-->
+	<div class="bg-modal">
+		<div class="modal-content">
+			<div class="close">+</div>
+			<div class="modal-main-content">
+				<h3 class="modal-menu-name">Name</h3>
+				<img class="modal-menu-img" src="" alt="nameOfImage" style="float:left" width="390" height="300" hspace="20">
+				<h4 class="modal-menu-price">Price</h4>
+				<h5 class="modal-menu-desc">Description</h5>
+			</div>
+			<br>
+			<form>
+				<textarea class="clear-this" name="notes" placeholder="Type in any allergies or anything you want added/removed from the item." cols="60"
+				 rows="5"></textarea>
+			</form>
+			<button type="button" class="btn btn-secondary btn-sm modal-submit submit-edited-item">Modify Order Item</button>
+		</div>
+	</div>
+
+    <!--@ bottom to allow DOM to fully load-->
+    <script src="http://localhost:3000/javascripts/takeout-submitToDB.js"></script>
+	<script src="http://localhost:3000/javascripts/takeout.js"></script>
+
+    
+</footer>
+</html>

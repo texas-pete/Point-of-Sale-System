@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Order</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+		 crossorigin="anonymous"></script>
+		<link href="http://localhost:3000/stylesheets/payStyle.css" rel="stylesheet">
+
+		<script>
+			var tblNumber = 0
+		</script>
+	</head>
+
+<body>
+
+<!--payment-->
+<div class= "left">
+	<h1>Payment</h1>
+	<br>
+	<br>
+	<% var sumTotal = 0; %>
+	<!--Print Order Total-->
+	<div class="Order Total">
+		<h2>Order Total:
+		<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+				<% sumTotal += parseFloat(order_items[0].orderedItems[i].price); %>
+		<% } %>	
+		$<%= parseFloat(sumTotal); %></h2>
+		<!--Print Individual Items and Prices-->
+		<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+				<h5>$<%= order_items[0].orderedItems[i].price %></h5>
+		<% } %>	
+	</div><br><br>
+
+
+
+	<div class="pay-method">
+		<h3>Pay with Cash:</h3>
+		<h6>Tap the 'Tap for Assistance' Button</h6>
+		<p>Paying with cash? Tell us how much you're tipping.</p>
+		<button type="button" class="btn btn-primarymodal-submit" data-toggle="modal" data-target="#ModalLong3">
+				CASH TIP
+				</button>
+	</div>
+	<br>
+
+	<div class="pay-method">
+		<button type="button" class="btn btn-primarymodal-submit" data-toggle="modal" data-target="#ModalLong2">
+				Credit Payment
+				</button>
+	</div>
+
+
+<!-- Single Pay Modal -->
+<div class="modal fade" id="ModalLong2" tabindex="-1" role="dialog" aria-labelledby="ModalLong2Title" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+				<div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
+						<div class="carousel-inner">
+								<div class="carousel-item active">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalLong2Title">Credit Pay</h5>
+				<div class="close" data-dismiss="modal">+</div>
+			</div>
+			<div class="modal-body">
+					
+					<% var sumTotal = 0; %> <% var TaxRate = 0.0825; %>
+					<!--Print Order Total-->
+					<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+						<% sumTotal += parseFloat(order_items[0].orderedItems[i].price); %>
+					<% } %>	
+					<h5>Order Total: $<span id = "singlePayTotal"><%= parseFloat(sumTotal); %></span></h5>
+					<h5>Gratuity: $</h5>
+					<h5 id='totalTip'></h5>
+
+					<% var Tax = parseFloat(sumTotal * TaxRate); %>
+					<h5>Sales Tax: $<span id = "totTax"><%=Tax.toFixed(2)%></span></h5>
+					
+					<h5>Overall Total: $</h5>
+					<h5 id='overallTotal'></h5>
+					<h5>Total People:</h5>
+					<h5 id='totPPL'></h5>
+					<h5>Total Per Person: $</h5>
+					<h5 id='splitVal'></h5>
+					
+			</div>
+			<div class="modal-footer">
+				<div class="col-50">
+					<h3>Payment</h3>
+					<label for="cname">Name on Card</label><br>
+					<input type="text" id="cname" name="cardname" placeholder="John More Doe">
+					<br><label for="ccnum">Credit card number</label><br>
+					<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+					<br><label for="expmonth">Exp Month</label><br>
+					<input type="text" id="expmonth" name="expmonth" placeholder="September">
+					<div class="row">
+						<div class="col-50">
+							<label for="expyear">Exp Year</label><br>
+							<input type="text" id="expyear" name="expyear" placeholder="2018">
+						</div>
+						<div class="col-50">
+							<label for="cvv">CVV</label><br>
+							<input type="text" id="cvv" name="cvv" placeholder="352">
+						</div>
+						<br><br><br><br>
+						<div class="col-50">
+								<!--<form action>="/action_page.php">-->
+									<label for ="numsplit">Split Amongst:</label>
+									<input type="number" id = "peopleamt" name="quantity" min="1" max="9">
+									<!--<input type="submit">-->
+								<!--</form>--><br>
+							</div>
+						<form><!--TIP-->
+							<select id="serviceQual">
+					 			<option disabled selected value="0">-- Choose an Option --</option>
+								<option value="0.2">20&#37; &#45; Great</option>
+								<option value="0.15">15&#37; &#45; Good</option>
+								<option value="0.1">10&#37; &#45; Bad</option>
+							</select>		  
+						</form>
+							
+						<button type="button" class="btn btn-primary btn-sm" id="calculate" >CALCULATE TIP</button>
+						<button type="button" class="btn btn-primary" id="singleSub">Submit Payment</button>
+					</div> 
+				</div>
+			</div>
+		</div>
+
+
+		</div>
+			    <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+		<span class="carousel-control-prev-icon"></span>
+	  </a>
+	  <a class="carousel-control-next" href="#demo" data-slide="next">
+		<span class="carousel-control-next-icon"></span>
+	  </a>
+	</div>
+		</div>
+	</div>
+</div>
+
+<!-- Cash Modal -->
+<div class="modal fade" id="ModalLong3" tabindex="-1" role="dialog" aria-labelledby="ModalLong3Title" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ModalLong3Title">Cash Tip</h5>
+					<div class="close" data-dismiss="modal">+</div>
+				</div>
+				<div class="modal-body">
+						
+						<% var sumTotal = 0; %> <% var TaxRate = 0.0825; %>
+						<!--Print Order Total-->
+						<% for(let i =0; i<order_items[0].orderedItems.length; i++){ %>
+							<% sumTotal += parseFloat(order_items[0].orderedItems[i].price); %>
+						<% } %>	
+						<h5>Order Total: $<span id = "singlePayTotal2"><%= parseFloat(sumTotal); %></span></h5>
+						<h5>Gratuity: $</h5>
+						<h5 id='totalTip2'></h5>
+	
+						<% var Tax = parseFloat(sumTotal * TaxRate); %>
+						<h5>Sales Tax: $<span id = "totTax2"><%=Tax.toFixed(2)%></span></h5>
+						
+						<h5>Overall Total: $</h5>
+						<h5 id='overallTotal2'></h5>
+						
+				</div>
+				<div class="modal-footer">
+							<form><!--TIP-->
+								<select id="serviceQual2">
+									 <option disabled selected value="0">-- Choose an Option --</option>
+									<option value="0.2">20&#37; &#45; Great</option>
+									<option value="0.15">15&#37; &#45; Good</option>
+									<option value="0.1">10&#37; &#45; Bad</option>
+									<option value="0.0">0&#37; &#45; No Tip</option>
+								</select>		  
+							</form>
+								
+							<button type="button" class="btn btn-primary btn-sm" id="calculate2">CALCULATE TIP</button>
+							<button type="button" class="btn btn-primary" id="cashSub">Submit</button>
+						</div> 
+					</div>
+				</div>
+			</div>	
+	</div>
+</div>
+
+
+
+</body>
+
+<footer>
+    <!-- Navigation -->
+	<% include takeout-navbar %>
+</footer>
+<script src="http://localhost:3000/javascripts/takeout.js"></script>
+<script src="http://localhost:3000/javascripts/pay.js"></script>
+
+</html>

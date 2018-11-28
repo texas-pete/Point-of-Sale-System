@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Takeout</title>
+
+    <script>
+        var tblNumber = 0
+    </script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--- Image Slider -->
+    <div id="slides" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+            <li data-target="#slides" data-slide-to="0" class="active"></li>
+            <li data-target="#slides" data-slide-to="1"></li>
+            <li data-target="#slides" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+            <% menu_items.forEach(function(item, index){ %>
+                <% if(index == 0){ %>
+                    <div class="carousel-item active">
+                <% } else { %>
+                    <div class="carousel-item">
+                <% } %>
+                    <img src="http://localhost:3000/images/<%= item.ImageName %>" width="100%" height="75%">
+                    <div class="carousel-caption">
+                        <h1 class="display-2"><%= item.Name %></h1>
+                        <h3><%= item.Description %></h3>
+                        <button type="button" class="btn btn-outline-light btn-lg addToOrder" data-id="<%= item._id %>">Order Now</button>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <!--Modal-->
+    <div class="bg-modal">
+        <div class="modal-content">
+            <div class="close">+</div>
+            <div class="modal-main-content">
+                <h3 class="modal-menu-name">Name</h3>
+                <img class="modal-menu-img" src="" alt="nameOfImage" style="float:left" width="390" height="300" hspace="20">
+                <h4 class="modal-menu-price">Price</h4>
+                <h5 class="modal-menu-desc">Description</h5>
+            </div>
+            <br>
+            <form>
+                <textarea class="clear-this" name="notes" placeholder="Type in any allergies or anything you want added/removed from the item." cols="60"
+                 rows="5"></textarea>
+            </form>
+            <button type="button" class="btn btn-secondary btn-sm modal-submit">Add to Order</button>
+        </div>
+    </div>
+    <br><br><br>
+</body>
+
+<footer>
+    <!-- Navigation -->
+    <% include takeout-navbar %>
+    <!--@ bottom to allow DOM to fully load-->
+    <script src="http://localhost:3000/javascripts/takeout-submitToDB.js"></script>
+</footer>
+</html>

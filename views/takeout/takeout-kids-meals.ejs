@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Takeout</title>
+    <script>
+        var tblNumber = 0
+    </script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+	 crossorigin="anonymous"></script>
+
+	<link href="http://localhost:3000/stylesheets/customerStyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<h1>Kid's Meals</h1>
+	<br><br>
+	<div class="container">
+		<div class="row">
+			<% menu_items.forEach(function(item, index){ %>
+			<div class="col-md-6">
+				<h3>
+					<%= item.Name %>
+				</h3>
+
+				<!--This says that the 'happy hour' is 2-3pm
+					need to also change in customer.js
+				-->
+				<% if(hour == 15){ %>
+				<h5>$
+					<%= item.HappyHour %>
+				</h5>
+				<% } else{ %>
+				<h5>$
+					<%= item.Price %>
+				</h5>
+				<% } %>
+
+				<hr style="clear:both;" />
+				<p><img src='http://localhost:3000/images/<%= item.ImageName %>' alt=<%=item.Name %> style="float:left"
+					width="290" height="200" hspace="20">
+					<%= item.Description %>
+				</p>
+				<button type="button" class="btn btn-secondary btn-sm addToOrder" data-id="<%= item._id %>">Add to Order</button>
+				<hr style="clear:both;" />
+			</div>
+			<% if((index + 1) > 0 && (index + 1) % 2 == 0){ %>
+			<br>
+		</div>
+		<div class="row">
+			<% } %>
+			<% }) %>
+		</div>
+	</div>
+
+	<br><br><br>
+
+	<!--Modal-->
+	<div class="bg-modal">
+		<div class="modal-content">
+			<div class="close">+</div>
+			<div class="modal-main-content">
+				<h3 class="modal-menu-name">Name</h3>
+				<img class="modal-menu-img" src="" alt="nameOfImage" style="float:left" width="390" height="300" hspace="20">
+				<h4 class="modal-menu-price">Price</h4>
+				<h5 class="modal-menu-desc">Description</h5>
+			</div>
+			<br>
+			<form>
+				<textarea class="clear-this" name="notes" placeholder="Type in any allergies or anything you want added/removed from the item." cols="60"
+				 rows="5"></textarea>
+			</form>
+			<button type="button" class="btn btn-secondary btn-sm modal-submit">Add to Order</button>
+		</div>
+	</div>
+
+</body>
+
+<footer>
+	<!-- Navigation -->
+	<% include takeout-navbar %>
+
+	<!--@ bottom to allow DOM to fully load-->
+	<script src="http://localhost:3000/javascripts/takeout.js"></script>
+</footer>
+
+</html>
