@@ -16,6 +16,12 @@
 		<script>
 			var tblNumber = 0
 		</script>
+
+		<script type="text/javascript">
+			function Redirect() {
+ 			window.location="http://localhost:3000/guest";
+		}
+		</script>
 	</head>
 
 <body>
@@ -49,9 +55,10 @@
 				CASH TIP
 				</button>
 	</div>
-	<br>
+	<br><br>
 
 	<div class="pay-method">
+		<h3>Pay with Credit:</h3>
 		<button type="button" class="btn btn-primarymodal-submit" data-toggle="modal" data-target="#ModalLong2">
 				Credit Payment
 				</button>
@@ -62,9 +69,9 @@
 <div class="modal fade" id="ModalLong2" tabindex="-1" role="dialog" aria-labelledby="ModalLong2Title" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-				<div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
+				<!--<div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
 						<div class="carousel-inner">
-								<div class="carousel-item active">
+								<div class="carousel-item active">-->
 			<div class="modal-header">
 				<h5 class="modal-title" id="ModalLong2Title">Credit Pay</h5>
 				<div class="close" data-dismiss="modal">+</div>
@@ -127,7 +134,7 @@
 						</form>
 							
 						<button type="button" class="btn btn-primary btn-sm" id="calculate" >CALCULATE TIP</button>
-						<button type="button" class="btn btn-primary" id="singleSub">Submit Payment</button>
+						<button type="button" class="btn btn-primary" id="singleSub" onclick="Redirect();">Submit Payment</button>
 					</div> 
 				</div>
 			</div>
@@ -136,12 +143,12 @@
 
 		</div>
 			    <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+  <!--<a class="carousel-control-prev" href="#demo" data-slide="prev">
 		<span class="carousel-control-prev-icon"></span>
 	  </a>
 	  <a class="carousel-control-next" href="#demo" data-slide="next">
 		<span class="carousel-control-next-icon"></span>
-	  </a>
+	  </a>-->
 	</div>
 		</div>
 	</div>

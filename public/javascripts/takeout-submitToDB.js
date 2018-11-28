@@ -14,8 +14,9 @@ function submitToDB() {
 			$.ajax({
 				url:"/takeout-order",
 				type: "GET",
-				success: function(){//upon success, reloads the now empty order page
-					location.reload();
+				success: function(){//upon success, routes to payment
+					//location.reload();
+					window.location.href = "http://localhost:3000/takeout-pay";
 				}
 			});
 		},
